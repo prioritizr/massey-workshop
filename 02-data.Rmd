@@ -164,16 +164,7 @@ Now, you can try and answer some questions about the planning unit data.
 ```{block2, type="rmdquestion"}
 1. How many planning units are in the planning unit data?
 2. What is the highest cost value?
-3. How many planning units are covered by the protected areas (hint: `sum(x)`)?
-4. What is the proportion of the planning units that are covered by the protected areas (hint: `mean(x)`)?
-5. How many planning units are highly degraded (hint: `sum(x)`)?
-6. What is the proportion of planning units are highly degraded (hint: `mean(x)`)?
-7. Can you verify that all values in the `locked_in` and `locked_out` columns are zero or one (hint: `min(x)` and `max(x)`)?.
-8. Can you verify that none of the planning units are missing cost values (hint: `all(is.finite(x))`)?.
-9. Can you very that none of the planning units have duplicated identifiers? (hint: `sum(duplicated(x))`)?
-10. Is there a spatial pattern in the planning unit cost values (hint: use `spplot` to make a map).
-11. Is there a spatial pattern in where most planning units are covered by protected areas (hint: use `spplot` to make a map).
-
+3. Is there a spatial pattern in the planning unit cost values (hint: use `spplot` to make a map).
 ```
 
 \clearpage
@@ -260,8 +251,6 @@ Now, you can try and answer some questions about the vegetation data.
 1. What part of the study area is the 51st vegetation class found in (hint: make a map)?
 2. What proportion of cells contain the 12th vegetation class?
 3. Which vegetation class is present in the greatest number of cells?
-4. The planning unit data and the vegetation data should have the same coordinate reference system. Can you check if they are the same?
-
 ```
 
 ```{r, include = FALSE}

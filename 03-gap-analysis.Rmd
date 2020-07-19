@@ -68,10 +68,8 @@ Now, try to answer the following questions.
 
 ```{block2, type="rmdquestion"}
 1. What is the median abundance of the features (hint: `median`)?
-2. What is the abundance of the feature with smallest abundance?
-3. What is the name of the feature with smallest abundance?
-4. What is the total abundance of all features in the planning units summed together?
-5. How many features have a total abundance greater than 100 km^2 (hint: `sum(abundance_values > set_units(threshold_value, km^2)`)?
+2. What is the name of the feature with smallest abundance?
+3. How many features have a total abundance greater than 100 km^2 (hint: `sum(abundance_values > set_units(threshold_value, km^2)`)?
 
 ```
 
@@ -108,13 +106,7 @@ Now let's investigate how well the species are represented.
 
 ```{block2, type="rmdquestion"}
 1. What is the average proportion of the features held in protected areas (hint: `mean(x, na.rm = TRUE)`?
-2. What is the average amount of land in km^2^ that features are represented by protected areas?
-3. What is the name of the feature with the greatest proportionate coverage by protected areas?
-4. What is the name of the feature with the greatest area coverage by protected areas?
-5. Do questions two and three have the same answer? Why could this be?
-6. Is there a relationship between the total abundance of a feature and how well it is represented by protected areas (hint: `plot(abundances ~ relative_held)`)?
-7. Are any features entirely missing from protected areas (hint: `sum(x == 0)`)?
-8. If we set a target of 10% coverage by protected areas, how many features fail to meet this target (hint: `sum(relative_held >= target, na.rm = TRUE)`)?
-9. If we set a target of 20% coverage by protected areas, how many features fail to meet this target?
-
+2. If we set a target of 10% coverage by protected areas, how many features fail to meet this target (hint: `sum(relative_held >= target, na.rm = TRUE)`)?
+3. If we set a target of 20% coverage by protected areas, how many features fail to meet this target?
+4. Is there a relationship between the total abundance of a feature and how well it is represented by protected areas (hint: `plot(abundances ~ relative_held)`)?
 ```
