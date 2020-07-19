@@ -4,7 +4,7 @@ bookdown::gitbook:
     toc:
       before: |
         <li><a href="./">PRIORITIZR WORKSHOP MANUAL</a></li>
-    edit: https://github.com/prioritizr/cibio-workshop/edit/master/%s
+    edit: https://github.com/prioritizr/massey-workshop/edit/master/%s
     download: pdf
 bookdown::pdf_book:
   includes:
