@@ -5,7 +5,6 @@ Version: 0.0.1
 biocViews:
 Imports:
   bookdown,
-  tidyverse,
   raster,
   dplyr,
   plyr,

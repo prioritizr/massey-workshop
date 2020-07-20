@@ -33,7 +33,6 @@ Now we will set up our R session for the workshop. Specifically, enter the follo
 
 ```{r, message = FALSE}
 # load packages
-library(tidyverse)
 library(prioritizr)
 library(sf)
 library(rgdal)
@@ -44,6 +43,7 @@ library(units)
 library(scales)
 library(assertthat)
 library(gridExtra)
+library(dplyr)
 ```
 
 You should have already downloaded the data. If you have not already done so, you can download it from here: https://github.com/prioritizr/cibio-workshop/raw/master/data.zip. After downloading the data, you can unzip the data into a new folder. Next, you will need to set the working directory to this new folder. To achieve this, click on the _Session_ button on the RStudio menu bar, then click _Set Working Directory_, and then _Choose Directory_.
