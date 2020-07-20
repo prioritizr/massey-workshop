@@ -2,7 +2,6 @@
 
 ## Starting out
 
-
 We will start by opening RStudio. Ideally, you will have already installed both R and Rstudio before the workshop. If you have not done this already, then please see the [Setting up your computer] section. **During this workshop, please do not copy and paste code from the workshop manual into RStudio. Instead, please write it out yourself in an R script.** When programming, you will spend a lot of time fixing coding mistakes---that is, debugging your code---so it is best to get used to making mistakes now when you have people here to help you. You can create a new R script by clicking on _File_ in the RStudio menu bar, then _New File_, and then _R Script_.
 
 ```{r, out.width = "70%", echo = FALSE}
@@ -36,6 +35,7 @@ Now we will set up our R session for the workshop. Specifically, enter the follo
 # load packages
 library(tidyverse)
 library(prioritizr)
+library(sf)
 library(rgdal)
 library(raster)
 library(rgeos)
@@ -76,7 +76,7 @@ Now that we have downloaded the dataset, we will need to import it into our R se
 
 ```{r}
 # import planning unit data
-pu_data <- readOGR("data/pu.shp")
+pu_data <- read_sf("data/pu.shp")
 
 # format columns in planning unit data
 pu_data$locked_in <- as.logical(pu_data$locked_in)
@@ -127,16 +127,16 @@ class(pu_data)
 slotNames(pu_data)
 
 # print the geometry for the 80th planning unit
-pu_data@polygons[[80]]
+st_geometry(pu_data)[[80]]
 
 # print the coordinate reference system
-print(pu_data@proj4string)
+st_crs(pu_data)
 
 # print number of planning units (geometries) in the data
 nrow(pu_data)
 
-# print the first six rows in the attribute data
-head(pu_data@data)
+# print the first six rows in the data
+head(pu_data)
 
 # print the first six values in the cost column of the attribute data
 head(pu_data$cost)
@@ -151,7 +151,7 @@ min(pu_data$cost)
 mean(pu_data$cost)
 
 # plot a map of the planning unit cost data
-spplot(pu_data, "cost")
+plot(pu_data[, "cost"])
 ```
 
 ```{r, eval = FALSE}
@@ -164,7 +164,8 @@ Now, you can try and answer some questions about the planning unit data.
 ```{block2, type="rmdquestion"}
 1. How many planning units are in the planning unit data?
 2. What is the highest cost value?
-3. Is there a spatial pattern in the planning unit cost values (hint: use `spplot` to make a map).
+3. Is there a spatial pattern in the planning unit cost values (hint: use `plot` to make a map).
+
 ```
 
 \clearpage
@@ -251,6 +252,7 @@ Now, you can try and answer some questions about the vegetation data.
 1. What part of the study area is the 51st vegetation class found in (hint: make a map)?
 2. What proportion of cells contain the 12th vegetation class?
 3. Which vegetation class is present in the greatest number of cells?
+
 ```
 
 ```{r, include = FALSE}
