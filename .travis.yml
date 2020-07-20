@@ -10,7 +10,7 @@ before_install:
   - sudo fallocate -l 10G /swapfile && sudo chmod 600 /swapfile && sudo mkswap /swapfile && sudo swapon /swapfile
   - sudo add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
   - sudo apt-get update
-  - sudo apt-get install libudunits2-dev libgdal-dev libgeos-dev libproj-dev r-r-api-3 cran-rsymphony
+  - sudo apt-get install libudunits2-dev libgdal-dev libgeos-dev libproj-dev
 
 before_script:
   - chmod +x ./_build.sh
