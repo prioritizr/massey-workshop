@@ -10,6 +10,7 @@ Imports:
   prioritizr,
   prioritizrdata,
   units,
+  scales,
   lpsymphony,
   gridExtra
 Remotes:
