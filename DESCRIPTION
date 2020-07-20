@@ -4,19 +4,12 @@ Title: Prioritizr Workshop Manual
 Version: 0.0.1
 biocViews:
 Imports:
-  bookdown,
-  raster,
   dplyr,
-  plyr,
-  sp,
-  rgeos,
   rgdal,
   prioritizr,
   prioritizrdata,
-  mapview,
   units,
   lpsymphony,
   gridExtra
 Remotes:
-  rstudio/bookdown,
-  prioritizr/prioritizr
+  rstudio/bookdown
