@@ -12,7 +12,7 @@ clean_temp:
 
 data:
 	mkdir -p data
-	Rscript -e "library(prioritizrdata);library(raster);data(tas_pu,tas_features);tas_pu[['locked_out']]<-as.numeric((tas_pu[['cost']] > quantile(tas_pu[['cost']], 0.85)[[1]]) & !tas_pu[['locked_in']]); rgdal::writeOGR(tas_pu,'data','pu',overwrite=TRUE,driver='ESRI Shapefile');writeRaster(tas_features,'data/vegetation.tif',overwrite=TRUE,NAflag=-9999)"
+	Rscript -e "source('data.R')"
 	zip -r data.zip data
 	rm -rf data
 
@@ -22,6 +22,9 @@ site: clean_temp
 pdf: clean_temp
 	Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::pdf_book')"
 	rm -f prioritizr-workshop-manual.log
+
+purl:
+	Rscript -e "knitr::purl('prioritizr-workshop-manual.Rmd')"
 
 check:
 	R -e "source('verify-solutions.R')"

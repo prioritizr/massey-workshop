@@ -20,10 +20,10 @@ description: "Manual for the prioritizr workshop held at Massey University, Palm
 # Welcome!
 
 ```{r, echo=FALSE, results="asis", include = knitr:::is_html_output()}
-cat("<img src=\"cover.png\" width=\"250\" height=\"250\" alt=\"Cover image\" align=\"right\" style=\"margin: 0 1em 0 1em\" />\n")
+cat("<img src=\"images/cover.png\" width=\"250\" height=\"250\" alt=\"Cover image\" align=\"right\" style=\"margin: 0 1em 0 1em\" />\n")
 ```
 
-Here you will find the manual for the prioritizr workshop held at Massey University, Palmerston North, New Zealand. **Before you arrive at the workshop, you should make sure that you have correctly [set up your computer for the workshop][Setting up your computer] and you have [downloaded the data from here](https://github.com/prioritizr/massey-workshop/raw/master/data.zip). We cannot guarantee a reliable Internet connection during the workshop, and so you may be unable to complete the workshop if you have not set up your computer beforehand.**
+Here you will find the manual for the prioritizr workshop held at Massey University, Palmerston North, New Zealand. **Before you arrive at the workshop, you should make sure that you have correctly [set up your computer for the workshop](#setup) and you have [downloaded the data from here](https://github.com/prioritizr/massey-workshop/raw/master/data.zip). Since we cannot guarantee a stable Internet connection during the workshop, you may be unable to complete the workshop if you have not set up your computer beforehand.**
 
 ```{r, include = FALSE}
 # set knitr options

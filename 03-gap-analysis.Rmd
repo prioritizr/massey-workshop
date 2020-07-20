@@ -35,7 +35,7 @@ print(class(abundance_data))
 print(abundance_data, n = Inf)
 ```
 
-The `abundance_data` object contains three columns. The `feature` column contains the name of each feature (derived from `names(veg_data`)), the `absolute_abundance` column contains the total amount of each feature in all the planning units, and the `relative_abundance` column contains the total amount of each feature in the planning units expressed as a proportion of the total amount in the underlying raster data. Since all the raster cells containing vegetation overlap with the planning units, all of the values in the `relative_abundance` column are equal to one (meaning 100%)---except for the 61st feature which has a value on `NaN` because it does not occur in the study area at all (i.e. all of its raster values are zeros). Now let's add a new column with the feature abundances expressed in area units (i.e. km^2^).
+The `abundance_data` object contains three columns. The `feature` column contains the name of each feature (derived from `names(veg_data)`), the `absolute_abundance` column contains the total amount of each feature in all the planning units, and the `relative_abundance` column contains the total amount of each feature in the planning units expressed as a proportion of the total amount in the underlying raster data. Since all the raster cells containing vegetation overlap with the planning units, all of the values in the `relative_abundance` column are equal to one (meaning 100%). Now let's add a new column with the feature abundances expressed in area units (i.e. km^2^).
 
 ```{r}
 # add new column with feature abundances in km^2
@@ -69,11 +69,11 @@ Now, try to answer the following questions.
 ```{block2, type="rmdquestion"}
 1. What is the median abundance of the features (hint: `median`)?
 2. What is the name of the feature with smallest abundance?
-3. How many features have a total abundance greater than 100 km^2 (hint: `sum(abundance_values > set_units(threshold_value, km^2)`)?
+3. How many features have a total abundance greater than 100 km^2 (hint: use `sum(abundance_data$absolute_abundance_km2 > set_units(threshold, km^2)` with the correct `threshold` value)?
 
 ```
 
-## Feature representation by protected areas
+## Feature representation
 
 After calculating the total amount of each feature in the planning units (i.e. the features' abundances), we will now calculate the amount of each feature in the planning units that are covered by protected areas (i.e. feature representation by protected areas). We can complete this task using the `feature_representation` function. This function requires (i) a conservation problem object with the planning unit and biodiversity data and also (ii) an object representing a solution to the problem (i.e an object in the same format as the planning unit data with values indicating if the planning units are selected or not).
 
@@ -105,8 +105,8 @@ print(repr_data)
 Now let's investigate how well the species are represented.
 
 ```{block2, type="rmdquestion"}
-1. What is the average proportion of the features held in protected areas (hint: `mean(x, na.rm = TRUE)`?
-2. If we set a target of 10% coverage by protected areas, how many features fail to meet this target (hint: `sum(relative_held >= target, na.rm = TRUE)`)?
+1. What is the average proportion of the features held in protected areas (hint: use `mean(table$relative_held)` with the correct `table` name)?
+2. If we set a target of 10% coverage by protected areas, how many features fail to meet this target (hint: use `sum(table$relative_held >= target_value)`  with the correct `table` name)?
 3. If we set a target of 20% coverage by protected areas, how many features fail to meet this target?
-4. Is there a relationship between the total abundance of a feature and how well it is represented by protected areas (hint: `plot(abundances ~ relative_held)`)?
+4. Is there a relationship between the total abundance of a feature and how well it is represented by protected areas (hint: `plot(abundance_data$absolute_abundance ~ repr_data$relative_held)`)?
 ```

@@ -2,8 +2,7 @@
 
 ## Starting out
 
-
-We will start by opening RStudio. Ideally, you will have already installed both R and Rstudio before the workshop. If you have not done this already, then please see the [Setting up your computer] section. **During this workshop, please do not copy and paste code from the workshop manual into RStudio. Instead, please write it out yourself in an R script.** When programming, you will spend a lot of time fixing coding mistakes---that is, debugging your code---so it is best to get used to making mistakes now when you have people here to help you. You can create a new R script by clicking on _File_ in the RStudio menu bar, then _New File_, and then _R Script_.
+We will start by opening RStudio. Ideally, you will have already installed both R and Rstudio before the workshop. If you have not done this already, then please see the [Setting up your computer](#setup) section. **During this workshop, please do not copy and paste code from the workshop manual into RStudio. Instead, please write it out yourself in an R script.** When programming, you will spend a lot of time fixing coding mistakes---that is, debugging your code---so it is best to get used to making mistakes now when you have people here to help you. You can create a new R script by clicking on _File_ in the RStudio menu bar, then _New File_, and then _R Script_.
 
 ```{r, out.width = "70%", echo = FALSE}
 knitr::include_graphics("images/rstudio-new-script.png")
@@ -36,6 +35,7 @@ Now we will set up our R session for the workshop. Specifically, enter the follo
 # load packages
 library(tidyverse)
 library(prioritizr)
+library(sf)
 library(rgdal)
 library(raster)
 library(rgeos)
@@ -46,7 +46,7 @@ library(assertthat)
 library(gridExtra)
 ```
 
-You should have already downloaded the data for the prioritizr module of this workshop. If you have not already done so, you can download it from here: https://github.com/prioritizr/cibio-workshop/raw/master/data.zip. After downloading the data, you can unzip the data into a new folder. Next, you will need to set the working directory to this new folder. To achieve this, click on the _Session_ button on the RStudio menu bar, then click _Set Working Directory_, and then _Choose Directory_.
+You should have already downloaded the data. If you have not already done so, you can download it from here: https://github.com/prioritizr/cibio-workshop/raw/master/data.zip. After downloading the data, you can unzip the data into a new folder. Next, you will need to set the working directory to this new folder. To achieve this, click on the _Session_ button on the RStudio menu bar, then click _Set Working Directory_, and then _Choose Directory_.
 
 ```{r, out.width = "70%", echo = FALSE}
 knitr::include_graphics("images/rstudio-wd.png")
@@ -72,11 +72,15 @@ setwd("..")
 
 ## Data import
 
-Now that we have downloaded the dataset, we will need to import it into our R session. Specifically, this data was obtained from the "Introduction to Marxan" course and was originally a subset of a larger spatial prioritization project performed under contract to Australia’s Department of Environment and Water Resources. It contains vector-based planning unit data (`pu.shp`) and the raster-based data describing the spatial distributions of 62 vegetation classes (`vegetation.tif`) in Tasmania, Australia. Please note this dataset is only provided for teaching purposes and should not be used for any real-world conservation planning. We can import the data into our R session using the following code.
+```{r, include = FALSE}
+n_features <- raster::nlayers(raster::stack("data/vegetation.tif"))
+```
+
+Now that we have downloaded the dataset, we will need to import it into our R session. Specifically, this data was obtained from the "Introduction to Marxan" course and was originally a subset of a larger spatial prioritization project performed under contract to Australia’s Department of Environment and Water Resources. It contains vector-based planning unit data (`pu.shp`) and the raster-based data describing the spatial distributions of `r n_features` vegetation classes (`vegetation.tif`) in southern Tasmania, Australia. Please note this dataset is only provided for teaching purposes and should not be used for any real-world conservation planning. We can import the data into our R session using the following code.
 
 ```{r}
 # import planning unit data
-pu_data <- readOGR("data/pu.shp")
+pu_data <- as(read_sf("data/pu.shp"), "Spatial")
 
 # format columns in planning unit data
 pu_data$locked_in <- as.logical(pu_data$locked_in)
@@ -126,16 +130,13 @@ class(pu_data)
 # print the slots of the object
 slotNames(pu_data)
 
-# print the geometry for the 80th planning unit
-pu_data@polygons[[80]]
-
 # print the coordinate reference system
 print(pu_data@proj4string)
 
 # print number of planning units (geometries) in the data
 nrow(pu_data)
 
-# print the first six rows in the attribute data
+# print the first six rows in the data
 head(pu_data@data)
 
 # print the first six values in the cost column of the attribute data
@@ -164,33 +165,34 @@ Now, you can try and answer some questions about the planning unit data.
 ```{block2, type="rmdquestion"}
 1. How many planning units are in the planning unit data?
 2. What is the highest cost value?
-3. Is there a spatial pattern in the planning unit cost values (hint: use `spplot` to make a map).
+3. Is there a spatial pattern in the planning unit cost values (hint: use `plot` to make a map)?
+
 ```
 
 \clearpage
 
 ## Vegetation data
 
-The vegetation data describes the spatial distribution of 62 vegetation classes in the study area. This data is in a raster format and so the data are organized using a square grid comprising square grid cells that are each the same size. In our case, the raster data contains multiple layers (also called "bands") and each layer has corresponds to a spatial grid with exactly the same area and has exactly the same dimensionality (i.e. number of rows, columns, and cells). In this dataset, there are 62 different regular spatial grids layered on top of each other -- with each layer corresponding to a different vegetation class -- and each of these layers contains a grid with `r nrow(veg_data)` rows, `r ncol(veg_data)` columns, and `r nrow(veg_data) * ncol(veg_data)` cells. Within each layer, each cell corresponds to a `r xres(veg_data)/1000` by `r yres(veg_data)/1000` km square. The values associated with each grid cell indicate the (one) presence or (zero) absence of a given vegetation class in the cell.
+The vegetation data describe the spatial distribution of `r n_features` vegetation classes in the study area. This data is in a raster format and so the data are organized using a grid comprising square grid cells that are each the same size. In our case, the raster data contains multiple layers (also called "bands") and each layer has corresponds to a spatial grid with exactly the same area and has exactly the same dimensionality (i.e. number of rows, columns, and cells). In this dataset, there are `r n_features` different regular spatial grids layered on top of each other -- with each layer corresponding to a different vegetation class -- and each of these layers contains a grid with `r raster::nrow(veg_data)` rows, `r raster::ncol(veg_data)` columns, and `r nrow(veg_data) * ncol(veg_data)` cells. Within each layer, each cell corresponds to a `r raster::xres(veg_data)/1000` by `r raster::yres(veg_data)/1000` km square. The values associated with each grid cell indicate the (one) presence or (zero) absence of a given vegetation class in the cell.
 
 ![](images/rasterbands.png)
 
 Let's explore the vegetation data.
 
-```{r}
+```{r "explore feature data"}
 # print a short summary of the data
 print(veg_data)
 
-# plot a map of the 36th vegetation class
-plot(veg_data[[36]])
+# plot a map of the 20th vegetation class
+plot(veg_data[[20]])
 ```
 
 ```{r, eval = FALSE}
-# plot an interactive map of the 36th vegetation class
-mapview(veg_data[[36]])
+# plot an interactive map of the 20th vegetation class
+mapview(veg_data[[20]])
 ```
 
-```{r}
+```{r "preview feature data"}
 # print number of rows in the data
 nrow(veg_data)
 
@@ -240,17 +242,13 @@ cellStats(veg_data[[1]], "mean")
 
 \clearpage
 
-```{r}
-# calculate the maximum value in each layer
-as_tibble(data.frame(max = cellStats(veg_data, "max")))
-```
-
 Now, you can try and answer some questions about the vegetation data.
 
 ```{block2, type="rmdquestion"}
-1. What part of the study area is the 51st vegetation class found in (hint: make a map)?
+1. What part of the study area is the 13th vegetation class found in (hint: make a map)? For instance, is it in the south-eastern part of the study area?
 2. What proportion of cells contain the 12th vegetation class?
-3. Which vegetation class is present in the greatest number of cells?
+3. Which vegetation class is the most abundant (i.e. present in the greatest number of cells)?
+
 ```
 
 ```{r, include = FALSE}
