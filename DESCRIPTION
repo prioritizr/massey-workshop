@@ -12,7 +12,6 @@ Imports:
   sp,
   rgeos,
   rgdal,
-  Rsymphony,
   prioritizr,
   prioritizrdata,
   mapview,
