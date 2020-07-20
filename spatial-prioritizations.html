@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Spatial prioritizations | PRIORITIZR WORKSHOP MANUAL</title>
+  <meta name="description" content="Manual for the prioritizr workshop held at Massey University, Palmerston North, New Zealand." />
+  <meta name="generator" content="bookdown 0.20.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Spatial prioritizations | PRIORITIZR WORKSHOP MANUAL" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://prioritizr.github.io/massey-workshop" />
+  <meta property="og:image" content="https://prioritizr.github.io/massey-workshopimages/cover.png" />
+  <meta property="og:description" content="Manual for the prioritizr workshop held at Massey University, Palmerston North, New Zealand." />
+  <meta name="github-repo" content="prioritizr/massey-workshop" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Spatial prioritizations | PRIORITIZR WORKSHOP MANUAL" />
+  
+  <meta name="twitter:description" content="Manual for the prioritizr workshop held at Massey University, Palmerston North, New Zealand." />
+  <meta name="twitter:image" content="https://prioritizr.github.io/massey-workshopimages/cover.png" />
+
+<meta name="author" content="Jeffrey O. Hanson" />
+
+
+<meta name="date" content="2020-07-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<link rel="prev" href="gap-analysis.html"/>
+<link rel="next" href="acknowledgements.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">PRIORITIZR WORKSHOP MANUAL</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome!</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#overview"><i class="fa fa-check"></i><b>2.1</b> Overview</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#setup"><i class="fa fa-check"></i><b>2.2</b> Setting up your computer</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction.html"><a href="introduction.html#r"><i class="fa fa-check"></i><b>2.2.1</b> R</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introduction.html"><a href="introduction.html#rstudio"><i class="fa fa-check"></i><b>2.2.2</b> RStudio</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introduction.html"><a href="introduction.html#r-packages"><i class="fa fa-check"></i><b>2.2.3</b> R packages</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#further-reading"><i class="fa fa-check"></i><b>2.3</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>3</b> Data</a><ul>
+<li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html#starting-out"><i class="fa fa-check"></i><b>3.1</b> Starting out</a></li>
+<li class="chapter" data-level="3.2" data-path="data.html"><a href="data.html#attaching-packages"><i class="fa fa-check"></i><b>3.2</b> Attaching packages</a></li>
+<li class="chapter" data-level="3.3" data-path="data.html"><a href="data.html#data-import"><i class="fa fa-check"></i><b>3.3</b> Data import</a></li>
+<li class="chapter" data-level="3.4" data-path="data.html"><a href="data.html#planning-unit-data"><i class="fa fa-check"></i><b>3.4</b> Planning unit data</a></li>
+<li class="chapter" data-level="3.5" data-path="data.html"><a href="data.html#vegetation-data"><i class="fa fa-check"></i><b>3.5</b> Vegetation data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="gap-analysis.html"><a href="gap-analysis.html"><i class="fa fa-check"></i><b>4</b> Gap analysis</a><ul>
+<li class="chapter" data-level="4.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="gap-analysis.html"><a href="gap-analysis.html#feature-abundance"><i class="fa fa-check"></i><b>4.2</b> Feature abundance</a></li>
+<li class="chapter" data-level="4.3" data-path="gap-analysis.html"><a href="gap-analysis.html#feature-representation"><i class="fa fa-check"></i><b>4.3</b> Feature representation</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="spatial-prioritizations.html"><a href="spatial-prioritizations.html"><i class="fa fa-check"></i><b>5</b> Spatial prioritizations</a><ul>
+<li class="chapter" data-level="5.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="spatial-prioritizations.html"><a href="spatial-prioritizations.html#starting-out-simple"><i class="fa fa-check"></i><b>5.2</b> Starting out simple</a></li>
+<li class="chapter" data-level="5.3" data-path="spatial-prioritizations.html"><a href="spatial-prioritizations.html#adding-complexity"><i class="fa fa-check"></i><b>5.3</b> Adding complexity</a></li>
+<li class="chapter" data-level="5.4" data-path="spatial-prioritizations.html"><a href="spatial-prioritizations.html#penalizing-fragmentation"><i class="fa fa-check"></i><b>5.4</b> Penalizing fragmentation</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>6</b> Acknowledgements</a></li>
+<li class="chapter" data-level="7" data-path="session-information.html"><a href="session-information.html"><i class="fa fa-check"></i><b>7</b> Session information</a></li>
+<li class="chapter" data-level="8" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>8</b> References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">PRIORITIZR WORKSHOP MANUAL</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="spatial-prioritizations" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Spatial prioritizations</h1>
+<div id="introduction" class="section level2">
+<h2><span class="header-section-number">5.1</span> Introduction</h2>
+<p>Here we will develop prioritizations to identify priority areas for protected area establishment. Its worth noting that prioritizr is a decision support tool (similar to <a href="http://marxan.org/">Marxan</a> and <a href="https://www.helsinki.fi/en/researchgroups/digital-geography-lab/software-developed-in-cbig#section-52992">Zonation</a>). This means that it is designed to help you make decisions---it can't make decisions for you.</p>
+</div>
+<div id="starting-out-simple" class="section level2">
+<h2><span class="header-section-number">5.2</span> Starting out simple</h2>
+<p>To start things off, let's keep things simple. Let's create a prioritization using the <a href="https://prioritizr.net/reference/add_min_set_objective.html">minimum set formulation of the reserve selection problem</a>. This formulation means that we want a solution that will meet the targets for our biodiversity features for minimum cost. Here, we will set 5% targets for each vegetation class and use the data in the <code>cost</code> column to specify acquisition costs. Although we strongly recommend using <a href="https://www.gurobi.com/">Gurobi</a> to solve problems (with <a href="https://prioritizr.net/reference/add_gurobi_solver.html"><code>add_gurobi_solver</code></a>), we will use the <a href="https://prioritizr.net/reference/add_lpsymphony_solver.html">lpsymphony solver</a> in this workshop since it is easier to install. The Gurobi solver is much faster than the lpsymphony solver (<a href="https://prioritizr.net/articles/gurobi_installation.html">see here for installation instructions</a>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print planning unit data</span>
+<span class="kw">print</span>(pu_data)</code></pre></div>
+<pre><code>## class       : SpatialPolygonsDataFrame 
+## features    : 557 
+## extent      : 1115191, 1385011, -4840595, -4662354  (xmin, xmax, ymin, ymax)
+## crs         : +proj=aea +lat_1=-18 +lat_2=-36 +lat_0=0 +lon_0=132 +x_0=0 +y_0=0 +ellps=GRS80 +units=m +no_defs 
+## variables   : 6
+## names       :   id,            cost, status, locked_in, locked_out, pa_status 
+## min values  :  574, 2.5534941249227,      0,         0,          0,         0 
+## max values  : 1130, 47.238336402701,      2,         1,          1,         1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># make prioritization problem</span>
+p1 &lt;-<span class="st"> </span><span class="kw">problem</span>(pu_data, veg_data, <span class="dt">cost_column =</span> <span class="st">&quot;cost&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_min_set_objective</span>() <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_relative_targets</span>(<span class="fl">0.05</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># 5% representation targets</span>
+<span class="st">      </span><span class="kw">add_binary_decisions</span>() <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_lpsymphony_solver</span>()
+
+<span class="co"># print problem</span>
+<span class="kw">print</span>(p1)</code></pre></div>
+<pre><code>## Conservation Problem
+##   planning units: SpatialPolygonsDataFrame (557 units)
+##   cost:           min: 2.55349, max: 47.23834
+##   features:       vegetation.1, vegetation.2, vegetation.3, ... (33 features)
+##   objective:      Minimum set objective 
+##   targets:        Relative targets [targets (min: 0.05, max: 0.05)]
+##   decisions:      Binary decision 
+##   constraints:    &lt;none&gt;
+##   penalties:      &lt;none&gt;
+##   portfolio:      default
+##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (-1), verbose (1)]</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># solve problem</span>
+s1 &lt;-<span class="st"> </span><span class="kw">solve</span>(p1)
+
+<span class="co"># print solution, the solution_1 column contains the solution values</span>
+<span class="co"># indicating if a planning unit is (1) selected or (0) not</span>
+<span class="kw">print</span>(s1)</code></pre></div>
+<pre><code>## class       : SpatialPolygonsDataFrame 
+## features    : 557 
+## extent      : 1115191, 1385011, -4840595, -4662354  (xmin, xmax, ymin, ymax)
+## crs         : +proj=aea +lat_1=-18 +lat_2=-36 +lat_0=0 +lon_0=132 +x_0=0 +y_0=0 +ellps=GRS80 +units=m +no_defs 
+## variables   : 7
+## names       :   id,            cost, status, locked_in, locked_out, pa_status, solution_1 
+## min values  :  574, 2.5534941249227,      0,         0,          0,         0,          0 
+## max values  : 1130, 47.238336402701,      2,         1,          1,         1,          1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate number of planning units selected in the prioritization</span>
+<span class="kw">sum</span>(s1<span class="op">$</span>solution_<span class="dv">1</span>)</code></pre></div>
+<pre><code>## [1] 16</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate total cost of the prioritization</span>
+<span class="kw">sum</span>(s1<span class="op">$</span>solution_<span class="dv">1</span> <span class="op">*</span><span class="st"> </span>s1<span class="op">$</span>cost)</code></pre></div>
+<pre><code>## [1] 408.3382</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot solution</span>
+<span class="co"># selected = green, not selected = grey</span>
+<span class="kw">spplot</span>(s1, <span class="st">&quot;solution_1&quot;</span>, <span class="dt">col.regions =</span> <span class="kw">c</span>(<span class="st">&quot;grey80&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>), <span class="dt">main =</span> <span class="st">&quot;s1&quot;</span>,
+       <span class="dt">colorkey =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p><img src="prioritizr-workshop-manual_files/figure-html/unnamed-chunk-32-1.png" width="65%" style="display: block; margin: auto;" /></p>
+<p>Now let's examine the solution.</p>
+
+<div class="rmdquestion">
+<ol style="list-style-type: decimal">
+<li>How many planing units were selected in the prioritization? What proportion of planning units were selected in the prioritization?</li>
+<li>Is there a pattern in the spatial distribution of the priority areas?</li>
+<li>Can you verify that all of the targets were met in the prioritization (hint: <code>feature_representation(p1, s1[, &quot;solution_1&quot;])</code>)?</li>
+</ol>
+</div>
+
+</div>
+<div id="adding-complexity" class="section level2">
+<h2><span class="header-section-number">5.3</span> Adding complexity</h2>
+<p>Our first prioritization suffers many limitations, so let's add additional constraints to the problem to make it more useful. First, let's lock in planing units that are already by covered protected areas. If some vegetation communities are already secured inside existing protected areas, then we might not need to add as many new protected areas to the existing protected area system to meet their targets. Since our planning unit data (<code>pu_da</code>) already contains this information in the <code>locked_in</code> column, we can use this column name to specify which planning units should be locked in.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot locked_in data</span>
+<span class="co"># TRUE = blue, FALSE = grey</span>
+<span class="kw">spplot</span>(pu_data, <span class="st">&quot;locked_in&quot;</span>, <span class="dt">col.regions =</span> <span class="kw">c</span>(<span class="st">&quot;grey80&quot;</span>, <span class="st">&quot;darkblue&quot;</span>),
+       <span class="dt">main =</span> <span class="st">&quot;locked_in&quot;</span>, <span class="dt">colorkey =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p><img src="prioritizr-workshop-manual_files/figure-html/unnamed-chunk-34-1.png" width="65%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># make prioritization problem</span>
+p2 &lt;-<span class="st"> </span><span class="kw">problem</span>(pu_data, veg_data, <span class="dt">cost_column =</span> <span class="st">&quot;cost&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_min_set_objective</span>() <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_relative_targets</span>(<span class="fl">0.05</span>) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_locked_in_constraints</span>(<span class="st">&quot;locked_in&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_binary_decisions</span>() <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_lpsymphony_solver</span>()
+
+<span class="co"># print problem</span>
+<span class="kw">print</span>(p2)</code></pre></div>
+<pre><code>## Conservation Problem
+##   planning units: SpatialPolygonsDataFrame (557 units)
+##   cost:           min: 2.55349, max: 47.23834
+##   features:       vegetation.1, vegetation.2, vegetation.3, ... (33 features)
+##   objective:      Minimum set objective 
+##   targets:        Relative targets [targets (min: 0.05, max: 0.05)]
+##   decisions:      Binary decision 
+##   constraints:    &lt;Locked in planning units [203 locked units]&gt;
+##   penalties:      &lt;none&gt;
+##   portfolio:      default
+##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (-1), verbose (1)]</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># solve problem</span>
+s2 &lt;-<span class="st"> </span><span class="kw">solve</span>(p2)
+
+<span class="co"># plot solution</span>
+<span class="co"># selected = green, not selected = grey</span>
+<span class="kw">spplot</span>(s2, <span class="st">&quot;solution_1&quot;</span>, <span class="dt">col.regions =</span> <span class="kw">c</span>(<span class="st">&quot;grey80&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>), <span class="dt">main =</span> <span class="st">&quot;s2&quot;</span>,
+       <span class="dt">colorkey =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p><img src="prioritizr-workshop-manual_files/figure-html/unnamed-chunk-35-1.png" width="65%" style="display: block; margin: auto;" /></p>
+<p>Let's pretend that we talked to an expert on the vegetation communities in our study system and they recommended that a 10% target was needed for each vegetation class. So, equipped with this information, let's set the targets to 10%.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># make prioritization problem</span>
+p3 &lt;-<span class="st"> </span><span class="kw">problem</span>(pu_data, veg_data, <span class="dt">cost_column =</span> <span class="st">&quot;cost&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_min_set_objective</span>() <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_relative_targets</span>(<span class="fl">0.1</span>) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_locked_in_constraints</span>(<span class="st">&quot;locked_in&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_binary_decisions</span>() <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_lpsymphony_solver</span>()
+
+<span class="co"># print problem</span>
+<span class="kw">print</span>(p3)</code></pre></div>
+<pre><code>## Conservation Problem
+##   planning units: SpatialPolygonsDataFrame (557 units)
+##   cost:           min: 2.55349, max: 47.23834
+##   features:       vegetation.1, vegetation.2, vegetation.3, ... (33 features)
+##   objective:      Minimum set objective 
+##   targets:        Relative targets [targets (min: 0.1, max: 0.1)]
+##   decisions:      Binary decision 
+##   constraints:    &lt;Locked in planning units [203 locked units]&gt;
+##   penalties:      &lt;none&gt;
+##   portfolio:      default
+##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (-1), verbose (1)]</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># solve problem</span>
+s3 &lt;-<span class="st"> </span><span class="kw">solve</span>(p3)
+
+<span class="co"># plot solution</span>
+<span class="co"># selected = green, not selected = grey</span>
+<span class="kw">spplot</span>(s3, <span class="st">&quot;solution_1&quot;</span>, <span class="dt">col.regions =</span> <span class="kw">c</span>(<span class="st">&quot;grey80&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>), <span class="dt">main =</span> <span class="st">&quot;s3&quot;</span>,
+       <span class="dt">colorkey =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p><img src="prioritizr-workshop-manual_files/figure-html/unnamed-chunk-36-1.png" width="65%" style="display: block; margin: auto;" /></p>
+<p>Next, let's lock out highly degraded areas. Similar to before, this information is present in our planning unit data so we can use the <code>locked_out</code> column name to achieve this.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot locked_out data</span>
+<span class="co"># TRUE = red, FALSE = grey</span>
+<span class="kw">spplot</span>(pu_data, <span class="st">&quot;locked_out&quot;</span>, <span class="dt">col.regions =</span> <span class="kw">c</span>(<span class="st">&quot;grey80&quot;</span>, <span class="st">&quot;darkred&quot;</span>),
+       <span class="dt">main =</span> <span class="st">&quot;locked_out&quot;</span>, <span class="dt">colorkey =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p><img src="prioritizr-workshop-manual_files/figure-html/unnamed-chunk-37-1.png" width="65%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># make prioritization problem</span>
+p4 &lt;-<span class="st"> </span><span class="kw">problem</span>(pu_data, veg_data, <span class="dt">cost_column =</span> <span class="st">&quot;cost&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_min_set_objective</span>() <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_relative_targets</span>(<span class="fl">0.1</span>) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_locked_in_constraints</span>(<span class="st">&quot;locked_in&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_locked_out_constraints</span>(<span class="st">&quot;locked_out&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_binary_decisions</span>() <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_lpsymphony_solver</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print problem</span>
+<span class="kw">print</span>(p4)</code></pre></div>
+<pre><code>## Conservation Problem
+##   planning units: SpatialPolygonsDataFrame (557 units)
+##   cost:           min: 2.55349, max: 47.23834
+##   features:       vegetation.1, vegetation.2, vegetation.3, ... (33 features)
+##   objective:      Minimum set objective 
+##   targets:        Relative targets [targets (min: 0.1, max: 0.1)]
+##   decisions:      Binary decision 
+##   constraints:    &lt;Locked in planning units [203 locked units]
+##                    Locked out planning units [6 locked units]&gt;
+##   penalties:      &lt;none&gt;
+##   portfolio:      default
+##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (-1), verbose (1)]</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># solve problem</span>
+s4 &lt;-<span class="st"> </span><span class="kw">solve</span>(p4)
+
+<span class="co"># plot solution</span>
+<span class="co"># selected = green, not selected = grey</span>
+<span class="kw">spplot</span>(s4, <span class="st">&quot;solution_1&quot;</span>, <span class="dt">col.regions =</span> <span class="kw">c</span>(<span class="st">&quot;grey80&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>), <span class="dt">main =</span> <span class="st">&quot;s4&quot;</span>,
+       <span class="dt">colorkey =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p><img src="prioritizr-workshop-manual_files/figure-html/unnamed-chunk-38-1.png" width="65%" style="display: block; margin: auto;" /></p>
+
+<p>Now, let's compare the solutions.</p>
+
+<div class="rmdquestion">
+<ol style="list-style-type: decimal">
+<li>What is the cost of the planning units selected in <code>s2</code>, <code>s3</code>, and <code>s4</code>?</li>
+<li>How many planning units are in <code>s2</code>, <code>s3</code>, and <code>s4</code>?</li>
+<li>Do the solutions with more planning units have a greater cost? Why (or why not)?</li>
+<li>Why does the first solution (<code>s1</code>) cost less than the second solution with protected areas locked into the solution (<code>s2</code>)?</li>
+<li>Why does the third solution (<code>s3</code>) cost less than the fourth solution solution with highly degraded areas locked out (<code>s4</code>)?
+</div>
+</li>
+</ol>
+</div>
+<div id="penalizing-fragmentation" class="section level2">
+<h2><span class="header-section-number">5.4</span> Penalizing fragmentation</h2>
+<p>Plans for protected area systems should promote connectivity. However, the prioritizations we have made so far have been highly fragmented. To address this issue, we can add penalties to our conservation planning problem to penalize fragmentation. These penalties work by specifying a trade-off between the primary objective (here, solution cost) and fragmentation (i.e. total exposed boundary length) using a penalty value. If we set the penalty value too low, then we will end up with a solution that is nearly identical to the previous solution. If we set the penalty value too high, then prioritizr will (1) take a long time to solve the problem and (2) we will end up with a solution that contains lots of extra planning units that are not needed. This is because the minimizing fragmentation is considered so much more important than solution cost that the optimal solution is simply to select as many planning units as possible.</p>
+<p>As a rule of thumb, we generally want penalty values between 0.00001 and 0.01. However, finding a useful penalty value requires calibration. The &quot;correct&quot; penalty value depends on the size of the planning units, the main objective values (e.g. cost values), and the effect of fragmentation on biodiversity persistence. Let's create a new problem that is similar to our previous problem (<code>p4</code>)---except that it contains boundary length penalties and a slightly higher optimality gap to reduce runtime (default is 0.1)---and solve it. Since our planning unit data is in a spatial format (i.e. vector or raster data), prioritizr can automatically calculate the boundary data for us.</p>
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># make prioritization problem</span>
+p5 &lt;-<span class="st"> </span><span class="kw">problem</span>(pu_data, veg_data, <span class="dt">cost_column =</span> <span class="st">&quot;cost&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_min_set_objective</span>() <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_boundary_penalties</span>(<span class="dt">penalty =</span> <span class="fl">0.001</span>) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_relative_targets</span>(<span class="fl">0.1</span>) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_locked_in_constraints</span>(<span class="st">&quot;locked_in&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_locked_out_constraints</span>(<span class="st">&quot;locked_out&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_binary_decisions</span>() <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">add_lpsymphony_solver</span>()
+
+<span class="co"># print problem</span>
+<span class="kw">print</span>(p5)</code></pre></div>
+<pre><code>## Conservation Problem
+##   planning units: SpatialPolygonsDataFrame (557 units)
+##   cost:           min: 2.55349, max: 47.23834
+##   features:       vegetation.1, vegetation.2, vegetation.3, ... (33 features)
+##   objective:      Minimum set objective 
+##   targets:        Relative targets [targets (min: 0.1, max: 0.1)]
+##   decisions:      Binary decision 
+##   constraints:    &lt;Locked out planning units [6 locked units]
+##                    Locked in planning units [203 locked units]&gt;
+##   penalties:      &lt;Boundary penalties [edge factor (min: 0.5, max: 0.5), penalty (0.001), zones]&gt;
+##   portfolio:      default
+##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (-1), verbose (1)]</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># solve problem,</span>
+<span class="co"># note this will take a bit longer than the previous runs</span>
+s5 &lt;-<span class="st"> </span><span class="kw">solve</span>(p5)
+
+<span class="co"># print solution</span>
+<span class="kw">print</span>(s5)</code></pre></div>
+<pre><code>## class       : SpatialPolygonsDataFrame 
+## features    : 557 
+## extent      : 1115191, 1385011, -4840595, -4662354  (xmin, xmax, ymin, ymax)
+## crs         : +proj=aea +lat_1=-18 +lat_2=-36 +lat_0=0 +lon_0=132 +x_0=0 +y_0=0 +ellps=GRS80 +units=m +no_defs 
+## variables   : 7
+## names       :   id,            cost, status, locked_in, locked_out, pa_status, solution_1 
+## min values  :  574, 2.5534941249227,      0,         0,          0,         0,          0 
+## max values  : 1130, 47.238336402701,      2,         1,          1,         1,          1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot solution</span>
+<span class="co"># selected = green, not selected = grey</span>
+<span class="kw">spplot</span>(s5, <span class="st">&quot;solution_1&quot;</span>, <span class="dt">col.regions =</span> <span class="kw">c</span>(<span class="st">&quot;grey80&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>), <span class="dt">main =</span> <span class="st">&quot;s5&quot;</span>,
+       <span class="dt">colorkey =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p><img src="prioritizr-workshop-manual_files/figure-html/unnamed-chunk-41-1.png" width="65%" style="display: block; margin: auto;" /></p>
+<p>Now let's compare the solutions to the problems with (<code>s5</code>) and without (<code>s4</code>) the boundary length penalties.</p>
+
+<div class="rmdquestion">
+<ol style="list-style-type: decimal">
+<li>What is the cost the fourth (<code>s4</code>) and fifth (<code>s5</code>) solutions? Why does the fifth solution (<code>s5</code>) cost more than the fourth (<code>s4</code>) solution?</li>
+<li>Try setting the penalty value to 0.000000001 (i.e. <code>1e-9</code>) instead of 0.0005. What is the cost of the solution now? Is it different from the fourth solution (<code>s4</code>) (hint: try plotting the solutions to visualize them)? Is this is a useful penalty value? Why (or why not)?</li>
+<li>Try setting the penalty value to 0.5. What is the cost of the solution now? Is it different from the fourth solution (<code>s4</code>) (hint: try plotting the solutions to visualize them)? Is this a useful penalty value? Why (or why not)?</li>
+</ol>
+</div>
+
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="gap-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="acknowledgements.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/prioritizr/massey-workshop/edit/master/04-prioritizations.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["prioritizr-workshop-manual.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
