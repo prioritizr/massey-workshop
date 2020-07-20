@@ -17,7 +17,6 @@ Imports:
   prioritizrdata,
   mapview,
   units,
-  velox,
   lpsymphony,
   gridExtra
 Remotes:
