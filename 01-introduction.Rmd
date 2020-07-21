@@ -33,7 +33,7 @@ install.packages(c("sf", "dplyr", "sp", "rgeos", "rgdal", "raster",
                    "units", "prioritizr", "prioritizrdata", "Rsymphony",
                    "mapview", "assertthat", "remotes", "gridExtra",
                    "BiocManager"))
-BiocManager::install("lpsymphony", version = "3.9")
+BiocManager::install("lpsymphony")
 ```
 
 ## Further reading {#further-reading}
