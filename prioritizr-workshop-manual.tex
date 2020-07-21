@@ -325,9 +325,9 @@ connection and the installation process may take some time to complete.
 \begin{Highlighting}[]
 \KeywordTok{install.packages}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"sf"}\NormalTok{, }\StringTok{"dplyr"}\NormalTok{, }\StringTok{"sp"}\NormalTok{, }\StringTok{"rgeos"}\NormalTok{, }\StringTok{"rgdal"}\NormalTok{, }\StringTok{"raster"}\NormalTok{,}
                    \StringTok{"units"}\NormalTok{, }\StringTok{"prioritizr"}\NormalTok{, }\StringTok{"prioritizrdata"}\NormalTok{, }\StringTok{"Rsymphony"}\NormalTok{,}
-                   \StringTok{"mapview"}\NormalTok{, }\StringTok{"assertthat"}\NormalTok{, }\StringTok{"velox"}\NormalTok{, }\StringTok{"remotes"}\NormalTok{,}
-                   \StringTok{"gridExtra"}\NormalTok{, }\StringTok{"BiocManager"}\NormalTok{))}
-\NormalTok{BiocManager}\OperatorTok{::}\KeywordTok{install}\NormalTok{(}\StringTok{"lpsymphony"}\NormalTok{, }\DataTypeTok{version =} \StringTok{"3.9"}\NormalTok{)}
+                   \StringTok{"mapview"}\NormalTok{, }\StringTok{"assertthat"}\NormalTok{, }\StringTok{"remotes"}\NormalTok{, }\StringTok{"gridExtra"}\NormalTok{,}
+                   \StringTok{"BiocManager"}\NormalTok{))}
+\NormalTok{BiocManager}\OperatorTok{::}\KeywordTok{install}\NormalTok{(}\StringTok{"lpsymphony"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -431,16 +431,6 @@ the following R code to attach the R packages used in this workshop.
 \KeywordTok{library}\NormalTok{(raster)}
 \KeywordTok{library}\NormalTok{(rgeos)}
 \KeywordTok{require}\NormalTok{(mapview)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
-## logical.return = TRUE, : there is no package called 'mapview'
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(units)}
 \KeywordTok{library}\NormalTok{(scales)}
 \KeywordTok{library}\NormalTok{(assertthat)}
@@ -1617,8 +1607,8 @@ information is present in our planning unit data so we can use the
 ##   objective:      Minimum set objective 
 ##   targets:        Relative targets [targets (min: 0.1, max: 0.1)]
 ##   decisions:      Binary decision 
-##   constraints:    <Locked in planning units [203 locked units]
-##                    Locked out planning units [6 locked units]>
+##   constraints:    <Locked out planning units [6 locked units]
+##                    Locked in planning units [203 locked units]>
 ##   penalties:      <none>
 ##   portfolio:      default
 ##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (-1), verbose (1)]
@@ -1707,8 +1697,8 @@ prioritizr can automatically calculate the boundary data for us.
 ##   objective:      Minimum set objective 
 ##   targets:        Relative targets [targets (min: 0.1, max: 0.1)]
 ##   decisions:      Binary decision 
-##   constraints:    <Locked out planning units [6 locked units]
-##                    Locked in planning units [203 locked units]>
+##   constraints:    <Locked in planning units [203 locked units]
+##                    Locked out planning units [6 locked units]>
 ##   penalties:      <Boundary penalties [edge factor (min: 0.5, max: 0.5), penalty (0.001), zones]>
 ##   portfolio:      default
 ##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (-1), verbose (1)]
