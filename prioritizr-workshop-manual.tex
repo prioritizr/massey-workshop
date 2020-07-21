@@ -441,7 +441,7 @@ the following R code to attach the R packages used in this workshop.
 
 You should have already downloaded the data. If you have not already
 done so, you can download it from here:
-\url{https://github.com/prioritizr/cibio-workshop/raw/master/data.zip}.
+\url{https://github.com/prioritizr/massey-workshop/raw/master/data.zip}.
 After downloading the data, you can unzip the data into a new folder.
 Next, you will need to set the working directory to this new folder. To
 achieve this, click on the \emph{Session} button on the RStudio menu
@@ -475,7 +475,7 @@ our R session. Specifically, this data was obtained from the
 larger spatial prioritization project performed under contract to
 Australia's Department of Environment and Water Resources. It contains
 vector-based planning unit data (\texttt{pu.shp}) and the raster-based
-data describing the spatial distributions of 33 vegetation classes
+data describing the spatial distributions of 32 vegetation classes
 (\texttt{vegetation.tif}) in southern Tasmania, Australia. Please note
 this dataset is only provided for teaching purposes and should not be
 used for any real-world conservation planning. We can import the data
@@ -484,14 +484,22 @@ into our R session using the following code.
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# import planning unit data}
-\NormalTok{pu_data <-}\StringTok{ }\KeywordTok{as}\NormalTok{(}\KeywordTok{read_sf}\NormalTok{(}\StringTok{"data/pu.shp"}\NormalTok{), }\StringTok{"Spatial"}\NormalTok{)}
+\NormalTok{pu_data <-}\StringTok{ }\KeywordTok{suppressWarnings}\NormalTok{(}\KeywordTok{as}\NormalTok{(}\KeywordTok{read_sf}\NormalTok{(}\StringTok{"data/pu.shp"}\NormalTok{), }\StringTok{"Spatial"}\NormalTok{))}
 
 \CommentTok{# format columns in planning unit data}
 \NormalTok{pu_data}\OperatorTok{$}\NormalTok{locked_in <-}\StringTok{ }\KeywordTok{as.logical}\NormalTok{(pu_data}\OperatorTok{$}\NormalTok{locked_in)}
 \NormalTok{pu_data}\OperatorTok{$}\NormalTok{locked_out <-}\StringTok{ }\KeywordTok{as.logical}\NormalTok{(pu_data}\OperatorTok{$}\NormalTok{locked_out)}
 
 \CommentTok{# import vegetation data}
-\NormalTok{veg_data <-}\StringTok{ }\KeywordTok{stack}\NormalTok{(}\StringTok{"data/vegetation.tif"}\NormalTok{)}
+\NormalTok{veg_data <-}\StringTok{ }\KeywordTok{suppressWarnings}\NormalTok{(}\KeywordTok{stack}\NormalTok{(}\StringTok{"data/vegetation.tif"}\NormalTok{))}
+
+\CommentTok{# verify that data are in same coordinate reference system}
+
+\CommentTok{# manually set the coordinate reference system for veg_data to be equal to}
+\CommentTok{# the coordinate reference system for pu_data,}
+\NormalTok{## note that we do this because we know that the data have the same}
+\NormalTok{## projection system, and normally you use would sp::spTransform or}
+\NormalTok{## raster::projectRaster}
 \end{Highlighting}
 \end{Shaded}
 
@@ -534,13 +542,13 @@ contain the following information:
 
 \begin{verbatim}
 ## class       : SpatialPolygonsDataFrame 
-## features    : 557 
-## extent      : 1115191, 1385011, -4840595, -4662354  (xmin, xmax, ymin, ymax)
-## crs         : +proj=aea +lat_1=-18 +lat_2=-36 +lat_0=0 +lon_0=132 +x_0=0 +y_0=0 +ellps=GRS80 +units=m +no_defs 
+## features    : 516 
+## extent      : 348703.2, 611932.4, 5167775, 5344516  (xmin, xmax, ymin, ymax)
+## crs         : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 
 ## variables   : 5
-## names       :   id,            cost, status, locked_in, locked_out 
-## min values  :  574, 2.5534941249227,      0,         0,          0 
-## max values  : 1130, 47.238336402701,      2,         1,          1
+## names       :   id,             cost, status, locked_in, locked_out 
+## min values  :  557, 3.59717531470679,      0,         0,          0 
+## max values  : 1130,  47.238336402701,      2,         1,          1
 \end{verbatim}
 
 \begin{Shaded}
@@ -568,10 +576,10 @@ contain the following information:
 
 \begin{verbatim}
 ## Formal class 'SpatialPolygonsDataFrame' [package "sp"] with 5 slots
-##   ..@ data       :'data.frame':  557 obs. of  5 variables:
-##   ..@ polygons   :List of 557
-##   ..@ plotOrder  : int [1:557] 103 219 21 314 206 131 316 327 231 218 ...
-##   ..@ bbox       : num [1:2, 1:2] 1115191 -4840595 1385011 -4662354
+##   ..@ data       :'data.frame':  516 obs. of  5 variables:
+##   ..@ polygons   :List of 516
+##   ..@ plotOrder  : int [1:516] 69 104 1 122 157 190 4 221 17 140 ...
+##   ..@ bbox       : num [1:2, 1:2] 348703 5167775 611932 5344516
 ##   .. ..- attr(*, "dimnames")=List of 2
 ##   ..@ proj4string:Formal class 'CRS' [package "sp"] with 1 slot
 \end{verbatim}
@@ -609,8 +617,8 @@ contain the following information:
 
 \begin{verbatim}
 ## CRS arguments:
-##  +proj=aea +lat_1=-18 +lat_2=-36 +lat_0=0 +lon_0=132 +x_0=0 +y_0=0
-## +ellps=GRS80 +units=m +no_defs
+##  +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84
+## +towgs84=0,0,0
 \end{verbatim}
 
 \begin{Shaded}
@@ -621,7 +629,7 @@ contain the following information:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 557
+## [1] 516
 \end{verbatim}
 
 \begin{Shaded}
@@ -633,12 +641,12 @@ contain the following information:
 
 \begin{verbatim}
 ##    id     cost status locked_in locked_out
-## 1 574 28.60687      0     FALSE      FALSE
-## 2 575 30.83416      0     FALSE      FALSE
-## 3 576 38.75511      0     FALSE      FALSE
-## 4 577 38.11618      2      TRUE      FALSE
-## 5 578 33.33462      2      TRUE      FALSE
-## 6 579 42.98948      2      TRUE      FALSE
+## 1 557 29.74225      0     FALSE      FALSE
+## 2 558 29.87703      0     FALSE      FALSE
+## 3 574 28.60687      0     FALSE      FALSE
+## 4 575 30.83416      0     FALSE      FALSE
+## 5 576 38.75511      0     FALSE      FALSE
+## 6 577 38.11618      2      TRUE      FALSE
 \end{verbatim}
 
 \begin{Shaded}
@@ -649,7 +657,7 @@ contain the following information:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 28.60687 30.83416 38.75511 38.11618 33.33462 42.98948
+## [1] 29.74225 29.87703 28.60687 30.83416 38.75511 38.11618
 \end{verbatim}
 
 \begin{Shaded}
@@ -671,7 +679,7 @@ contain the following information:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 2.553494
+## [1] 3.597175
 \end{verbatim}
 
 \begin{Shaded}
@@ -682,7 +690,7 @@ contain the following information:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 26.65837
+## [1] 26.87393
 \end{verbatim}
 
 \begin{Shaded}
@@ -713,20 +721,20 @@ spatial pattern in the planning unit cost values (hint: use
 
 \section{Vegetation data}\label{vegetation-data}
 
-The vegetation data describe the spatial distribution of 33 vegetation
+The vegetation data describe the spatial distribution of 32 vegetation
 classes in the study area. This data is in a raster format and so the
 data are organized using a grid comprising square grid cells that are
 each the same size. In our case, the raster data contains multiple
 layers (also called ``bands'') and each layer has corresponds to a
 spatial grid with exactly the same area and has exactly the same
 dimensionality (i.e.~number of rows, columns, and cells). In this
-dataset, there are 33 different regular spatial grids layered on top of
+dataset, there are 32 different regular spatial grids layered on top of
 each other -- with each layer corresponding to a different vegetation
-class -- and each of these layers contains a grid with 171 rows, 319
-columns, and 54549 cells. Within each layer, each cell corresponds to a
-1 by 1 km square. The values associated with each grid cell indicate the
-(one) presence or (zero) absence of a given vegetation class in the
-cell.
+class -- and each of these layers contains a grid with 164 rows, 326
+columns, and 53464 cells. Within each layer, each cell corresponds to a
+0.967 by 1.02 km square. The values associated with each grid cell
+indicate the (one) presence or (zero) absence of a given vegetation
+class in the cell.
 
 \begin{figure}
 \centering
@@ -745,10 +753,10 @@ Let's explore the vegetation data.
 
 \begin{verbatim}
 ## class      : RasterStack 
-## dimensions : 171, 319, 54549, 33  (nrow, ncol, ncell, nlayers)
-## resolution : 1000, 1000  (x, y)
-## extent     : 1080496, 1399496, -4840217, -4669217  (xmin, xmax, ymin, ymax)
-## crs        : +proj=aea +lat_1=-18 +lat_2=-36 +lat_0=0 +lon_0=132 +x_0=0 +y_0=0 +ellps=GRS80 +units=m +no_defs 
+## dimensions : 164, 326, 53464, 32  (nrow, ncol, ncell, nlayers)
+## resolution : 967, 1020  (x, y)
+## extent     : 298636.7, 613878.7, 5167756, 5335036  (xmin, xmax, ymin, ymax)
+## crs        : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 
 ## names      : vegetation.1, vegetation.2, vegetation.3, vegetation.4, vegetation.5, vegetation.6, vegetation.7, vegetation.8, vegetation.9, vegetation.10, vegetation.11, vegetation.12, vegetation.13, vegetation.14, vegetation.15, ... 
 ## min values :            0,            0,            0,            0,            0,            0,            0,            0,            0,             0,             0,             0,             0,             0,             0, ... 
 ## max values :            1,            1,            1,            1,            1,            1,            1,            1,            1,             1,             1,             1,             1,             1,             1, ...
@@ -778,7 +786,7 @@ Let's explore the vegetation data.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 171
+## [1] 164
 \end{verbatim}
 
 \begin{Shaded}
@@ -789,7 +797,7 @@ Let's explore the vegetation data.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 319
+## [1] 326
 \end{verbatim}
 
 \begin{Shaded}
@@ -800,7 +808,7 @@ Let's explore the vegetation data.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 54549
+## [1] 53464
 \end{verbatim}
 
 \begin{Shaded}
@@ -811,7 +819,7 @@ Let's explore the vegetation data.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 33
+## [1] 32
 \end{verbatim}
 
 \begin{Shaded}
@@ -822,7 +830,7 @@ Let's explore the vegetation data.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1000
+## [1] 967
 \end{verbatim}
 
 \begin{Shaded}
@@ -833,7 +841,7 @@ Let's explore the vegetation data.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1000
+## [1] 1020
 \end{verbatim}
 
 \begin{Shaded}
@@ -845,10 +853,10 @@ Let's explore the vegetation data.
 
 \begin{verbatim}
 ## class      : Extent 
-## xmin       : 1080496 
-## xmax       : 1399496 
-## ymin       : -4840217 
-## ymax       : -4669217
+## xmin       : 298636.7 
+## xmax       : 613878.7 
+## ymin       : 5167756 
+## ymax       : 5335036
 \end{verbatim}
 
 \begin{Shaded}
@@ -860,8 +868,8 @@ Let's explore the vegetation data.
 
 \begin{verbatim}
 ## CRS arguments:
-##  +proj=aea +lat_1=-18 +lat_2=-36 +lat_0=0 +lon_0=132 +x_0=0 +y_0=0
-## +ellps=GRS80 +units=m +no_defs
+##  +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84
+## +towgs84=0,0,0
 \end{verbatim}
 
 \begin{Shaded}
@@ -873,11 +881,11 @@ Let's explore the vegetation data.
 
 \begin{verbatim}
 ## class      : RasterLayer 
-## band       : 1  (of  33  bands)
-## dimensions : 171, 319, 54549  (nrow, ncol, ncell)
-## resolution : 1000, 1000  (x, y)
-## extent     : 1080496, 1399496, -4840217, -4669217  (xmin, xmax, ymin, ymax)
-## crs        : +proj=aea +lat_1=-18 +lat_2=-36 +lat_0=0 +lon_0=132 +x_0=0 +y_0=0 +ellps=GRS80 +units=m +no_defs 
+## band       : 1  (of  32  bands)
+## dimensions : 164, 326, 53464  (nrow, ncol, ncell)
+## resolution : 967, 1020  (x, y)
+## extent     : 298636.7, 613878.7, 5167756, 5335036  (xmin, xmax, ymin, ymax)
+## crs        : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 
 ## source     : /home/travis/build/prioritizr/massey-workshop/data/vegetation.tif 
 ## names      : vegetation.1 
 ## values     : 0, 1  (min, max)
@@ -949,7 +957,7 @@ Let's explore the vegetation data.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.0003116464
+## [1] 0.00035239
 \end{verbatim}
 
 \clearpage
@@ -1013,9 +1021,9 @@ unit.
 
 \begin{verbatim}
 ## Conservation Problem
-##   planning units: SpatialPolygonsDataFrame (557 units)
-##   cost:           min: 2.55349, max: 47.23834
-##   features:       vegetation.1, vegetation.2, vegetation.3, ... (33 features)
+##   planning units: SpatialPolygonsDataFrame (516 units)
+##   cost:           min: 3.59718, max: 47.23834
+##   features:       vegetation.1, vegetation.2, vegetation.3, ... (32 features)
 ##   objective:      none
 ##   targets:        none
 ##   decisions:      default
@@ -1036,20 +1044,20 @@ unit.
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 33 x 3
+## # A tibble: 32 x 3
 ##    feature       absolute_abundance relative_abundance
 ##    <chr>                      <dbl>              <dbl>
-##  1 vegetation.1                16.                   1
-##  2 vegetation.2                12.2                  1
-##  3 vegetation.3                11.4                  1
-##  4 vegetation.4                17.0                  1
-##  5 vegetation.5                11.1                  1
-##  6 vegetation.6                15.2                  1
-##  7 vegetation.7                27.1                  1
-##  8 vegetation.8                16.1                  1
+##  1 vegetation.1                16.0                  1
+##  2 vegetation.2                14.3                  1
+##  3 vegetation.3                10.4                  1
+##  4 vegetation.4                17.8                  1
+##  5 vegetation.5                13.0                  1
+##  6 vegetation.6                14.3                  1
+##  7 vegetation.7                20.0                  1
+##  8 vegetation.8                14.0                  1
 ##  9 vegetation.9                18.0                  1
-## 10 vegetation.10               19.5                  1
-## # ... with 23 more rows
+## 10 vegetation.10               20.0                  1
+## # ... with 22 more rows
 \end{verbatim}
 
 \clearpage
@@ -1075,42 +1083,41 @@ unit.
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 33 x 3
+## # A tibble: 32 x 3
 ##    feature       absolute_abundance relative_abundance
 ##    <chr>                      <dbl>              <dbl>
-##  1 vegetation.1                16.                   1
-##  2 vegetation.2                12.2                  1
-##  3 vegetation.3                11.4                  1
-##  4 vegetation.4                17.0                  1
-##  5 vegetation.5                11.1                  1
-##  6 vegetation.6                15.2                  1
-##  7 vegetation.7                27.1                  1
-##  8 vegetation.8                16.1                  1
+##  1 vegetation.1                16.0                  1
+##  2 vegetation.2                14.3                  1
+##  3 vegetation.3                10.4                  1
+##  4 vegetation.4                17.8                  1
+##  5 vegetation.5                13.0                  1
+##  6 vegetation.6                14.3                  1
+##  7 vegetation.7                20.0                  1
+##  8 vegetation.8                14.0                  1
 ##  9 vegetation.9                18.0                  1
-## 10 vegetation.10               19.5                  1
-## 11 vegetation.11               22.5                  1
-## 12 vegetation.12              852.                   1
-## 13 vegetation.13              178.                   1
-## 14 vegetation.14               11.2                  1
-## 15 vegetation.15               19.2                  1
-## 16 vegetation.16               14.1                  1
-## 17 vegetation.17              208.                   1
-## 18 vegetation.18               14.4                  1
-## 19 vegetation.19               16.0                  1
-## 20 vegetation.20               17.9                  1
-## 21 vegetation.21               17.5                  1
-## 22 vegetation.22              292.                   1
-## 23 vegetation.23               21.4                  1
-## 24 vegetation.24              164.                   1
-## 25 vegetation.25              715.                   1
-## 26 vegetation.26               25.0                  1
-## 27 vegetation.27               17.7                  1
-## 28 vegetation.28               17.7                  1
-## 29 vegetation.29               24.2                  1
-## 30 vegetation.30               59.6                  1
-## 31 vegetation.31               84.0                  1
-## 32 vegetation.32               10.0                  1
-## 33 vegetation.33               65.0                  1
+## 10 vegetation.10               20.0                  1
+## 11 vegetation.11               23.6                  1
+## 12 vegetation.12              748.                   1
+## 13 vegetation.13              126.                   1
+## 14 vegetation.14               10.5                  1
+## 15 vegetation.15               17.5                  1
+## 16 vegetation.16               15.0                  1
+## 17 vegetation.17              213.                   1
+## 18 vegetation.18               14.3                  1
+## 19 vegetation.19               17.1                  1
+## 20 vegetation.20               21.4                  1
+## 21 vegetation.21               18.6                  1
+## 22 vegetation.22              297.                   1
+## 23 vegetation.23               20.3                  1
+## 24 vegetation.24              165.                   1
+## 25 vegetation.25              716.                   1
+## 26 vegetation.26               24.0                  1
+## 27 vegetation.27               18.8                  1
+## 28 vegetation.28               17.5                  1
+## 29 vegetation.29               24.7                  1
+## 30 vegetation.30               59.0                  1
+## 31 vegetation.31               60.0                  1
+## 32 vegetation.32               32                    1
 \end{verbatim}
 
 The \texttt{abundance\_data} object contains three columns. The
@@ -1139,20 +1146,20 @@ in area units (i.e.~km\textsuperscript{2}).
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 33 x 4
+## # A tibble: 32 x 4
 ##    feature       absolute_abundance relative_abundance absolute_abundance_km2
 ##    <chr>                      <dbl>              <dbl>                 [km^2]
-##  1 vegetation.1                16.                   1               16.00000
-##  2 vegetation.2                12.2                  1               12.23304
-##  3 vegetation.3                11.4                  1               11.41238
-##  4 vegetation.4                17.0                  1               16.97727
-##  5 vegetation.5                11.1                  1               11.11602
-##  6 vegetation.6                15.2                  1               15.23127
-##  7 vegetation.7                27.1                  1               27.11938
-##  8 vegetation.8                16.1                  1               16.13828
-##  9 vegetation.9                18.0                  1               17.99032
-## 10 vegetation.10               19.5                  1               19.54535
-## # ... with 23 more rows
+##  1 vegetation.1                16.0                  1               15.78148
+##  2 vegetation.2                14.3                  1               14.11504
+##  3 vegetation.3                10.4                  1               10.23844
+##  4 vegetation.4                17.8                  1               17.58813
+##  5 vegetation.5                13.0                  1               12.83198
+##  6 vegetation.6                14.3                  1               14.10423
+##  7 vegetation.7                20.0                  1               19.72680
+##  8 vegetation.8                14.0                  1               13.85014
+##  9 vegetation.9                18.0                  1               17.75412
+## 10 vegetation.10               20.0                  1               19.74076
+## # ... with 22 more rows
 \end{verbatim}
 
 Now let's explore the abundance data.
@@ -1165,7 +1172,7 @@ Now let's explore the abundance data.
 \end{Shaded}
 
 \begin{verbatim}
-## 91.81647 [km^2]
+## 86.82948 [km^2]
 \end{verbatim}
 
 \begin{Shaded}
@@ -1185,7 +1192,7 @@ Now let's explore the abundance data.
 \end{Shaded}
 
 \begin{verbatim}
-## 851.9835 [km^2]
+## 737.982 [km^2]
 \end{verbatim}
 
 \begin{Shaded}
@@ -1236,7 +1243,7 @@ values indicating if the planning units are selected or not).
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 33 x 3
+## # A tibble: 32 x 3
 ##    feature       absolute_held relative_held
 ##    <chr>                 <dbl>         <dbl>
 ##  1 vegetation.1          0            0     
@@ -1247,9 +1254,9 @@ values indicating if the planning units are selected or not).
 ##  6 vegetation.6          0            0     
 ##  7 vegetation.7          0            0     
 ##  8 vegetation.8          0            0     
-##  9 vegetation.9          0.600        0.0334
+##  9 vegetation.9          0.846        0.0470
 ## 10 vegetation.10         0            0     
-## # ... with 23 more rows
+## # ... with 22 more rows
 \end{verbatim}
 
 Similar to the abundance data before, the \texttt{repr\_data} object
@@ -1278,7 +1285,7 @@ them.
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 33 x 4
+## # A tibble: 32 x 4
 ##    feature       absolute_held relative_held absolute_held_km2
 ##    <chr>                 <dbl>         <dbl>            [km^2]
 ##  1 vegetation.1          0            0              0.0000000
@@ -1289,9 +1296,9 @@ them.
 ##  6 vegetation.6          0            0              0.0000000
 ##  7 vegetation.7          0            0              0.0000000
 ##  8 vegetation.8          0            0              0.0000000
-##  9 vegetation.9          0.600        0.0334         0.6001696
+##  9 vegetation.9          0.846        0.0470         0.8341885
 ## 10 vegetation.10         0            0              0.0000000
-## # ... with 23 more rows
+## # ... with 22 more rows
 \end{verbatim}
 
 Now let's investigate how well the species are represented.
@@ -1348,13 +1355,13 @@ here for installation instructions}).
 
 \begin{verbatim}
 ## class       : SpatialPolygonsDataFrame 
-## features    : 557 
-## extent      : 1115191, 1385011, -4840595, -4662354  (xmin, xmax, ymin, ymax)
-## crs         : +proj=aea +lat_1=-18 +lat_2=-36 +lat_0=0 +lon_0=132 +x_0=0 +y_0=0 +ellps=GRS80 +units=m +no_defs 
+## features    : 516 
+## extent      : 348703.2, 611932.4, 5167775, 5344516  (xmin, xmax, ymin, ymax)
+## crs         : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 
 ## variables   : 6
-## names       :   id,            cost, status, locked_in, locked_out, pa_status 
-## min values  :  574, 2.5534941249227,      0,         0,          0,         0 
-## max values  : 1130, 47.238336402701,      2,         1,          1,         1
+## names       :   id,             cost, status, locked_in, locked_out, pa_status 
+## min values  :  557, 3.59717531470679,      0,         0,          0,         0 
+## max values  : 1130,  47.238336402701,      2,         1,          1,         1
 \end{verbatim}
 
 \begin{Shaded}
@@ -1373,9 +1380,9 @@ here for installation instructions}).
 
 \begin{verbatim}
 ## Conservation Problem
-##   planning units: SpatialPolygonsDataFrame (557 units)
-##   cost:           min: 2.55349, max: 47.23834
-##   features:       vegetation.1, vegetation.2, vegetation.3, ... (33 features)
+##   planning units: SpatialPolygonsDataFrame (516 units)
+##   cost:           min: 3.59718, max: 47.23834
+##   features:       vegetation.1, vegetation.2, vegetation.3, ... (32 features)
 ##   objective:      Minimum set objective 
 ##   targets:        Relative targets [targets (min: 0.05, max: 0.05)]
 ##   decisions:      Binary decision 
@@ -1398,13 +1405,13 @@ here for installation instructions}).
 
 \begin{verbatim}
 ## class       : SpatialPolygonsDataFrame 
-## features    : 557 
-## extent      : 1115191, 1385011, -4840595, -4662354  (xmin, xmax, ymin, ymax)
-## crs         : +proj=aea +lat_1=-18 +lat_2=-36 +lat_0=0 +lon_0=132 +x_0=0 +y_0=0 +ellps=GRS80 +units=m +no_defs 
+## features    : 516 
+## extent      : 348703.2, 611932.4, 5167775, 5344516  (xmin, xmax, ymin, ymax)
+## crs         : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 
 ## variables   : 7
-## names       :   id,            cost, status, locked_in, locked_out, pa_status, solution_1 
-## min values  :  574, 2.5534941249227,      0,         0,          0,         0,          0 
-## max values  : 1130, 47.238336402701,      2,         1,          1,         1,          1
+## names       :   id,             cost, status, locked_in, locked_out, pa_status, solution_1 
+## min values  :  557, 3.59717531470679,      0,         0,          0,         0,          0 
+## max values  : 1130,  47.238336402701,      2,         1,          1,         1,          1
 \end{verbatim}
 
 \begin{Shaded}
@@ -1415,7 +1422,7 @@ here for installation instructions}).
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 16
+## [1] 15
 \end{verbatim}
 
 \begin{Shaded}
@@ -1426,7 +1433,7 @@ here for installation instructions}).
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 408.3382
+## [1] 384.8434
 \end{verbatim}
 
 \begin{Shaded}
@@ -1490,13 +1497,13 @@ name to specify which planning units should be locked in.
 
 \begin{verbatim}
 ## Conservation Problem
-##   planning units: SpatialPolygonsDataFrame (557 units)
-##   cost:           min: 2.55349, max: 47.23834
-##   features:       vegetation.1, vegetation.2, vegetation.3, ... (33 features)
+##   planning units: SpatialPolygonsDataFrame (516 units)
+##   cost:           min: 3.59718, max: 47.23834
+##   features:       vegetation.1, vegetation.2, vegetation.3, ... (32 features)
 ##   objective:      Minimum set objective 
 ##   targets:        Relative targets [targets (min: 0.05, max: 0.05)]
 ##   decisions:      Binary decision 
-##   constraints:    <Locked in planning units [203 locked units]>
+##   constraints:    <Locked in planning units [198 locked units]>
 ##   penalties:      <none>
 ##   portfolio:      default
 ##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (-1), verbose (1)]
@@ -1538,13 +1545,13 @@ the targets to 10\%.
 
 \begin{verbatim}
 ## Conservation Problem
-##   planning units: SpatialPolygonsDataFrame (557 units)
-##   cost:           min: 2.55349, max: 47.23834
-##   features:       vegetation.1, vegetation.2, vegetation.3, ... (33 features)
+##   planning units: SpatialPolygonsDataFrame (516 units)
+##   cost:           min: 3.59718, max: 47.23834
+##   features:       vegetation.1, vegetation.2, vegetation.3, ... (32 features)
 ##   objective:      Minimum set objective 
 ##   targets:        Relative targets [targets (min: 0.1, max: 0.1)]
 ##   decisions:      Binary decision 
-##   constraints:    <Locked in planning units [203 locked units]>
+##   constraints:    <Locked in planning units [198 locked units]>
 ##   penalties:      <none>
 ##   portfolio:      default
 ##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (-1), verbose (1)]
@@ -1601,14 +1608,14 @@ information is present in our planning unit data so we can use the
 
 \begin{verbatim}
 ## Conservation Problem
-##   planning units: SpatialPolygonsDataFrame (557 units)
-##   cost:           min: 2.55349, max: 47.23834
-##   features:       vegetation.1, vegetation.2, vegetation.3, ... (33 features)
+##   planning units: SpatialPolygonsDataFrame (516 units)
+##   cost:           min: 3.59718, max: 47.23834
+##   features:       vegetation.1, vegetation.2, vegetation.3, ... (32 features)
 ##   objective:      Minimum set objective 
 ##   targets:        Relative targets [targets (min: 0.1, max: 0.1)]
 ##   decisions:      Binary decision 
 ##   constraints:    <Locked out planning units [6 locked units]
-##                    Locked in planning units [203 locked units]>
+##                    Locked in planning units [198 locked units]>
 ##   penalties:      <none>
 ##   portfolio:      default
 ##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (-1), verbose (1)]
@@ -1691,13 +1698,13 @@ prioritizr can automatically calculate the boundary data for us.
 
 \begin{verbatim}
 ## Conservation Problem
-##   planning units: SpatialPolygonsDataFrame (557 units)
-##   cost:           min: 2.55349, max: 47.23834
-##   features:       vegetation.1, vegetation.2, vegetation.3, ... (33 features)
+##   planning units: SpatialPolygonsDataFrame (516 units)
+##   cost:           min: 3.59718, max: 47.23834
+##   features:       vegetation.1, vegetation.2, vegetation.3, ... (32 features)
 ##   objective:      Minimum set objective 
 ##   targets:        Relative targets [targets (min: 0.1, max: 0.1)]
 ##   decisions:      Binary decision 
-##   constraints:    <Locked in planning units [203 locked units]
+##   constraints:    <Locked in planning units [198 locked units]
 ##                    Locked out planning units [6 locked units]>
 ##   penalties:      <Boundary penalties [edge factor (min: 0.5, max: 0.5), penalty (0.001), zones]>
 ##   portfolio:      default
@@ -1717,13 +1724,13 @@ prioritizr can automatically calculate the boundary data for us.
 
 \begin{verbatim}
 ## class       : SpatialPolygonsDataFrame 
-## features    : 557 
-## extent      : 1115191, 1385011, -4840595, -4662354  (xmin, xmax, ymin, ymax)
-## crs         : +proj=aea +lat_1=-18 +lat_2=-36 +lat_0=0 +lon_0=132 +x_0=0 +y_0=0 +ellps=GRS80 +units=m +no_defs 
+## features    : 516 
+## extent      : 348703.2, 611932.4, 5167775, 5344516  (xmin, xmax, ymin, ymax)
+## crs         : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 
 ## variables   : 7
-## names       :   id,            cost, status, locked_in, locked_out, pa_status, solution_1 
-## min values  :  574, 2.5534941249227,      0,         0,          0,         0,          0 
-## max values  : 1130, 47.238336402701,      2,         1,          1,         1,          1
+## names       :   id,             cost, status, locked_in, locked_out, pa_status, solution_1 
+## min values  :  557, 3.59717531470679,      0,         0,          0,         0,          0 
+## max values  : 1130,  47.238336402701,      2,         1,          1,         1,          1
 \end{verbatim}
 
 \begin{Shaded}

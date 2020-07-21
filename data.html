@@ -187,7 +187,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">library</span>(assertthat)
 <span class="kw">library</span>(gridExtra)
 <span class="kw">library</span>(dplyr)</code></pre></div>
-<p>You should have already downloaded the data. If you have not already done so, you can download it from here: <a href="https://github.com/prioritizr/cibio-workshop/raw/master/data.zip" class="uri">https://github.com/prioritizr/cibio-workshop/raw/master/data.zip</a>. After downloading the data, you can unzip the data into a new folder. Next, you will need to set the working directory to this new folder. To achieve this, click on the <em>Session</em> button on the RStudio menu bar, then click <em>Set Working Directory</em>, and then <em>Choose Directory</em>.</p>
+<p>You should have already downloaded the data. If you have not already done so, you can download it from here: <a href="https://github.com/prioritizr/massey-workshop/raw/master/data.zip" class="uri">https://github.com/prioritizr/massey-workshop/raw/master/data.zip</a>. After downloading the data, you can unzip the data into a new folder. Next, you will need to set the working directory to this new folder. To achieve this, click on the <em>Session</em> button on the RStudio menu bar, then click <em>Set Working Directory</em>, and then <em>Choose Directory</em>.</p>
 <p><img src="images/rstudio-wd.png" width="70%" style="display: block; margin: auto;" /></p>
 
 <p>Now navigate to the folder where you unzipped the data and select <em>Open</em>. You can verify that you have correctly set the working directory using the following R code. You should see the output <code>TRUE</code> in the <em>Console</em> panel.</p>
@@ -196,16 +196,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="data-import" class="section level2">
 <h2><span class="header-section-number">3.3</span> Data import</h2>
-<p>Now that we have downloaded the dataset, we will need to import it into our R session. Specifically, this data was obtained from the &quot;Introduction to Marxan&quot; course and was originally a subset of a larger spatial prioritization project performed under contract to Australia’s Department of Environment and Water Resources. It contains vector-based planning unit data (<code>pu.shp</code>) and the raster-based data describing the spatial distributions of 33 vegetation classes (<code>vegetation.tif</code>) in southern Tasmania, Australia. Please note this dataset is only provided for teaching purposes and should not be used for any real-world conservation planning. We can import the data into our R session using the following code.</p>
+<p>Now that we have downloaded the dataset, we will need to import it into our R session. Specifically, this data was obtained from the &quot;Introduction to Marxan&quot; course and was originally a subset of a larger spatial prioritization project performed under contract to Australia’s Department of Environment and Water Resources. It contains vector-based planning unit data (<code>pu.shp</code>) and the raster-based data describing the spatial distributions of 32 vegetation classes (<code>vegetation.tif</code>) in southern Tasmania, Australia. Please note this dataset is only provided for teaching purposes and should not be used for any real-world conservation planning. We can import the data into our R session using the following code.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># import planning unit data</span>
-pu_data &lt;-<span class="st"> </span><span class="kw">as</span>(<span class="kw">read_sf</span>(<span class="st">&quot;data/pu.shp&quot;</span>), <span class="st">&quot;Spatial&quot;</span>)
+pu_data &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as</span>(<span class="kw">read_sf</span>(<span class="st">&quot;data/pu.shp&quot;</span>), <span class="st">&quot;Spatial&quot;</span>))
 
 <span class="co"># format columns in planning unit data</span>
 pu_data<span class="op">$</span>locked_in &lt;-<span class="st"> </span><span class="kw">as.logical</span>(pu_data<span class="op">$</span>locked_in)
 pu_data<span class="op">$</span>locked_out &lt;-<span class="st"> </span><span class="kw">as.logical</span>(pu_data<span class="op">$</span>locked_out)
 
 <span class="co"># import vegetation data</span>
-veg_data &lt;-<span class="st"> </span><span class="kw">stack</span>(<span class="st">&quot;data/vegetation.tif&quot;</span>)</code></pre></div>
+veg_data &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">stack</span>(<span class="st">&quot;data/vegetation.tif&quot;</span>))
+
+<span class="co"># verify that data are in same coordinate reference system</span>
+
+<span class="co"># manually set the coordinate reference system for veg_data to be equal to</span>
+<span class="co"># the coordinate reference system for pu_data,</span>
+## note that we do this because we know that the data have the same
+## projection system, and normally you use would sp::spTransform or
+## raster::projectRaster</code></pre></div>
 
 </div>
 <div id="planning-unit-data" class="section level2">
@@ -221,13 +229,13 @@ veg_data &lt;-<span class="st"> </span><span class="kw">stack</span>(<span class
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print a short summary of the data</span>
 <span class="kw">print</span>(pu_data)</code></pre></div>
 <pre><code>## class       : SpatialPolygonsDataFrame 
-## features    : 557 
-## extent      : 1115191, 1385011, -4840595, -4662354  (xmin, xmax, ymin, ymax)
-## crs         : +proj=aea +lat_1=-18 +lat_2=-36 +lat_0=0 +lon_0=132 +x_0=0 +y_0=0 +ellps=GRS80 +units=m +no_defs 
+## features    : 516 
+## extent      : 348703.2, 611932.4, 5167775, 5344516  (xmin, xmax, ymin, ymax)
+## crs         : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 
 ## variables   : 5
-## names       :   id,            cost, status, locked_in, locked_out 
-## min values  :  574, 2.5534941249227,      0,         0,          0 
-## max values  : 1130, 47.238336402701,      2,         1,          1</code></pre>
+## names       :   id,             cost, status, locked_in, locked_out 
+## min values  :  557, 3.59717531470679,      0,         0,          0 
+## max values  : 1130,  47.238336402701,      2,         1,          1</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot the planning unit data</span>
 <span class="kw">plot</span>(pu_data)</code></pre></div>
 <p><img src="prioritizr-workshop-manual_files/figure-html/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
@@ -236,10 +244,10 @@ veg_data &lt;-<span class="st"> </span><span class="kw">stack</span>(<span class
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print the structure of object</span>
 <span class="kw">str</span>(pu_data, <span class="dt">max.level =</span> <span class="dv">2</span>)</code></pre></div>
 <pre><code>## Formal class &#39;SpatialPolygonsDataFrame&#39; [package &quot;sp&quot;] with 5 slots
-##   ..@ data       :&#39;data.frame&#39;:  557 obs. of  5 variables:
-##   ..@ polygons   :List of 557
-##   ..@ plotOrder  : int [1:557] 103 219 21 314 206 131 316 327 231 218 ...
-##   ..@ bbox       : num [1:2, 1:2] 1115191 -4840595 1385011 -4662354
+##   ..@ data       :&#39;data.frame&#39;:  516 obs. of  5 variables:
+##   ..@ polygons   :List of 516
+##   ..@ plotOrder  : int [1:516] 69 104 1 122 157 190 4 221 17 140 ...
+##   ..@ bbox       : num [1:2, 1:2] 348703 5167775 611932 5344516
 ##   .. ..- attr(*, &quot;dimnames&quot;)=List of 2
 ##   ..@ proj4string:Formal class &#39;CRS&#39; [package &quot;sp&quot;] with 1 slot</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print the class of the object</span>
@@ -253,32 +261,32 @@ veg_data &lt;-<span class="st"> </span><span class="kw">stack</span>(<span class
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print the coordinate reference system</span>
 <span class="kw">print</span>(pu_data<span class="op">@</span>proj4string)</code></pre></div>
 <pre><code>## CRS arguments:
-##  +proj=aea +lat_1=-18 +lat_2=-36 +lat_0=0 +lon_0=132 +x_0=0 +y_0=0
-## +ellps=GRS80 +units=m +no_defs</code></pre>
+##  +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84
+## +towgs84=0,0,0</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print number of planning units (geometries) in the data</span>
 <span class="kw">nrow</span>(pu_data)</code></pre></div>
-<pre><code>## [1] 557</code></pre>
+<pre><code>## [1] 516</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print the first six rows in the data</span>
 <span class="kw">head</span>(pu_data<span class="op">@</span>data)</code></pre></div>
 <pre><code>##    id     cost status locked_in locked_out
-## 1 574 28.60687      0     FALSE      FALSE
-## 2 575 30.83416      0     FALSE      FALSE
-## 3 576 38.75511      0     FALSE      FALSE
-## 4 577 38.11618      2      TRUE      FALSE
-## 5 578 33.33462      2      TRUE      FALSE
-## 6 579 42.98948      2      TRUE      FALSE</code></pre>
+## 1 557 29.74225      0     FALSE      FALSE
+## 2 558 29.87703      0     FALSE      FALSE
+## 3 574 28.60687      0     FALSE      FALSE
+## 4 575 30.83416      0     FALSE      FALSE
+## 5 576 38.75511      0     FALSE      FALSE
+## 6 577 38.11618      2      TRUE      FALSE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print the first six values in the cost column of the attribute data</span>
 <span class="kw">head</span>(pu_data<span class="op">$</span>cost)</code></pre></div>
-<pre><code>## [1] 28.60687 30.83416 38.75511 38.11618 33.33462 42.98948</code></pre>
+<pre><code>## [1] 29.74225 29.87703 28.60687 30.83416 38.75511 38.11618</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print the highest cost value</span>
 <span class="kw">max</span>(pu_data<span class="op">$</span>cost)</code></pre></div>
 <pre><code>## [1] 47.23834</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print the smallest cost value</span>
 <span class="kw">min</span>(pu_data<span class="op">$</span>cost)</code></pre></div>
-<pre><code>## [1] 2.553494</code></pre>
+<pre><code>## [1] 3.597175</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print average cost value</span>
 <span class="kw">mean</span>(pu_data<span class="op">$</span>cost)</code></pre></div>
-<pre><code>## [1] 26.65837</code></pre>
+<pre><code>## [1] 26.87393</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a map of the planning unit cost data</span>
 <span class="kw">spplot</span>(pu_data, <span class="st">&quot;cost&quot;</span>)</code></pre></div>
 <p><img src="prioritizr-workshop-manual_files/figure-html/unnamed-chunk-18-1.png" width="60%" style="display: block; margin: auto;" /></p>
@@ -298,7 +306,7 @@ veg_data &lt;-<span class="st"> </span><span class="kw">stack</span>(<span class
 </div>
 <div id="vegetation-data" class="section level2">
 <h2><span class="header-section-number">3.5</span> Vegetation data</h2>
-<p>The vegetation data describe the spatial distribution of 33 vegetation classes in the study area. This data is in a raster format and so the data are organized using a grid comprising square grid cells that are each the same size. In our case, the raster data contains multiple layers (also called &quot;bands&quot;) and each layer has corresponds to a spatial grid with exactly the same area and has exactly the same dimensionality (i.e. number of rows, columns, and cells). In this dataset, there are 33 different regular spatial grids layered on top of each other -- with each layer corresponding to a different vegetation class -- and each of these layers contains a grid with 171 rows, 319 columns, and 54549 cells. Within each layer, each cell corresponds to a 1 by 1 km square. The values associated with each grid cell indicate the (one) presence or (zero) absence of a given vegetation class in the cell.</p>
+<p>The vegetation data describe the spatial distribution of 32 vegetation classes in the study area. This data is in a raster format and so the data are organized using a grid comprising square grid cells that are each the same size. In our case, the raster data contains multiple layers (also called &quot;bands&quot;) and each layer has corresponds to a spatial grid with exactly the same area and has exactly the same dimensionality (i.e. number of rows, columns, and cells). In this dataset, there are 32 different regular spatial grids layered on top of each other -- with each layer corresponding to a different vegetation class -- and each of these layers contains a grid with 164 rows, 326 columns, and 53464 cells. Within each layer, each cell corresponds to a 0.967 by 1.02 km square. The values associated with each grid cell indicate the (one) presence or (zero) absence of a given vegetation class in the cell.</p>
 <div class="figure">
 <img src="images/rasterbands.png" />
 
@@ -307,10 +315,10 @@ veg_data &lt;-<span class="st"> </span><span class="kw">stack</span>(<span class
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print a short summary of the data</span>
 <span class="kw">print</span>(veg_data)</code></pre></div>
 <pre><code>## class      : RasterStack 
-## dimensions : 171, 319, 54549, 33  (nrow, ncol, ncell, nlayers)
-## resolution : 1000, 1000  (x, y)
-## extent     : 1080496, 1399496, -4840217, -4669217  (xmin, xmax, ymin, ymax)
-## crs        : +proj=aea +lat_1=-18 +lat_2=-36 +lat_0=0 +lon_0=132 +x_0=0 +y_0=0 +ellps=GRS80 +units=m +no_defs 
+## dimensions : 164, 326, 53464, 32  (nrow, ncol, ncell, nlayers)
+## resolution : 967, 1020  (x, y)
+## extent     : 298636.7, 613878.7, 5167756, 5335036  (xmin, xmax, ymin, ymax)
+## crs        : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 
 ## names      : vegetation.1, vegetation.2, vegetation.3, vegetation.4, vegetation.5, vegetation.6, vegetation.7, vegetation.8, vegetation.9, vegetation.10, vegetation.11, vegetation.12, vegetation.13, vegetation.14, vegetation.15, ... 
 ## min values :            0,            0,            0,            0,            0,            0,            0,            0,            0,             0,             0,             0,             0,             0,             0, ... 
 ## max values :            1,            1,            1,            1,            1,            1,            1,            1,            1,             1,             1,             1,             1,             1,             1, ...</code></pre>
@@ -321,42 +329,42 @@ veg_data &lt;-<span class="st"> </span><span class="kw">stack</span>(<span class
 <span class="kw">mapview</span>(veg_data[[<span class="dv">20</span>]])</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print number of rows in the data</span>
 <span class="kw">nrow</span>(veg_data)</code></pre></div>
-<pre><code>## [1] 171</code></pre>
+<pre><code>## [1] 164</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print number of columns  in the data</span>
 <span class="kw">ncol</span>(veg_data)</code></pre></div>
-<pre><code>## [1] 319</code></pre>
+<pre><code>## [1] 326</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print number of cells in the data</span>
 <span class="kw">ncell</span>(veg_data)</code></pre></div>
-<pre><code>## [1] 54549</code></pre>
+<pre><code>## [1] 53464</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print number of layers in the data</span>
 <span class="kw">nlayers</span>(veg_data)</code></pre></div>
-<pre><code>## [1] 33</code></pre>
+<pre><code>## [1] 32</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print  resolution on the x-axis</span>
 <span class="kw">xres</span>(veg_data)</code></pre></div>
-<pre><code>## [1] 1000</code></pre>
+<pre><code>## [1] 967</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print resolution on the y-axis</span>
 <span class="kw">yres</span>(veg_data)</code></pre></div>
-<pre><code>## [1] 1000</code></pre>
+<pre><code>## [1] 1020</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print spatial extent of the grid, i.e. coordinates for corners</span>
 <span class="kw">extent</span>(veg_data)</code></pre></div>
 <pre><code>## class      : Extent 
-## xmin       : 1080496 
-## xmax       : 1399496 
-## ymin       : -4840217 
-## ymax       : -4669217</code></pre>
+## xmin       : 298636.7 
+## xmax       : 613878.7 
+## ymin       : 5167756 
+## ymax       : 5335036</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print the coordinate reference system</span>
 <span class="kw">print</span>(veg_data<span class="op">@</span>crs)</code></pre></div>
 <pre><code>## CRS arguments:
-##  +proj=aea +lat_1=-18 +lat_2=-36 +lat_0=0 +lon_0=132 +x_0=0 +y_0=0
-## +ellps=GRS80 +units=m +no_defs</code></pre>
+##  +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84
+## +towgs84=0,0,0</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># print a summary of the first layer in the stack</span>
 <span class="kw">print</span>(veg_data[[<span class="dv">1</span>]])</code></pre></div>
 <pre><code>## class      : RasterLayer 
-## band       : 1  (of  33  bands)
-## dimensions : 171, 319, 54549  (nrow, ncol, ncell)
-## resolution : 1000, 1000  (x, y)
-## extent     : 1080496, 1399496, -4840217, -4669217  (xmin, xmax, ymin, ymax)
-## crs        : +proj=aea +lat_1=-18 +lat_2=-36 +lat_0=0 +lon_0=132 +x_0=0 +y_0=0 +ellps=GRS80 +units=m +no_defs 
+## band       : 1  (of  32  bands)
+## dimensions : 164, 326, 53464  (nrow, ncol, ncell)
+## resolution : 967, 1020  (x, y)
+## extent     : 298636.7, 613878.7, 5167756, 5335036  (xmin, xmax, ymin, ymax)
+## crs        : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 
 ## source     : /home/travis/build/prioritizr/massey-workshop/data/vegetation.tif 
 ## names      : vegetation.1 
 ## values     : 0, 1  (min, max)</code></pre>
@@ -380,7 +388,7 @@ veg_data &lt;-<span class="st"> </span><span class="kw">stack</span>(<span class
 <pre><code>## [1] 0</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate the mean value of all the cell values in the first layer</span>
 <span class="kw">cellStats</span>(veg_data[[<span class="dv">1</span>]], <span class="st">&quot;mean&quot;</span>)</code></pre></div>
-<pre><code>## [1] 0.0003116464</code></pre>
+<pre><code>## [1] 0.00035239</code></pre>
 
 <p>Now, you can try and answer some questions about the vegetation data.</p>
 

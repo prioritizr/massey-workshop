@@ -170,9 +170,9 @@ p0 &lt;-<span class="st"> </span><span class="kw">problem</span>(pu_data, veg_da
 <span class="co"># we can see that only the cost and feature data are defined</span>
 <span class="kw">print</span>(p0)</code></pre></div>
 <pre><code>## Conservation Problem
-##   planning units: SpatialPolygonsDataFrame (557 units)
-##   cost:           min: 2.55349, max: 47.23834
-##   features:       vegetation.1, vegetation.2, vegetation.3, ... (33 features)
+##   planning units: SpatialPolygonsDataFrame (516 units)
+##   cost:           min: 3.59718, max: 47.23834
+##   features:       vegetation.1, vegetation.2, vegetation.3, ... (32 features)
 ##   objective:      none
 ##   targets:        none
 ##   decisions:      default
@@ -185,20 +185,20 @@ abundance_data &lt;-<span class="st"> </span><span class="kw">feature_abundances
 
 <span class="co"># print abundance data</span>
 <span class="kw">print</span>(abundance_data)</code></pre></div>
-<pre><code>## # A tibble: 33 x 3
+<pre><code>## # A tibble: 32 x 3
 ##    feature       absolute_abundance relative_abundance
 ##    &lt;chr&gt;                      &lt;dbl&gt;              &lt;dbl&gt;
-##  1 vegetation.1                16.                   1
-##  2 vegetation.2                12.2                  1
-##  3 vegetation.3                11.4                  1
-##  4 vegetation.4                17.0                  1
-##  5 vegetation.5                11.1                  1
-##  6 vegetation.6                15.2                  1
-##  7 vegetation.7                27.1                  1
-##  8 vegetation.8                16.1                  1
+##  1 vegetation.1                16.0                  1
+##  2 vegetation.2                14.3                  1
+##  3 vegetation.3                10.4                  1
+##  4 vegetation.4                17.8                  1
+##  5 vegetation.5                13.0                  1
+##  6 vegetation.6                14.3                  1
+##  7 vegetation.7                20.0                  1
+##  8 vegetation.8                14.0                  1
 ##  9 vegetation.9                18.0                  1
-## 10 vegetation.10               19.5                  1
-## # … with 23 more rows</code></pre>
+## 10 vegetation.10               20.0                  1
+## # … with 22 more rows</code></pre>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># note that only the first ten rows are printed,</span>
 <span class="co"># this is because the abundance_data object is a tibble (i.e. tbl_df) object</span>
@@ -207,42 +207,41 @@ abundance_data &lt;-<span class="st"> </span><span class="kw">feature_abundances
 <pre><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># we can print all of the rows in abundance_data like this</span>
 <span class="kw">print</span>(abundance_data, <span class="dt">n =</span> <span class="ot">Inf</span>)</code></pre></div>
-<pre><code>## # A tibble: 33 x 3
+<pre><code>## # A tibble: 32 x 3
 ##    feature       absolute_abundance relative_abundance
 ##    &lt;chr&gt;                      &lt;dbl&gt;              &lt;dbl&gt;
-##  1 vegetation.1                16.                   1
-##  2 vegetation.2                12.2                  1
-##  3 vegetation.3                11.4                  1
-##  4 vegetation.4                17.0                  1
-##  5 vegetation.5                11.1                  1
-##  6 vegetation.6                15.2                  1
-##  7 vegetation.7                27.1                  1
-##  8 vegetation.8                16.1                  1
+##  1 vegetation.1                16.0                  1
+##  2 vegetation.2                14.3                  1
+##  3 vegetation.3                10.4                  1
+##  4 vegetation.4                17.8                  1
+##  5 vegetation.5                13.0                  1
+##  6 vegetation.6                14.3                  1
+##  7 vegetation.7                20.0                  1
+##  8 vegetation.8                14.0                  1
 ##  9 vegetation.9                18.0                  1
-## 10 vegetation.10               19.5                  1
-## 11 vegetation.11               22.5                  1
-## 12 vegetation.12              852.                   1
-## 13 vegetation.13              178.                   1
-## 14 vegetation.14               11.2                  1
-## 15 vegetation.15               19.2                  1
-## 16 vegetation.16               14.1                  1
-## 17 vegetation.17              208.                   1
-## 18 vegetation.18               14.4                  1
-## 19 vegetation.19               16.0                  1
-## 20 vegetation.20               17.9                  1
-## 21 vegetation.21               17.5                  1
-## 22 vegetation.22              292.                   1
-## 23 vegetation.23               21.4                  1
-## 24 vegetation.24              164.                   1
-## 25 vegetation.25              715.                   1
-## 26 vegetation.26               25.0                  1
-## 27 vegetation.27               17.7                  1
-## 28 vegetation.28               17.7                  1
-## 29 vegetation.29               24.2                  1
-## 30 vegetation.30               59.6                  1
-## 31 vegetation.31               84.0                  1
-## 32 vegetation.32               10.0                  1
-## 33 vegetation.33               65.0                  1</code></pre>
+## 10 vegetation.10               20.0                  1
+## 11 vegetation.11               23.6                  1
+## 12 vegetation.12              748.                   1
+## 13 vegetation.13              126.                   1
+## 14 vegetation.14               10.5                  1
+## 15 vegetation.15               17.5                  1
+## 16 vegetation.16               15.0                  1
+## 17 vegetation.17              213.                   1
+## 18 vegetation.18               14.3                  1
+## 19 vegetation.19               17.1                  1
+## 20 vegetation.20               21.4                  1
+## 21 vegetation.21               18.6                  1
+## 22 vegetation.22              297.                   1
+## 23 vegetation.23               20.3                  1
+## 24 vegetation.24              165.                   1
+## 25 vegetation.25              716.                   1
+## 26 vegetation.26               24.0                  1
+## 27 vegetation.27               18.8                  1
+## 28 vegetation.28               17.5                  1
+## 29 vegetation.29               24.7                  1
+## 30 vegetation.30               59.0                  1
+## 31 vegetation.31               60.0                  1
+## 32 vegetation.32               32                    1</code></pre>
 <p>The <code>abundance_data</code> object contains three columns. The <code>feature</code> column contains the name of each feature (derived from <code>names(veg_data)</code>), the <code>absolute_abundance</code> column contains the total amount of each feature in all the planning units, and the <code>relative_abundance</code> column contains the total amount of each feature in the planning units expressed as a proportion of the total amount in the underlying raster data. Since all the raster cells containing vegetation overlap with the planning units, all of the values in the <code>relative_abundance</code> column are equal to one (meaning 100%). Now let's add a new column with the feature abundances expressed in area units (i.e. km<sup>2</sup>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># add new column with feature abundances in km^2</span>
 abundance_data<span class="op">$</span>absolute_abundance_km2 &lt;-
@@ -252,30 +251,30 @@ abundance_data<span class="op">$</span>absolute_abundance_km2 &lt;-
 
 <span class="co"># print abundance data</span>
 <span class="kw">print</span>(abundance_data)</code></pre></div>
-<pre><code>## # A tibble: 33 x 4
+<pre><code>## # A tibble: 32 x 4
 ##    feature       absolute_abundance relative_abundance absolute_abundance_km2
 ##    &lt;chr&gt;                      &lt;dbl&gt;              &lt;dbl&gt;                 [km^2]
-##  1 vegetation.1                16.                   1               16.00000
-##  2 vegetation.2                12.2                  1               12.23304
-##  3 vegetation.3                11.4                  1               11.41238
-##  4 vegetation.4                17.0                  1               16.97727
-##  5 vegetation.5                11.1                  1               11.11602
-##  6 vegetation.6                15.2                  1               15.23127
-##  7 vegetation.7                27.1                  1               27.11938
-##  8 vegetation.8                16.1                  1               16.13828
-##  9 vegetation.9                18.0                  1               17.99032
-## 10 vegetation.10               19.5                  1               19.54535
-## # … with 23 more rows</code></pre>
+##  1 vegetation.1                16.0                  1               15.78148
+##  2 vegetation.2                14.3                  1               14.11504
+##  3 vegetation.3                10.4                  1               10.23844
+##  4 vegetation.4                17.8                  1               17.58813
+##  5 vegetation.5                13.0                  1               12.83198
+##  6 vegetation.6                14.3                  1               14.10423
+##  7 vegetation.7                20.0                  1               19.72680
+##  8 vegetation.8                14.0                  1               13.85014
+##  9 vegetation.9                18.0                  1               17.75412
+## 10 vegetation.10               20.0                  1               19.74076
+## # … with 22 more rows</code></pre>
 <p>Now let's explore the abundance data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate the average abundance of the features</span>
 <span class="kw">mean</span>(abundance_data<span class="op">$</span>absolute_abundance_km2)</code></pre></div>
-<pre><code>## 91.81647 [km^2]</code></pre>
+<pre><code>## 86.82948 [km^2]</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot histogram of the features&#39; abundances</span>
 <span class="kw">hist</span>(abundance_data<span class="op">$</span>absolute_abundance_km2, <span class="dt">main =</span> <span class="st">&quot;Feature abundances&quot;</span>)</code></pre></div>
 <p><img src="prioritizr-workshop-manual_files/figure-html/unnamed-chunk-27-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># find the abundance of the feature with the largest abundance</span>
 <span class="kw">max</span>(abundance_data<span class="op">$</span>absolute_abundance_km2)</code></pre></div>
-<pre><code>## 851.9835 [km^2]</code></pre>
+<pre><code>## 737.982 [km^2]</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># find the name of the feature with the largest abundance</span>
 abundance_data<span class="op">$</span>feature[<span class="kw">which.max</span>(abundance_data<span class="op">$</span>absolute_abundance_km2)]</code></pre></div>
 <pre><code>## [1] &quot;vegetation.12&quot;</code></pre>
@@ -302,7 +301,7 @@ repr_data &lt;-<span class="st"> </span><span class="kw">feature_representation<
 
 <span class="co"># print feature representation data</span>
 <span class="kw">print</span>(repr_data)</code></pre></div>
-<pre><code>## # A tibble: 33 x 3
+<pre><code>## # A tibble: 32 x 3
 ##    feature       absolute_held relative_held
 ##    &lt;chr&gt;                 &lt;dbl&gt;         &lt;dbl&gt;
 ##  1 vegetation.1          0            0     
@@ -313,9 +312,9 @@ repr_data &lt;-<span class="st"> </span><span class="kw">feature_representation<
 ##  6 vegetation.6          0            0     
 ##  7 vegetation.7          0            0     
 ##  8 vegetation.8          0            0     
-##  9 vegetation.9          0.600        0.0334
+##  9 vegetation.9          0.846        0.0470
 ## 10 vegetation.10         0            0     
-## # … with 23 more rows</code></pre>
+## # … with 22 more rows</code></pre>
 <p>Similar to the abundance data before, the <code>repr_data</code> object contains three columns. The <code>feature</code> column contains the name of each feature, the <code>absolute_held</code> column shows the total amount of each feature held in the solution (i.e. the planning units covered by protected areas), and the <code>relative_held</code> column shows the proportion of each feature held in the solution (i.e. the proportion of each feature's spatial distribution held in protected areas). Since the <code>absolute_held</code> values correspond to the number of grid cells in the <code>veg_data</code> object with overlap with protected areas, let's convert them to area units (i.e. km<sup>2</sup>) so we can report them.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># add new column with the areas represented in km^2</span>
 repr_data<span class="op">$</span>absolute_held_km2 &lt;-
@@ -325,7 +324,7 @@ repr_data<span class="op">$</span>absolute_held_km2 &lt;-
 
 <span class="co"># print representation data</span>
 <span class="kw">print</span>(repr_data)</code></pre></div>
-<pre><code>## # A tibble: 33 x 4
+<pre><code>## # A tibble: 32 x 4
 ##    feature       absolute_held relative_held absolute_held_km2
 ##    &lt;chr&gt;                 &lt;dbl&gt;         &lt;dbl&gt;            [km^2]
 ##  1 vegetation.1          0            0              0.0000000
@@ -336,9 +335,9 @@ repr_data<span class="op">$</span>absolute_held_km2 &lt;-
 ##  6 vegetation.6          0            0              0.0000000
 ##  7 vegetation.7          0            0              0.0000000
 ##  8 vegetation.8          0            0              0.0000000
-##  9 vegetation.9          0.600        0.0334         0.6001696
+##  9 vegetation.9          0.846        0.0470         0.8341885
 ## 10 vegetation.10         0            0              0.0000000
-## # … with 23 more rows</code></pre>
+## # … with 22 more rows</code></pre>
 <p>Now let's investigate how well the species are represented.</p>
 
 <div class="rmdquestion">
