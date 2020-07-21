@@ -31,7 +31,7 @@ print("this is also not a comment") # but this is a comment
 
 Now we will set up our R session for the workshop. Specifically, enter the following R code to attach the R packages used in this workshop.
 
-```{r, message = FALSE}
+```{r, message = FALSE, warning = FALSE}
 # load packages
 library(prioritizr)
 library(sf)
