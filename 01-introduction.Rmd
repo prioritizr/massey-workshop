@@ -8,7 +8,7 @@ You are not alone in this workshop. If you are having trouble, please put your h
 
 ## Setting up your computer {#setup}
 
-You will need to have both [R](https://www.r-project.org) and [RStudio](https://www.rstudio.com/) installed on your computer to complete this workshop. Although it is not imperative that you have the latest version of RStudio installed, **you will need the latest version of R installed (i.e. version `r as.character(getRversion())`)**. Please note that you might need administrative permissions to install these programs. After installing them, you will also need to install some R packages too.
+You will need to have both R and RStudio installed on your computer to complete this workshop. Although it is not imperative that you have the latest version of RStudio installed, **you will need the latest version of R installed (i.e. version `r as.character(getRversion())`)**. Please note that you might need administrative permissions to install these programs. After installing them, you will also need to install some R packages too. Finally, you will also need to download the data for this workshop.
 
 ### R {#r}
 
@@ -35,6 +35,10 @@ install.packages(c("sf", "dplyr", "sp", "rgeos", "rgdal", "raster",
                    "BiocManager"))
 BiocManager::install("lpsymphony")
 ```
+
+### Data {#data-setup}
+
+The data for this workshop are available online. To download the data, please  [click on this link](https://github.com/prioritizr/massey-workshop/raw/master/data.zip) and save the `data.zip` file to your computer.
 
 ## Further reading {#further-reading}
 

@@ -46,7 +46,7 @@ library(gridExtra)
 library(dplyr)
 ```
 
-You should have already downloaded the data. If you have not already done so, you can download it from here: https://github.com/prioritizr/massey-workshop/raw/master/data.zip. After downloading the data, you can unzip the data into a new folder. Next, you will need to set the working directory to this new folder. To achieve this, click on the _Session_ button on the RStudio menu bar, then click _Set Working Directory_, and then _Choose Directory_.
+You should have already downloaded the data. If you have not already done so, you can [download it from here](https://github.com/prioritizr/massey-workshop/raw/master/data.zip). After downloading the data, you can unzip the data into a new folder. Next, you will need to set the working directory to this new folder. To achieve this, click on the _Session_ button on the RStudio menu bar, then click _Set Working Directory_, and then _Choose Directory_.
 
 ```{r, out.width = "70%", echo = FALSE}
 knitr::include_graphics("images/rstudio-wd.png")
@@ -80,23 +80,14 @@ Now that we have downloaded the dataset, we will need to import it into our R se
 
 ```{r}
 # import planning unit data
-pu_data <- suppressWarnings(as(read_sf("data/pu.shp"), "Spatial"))
+pu_data <- as(read_sf("data/pu.shp"), "Spatial")
 
 # format columns in planning unit data
 pu_data$locked_in <- as.logical(pu_data$locked_in)
 pu_data$locked_out <- as.logical(pu_data$locked_out)
 
 # import vegetation data
-veg_data <- suppressWarnings(stack("data/vegetation.tif"))
-
-# verify that data are in same coordinate reference system
-
-# manually set the coordinate reference system for veg_data to be equal to
-# the coordinate reference system for pu_data,
-## note that we do this because we know that the data have the same
-## projection system, and normally you use would sp::spTransform or
-## raster::projectRaster
-
+veg_data <- stack("data/vegetation.tif")
 ```
 
 ```{r, include = FALSE}
