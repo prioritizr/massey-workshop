@@ -219,7 +219,7 @@
 
 \title{PRIORITIZR WORKSHOP MANUAL}
 \author{Jeffrey O. Hanson}
-\date{2020-07-21}
+\date{2020-07-22}
 
 \begin{document}
 \maketitle
@@ -267,13 +267,13 @@ far?''. We can't help you if you haven't tried anything.
 
 \hypertarget{setup}{\section{Setting up your computer}\label{setup}}
 
-You will need to have both \href{https://www.r-project.org}{R} and
-\href{https://www.rstudio.com/}{RStudio} installed on your computer to
+You will need to have both R and RStudio installed on your computer to
 complete this workshop. Although it is not imperative that you have the
 latest version of RStudio installed, \textbf{you will need the latest
 version of R installed (i.e.~version 4.0.0)}. Please note that you might
 need administrative permissions to install these programs. After
 installing them, you will also need to install some R packages too.
+Finally, you will also need to download the data for this workshop.
 
 \subsection{R}\label{r}
 
@@ -330,6 +330,13 @@ connection and the installation process may take some time to complete.
 \NormalTok{BiocManager}\OperatorTok{::}\KeywordTok{install}\NormalTok{(}\StringTok{"lpsymphony"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\subsection{Data}\label{data-setup}
+
+The data for this workshop are available online. To download the data,
+please
+\href{https://github.com/prioritizr/massey-workshop/raw/master/data.zip}{click
+on this link} and save the \texttt{data.zip} file to your computer.
 
 \section{Further reading}\label{further-reading}
 
@@ -440,13 +447,13 @@ the following R code to attach the R packages used in this workshop.
 \end{Shaded}
 
 You should have already downloaded the data. If you have not already
-done so, you can download it from here:
-\url{https://github.com/prioritizr/massey-workshop/raw/master/data.zip}.
-After downloading the data, you can unzip the data into a new folder.
-Next, you will need to set the working directory to this new folder. To
-achieve this, click on the \emph{Session} button on the RStudio menu
-bar, then click \emph{Set Working Directory}, and then \emph{Choose
-Directory}.
+done so, you can
+\href{https://github.com/prioritizr/massey-workshop/raw/master/data.zip}{download
+it from here}. After downloading the data, you can unzip the data into a
+new folder. Next, you will need to set the working directory to this new
+folder. To achieve this, click on the \emph{Session} button on the
+RStudio menu bar, then click \emph{Set Working Directory}, and then
+\emph{Choose Directory}.
 
 \begin{center}\includegraphics[width=0.7\linewidth]{images/rstudio-wd} \end{center}
 
@@ -484,22 +491,14 @@ into our R session using the following code.
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# import planning unit data}
-\NormalTok{pu_data <-}\StringTok{ }\KeywordTok{suppressWarnings}\NormalTok{(}\KeywordTok{as}\NormalTok{(}\KeywordTok{read_sf}\NormalTok{(}\StringTok{"data/pu.shp"}\NormalTok{), }\StringTok{"Spatial"}\NormalTok{))}
+\NormalTok{pu_data <-}\StringTok{ }\KeywordTok{as}\NormalTok{(}\KeywordTok{read_sf}\NormalTok{(}\StringTok{"data/pu.shp"}\NormalTok{), }\StringTok{"Spatial"}\NormalTok{)}
 
 \CommentTok{# format columns in planning unit data}
 \NormalTok{pu_data}\OperatorTok{$}\NormalTok{locked_in <-}\StringTok{ }\KeywordTok{as.logical}\NormalTok{(pu_data}\OperatorTok{$}\NormalTok{locked_in)}
 \NormalTok{pu_data}\OperatorTok{$}\NormalTok{locked_out <-}\StringTok{ }\KeywordTok{as.logical}\NormalTok{(pu_data}\OperatorTok{$}\NormalTok{locked_out)}
 
 \CommentTok{# import vegetation data}
-\NormalTok{veg_data <-}\StringTok{ }\KeywordTok{suppressWarnings}\NormalTok{(}\KeywordTok{stack}\NormalTok{(}\StringTok{"data/vegetation.tif"}\NormalTok{))}
-
-\CommentTok{# verify that data are in same coordinate reference system}
-
-\CommentTok{# manually set the coordinate reference system for veg_data to be equal to}
-\CommentTok{# the coordinate reference system for pu_data,}
-\NormalTok{## note that we do this because we know that the data have the same}
-\NormalTok{## projection system, and normally you use would sp::spTransform or}
-\NormalTok{## raster::projectRaster}
+\NormalTok{veg_data <-}\StringTok{ }\KeywordTok{stack}\NormalTok{(}\StringTok{"data/vegetation.tif"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1614,8 +1613,8 @@ information is present in our planning unit data so we can use the
 ##   objective:      Minimum set objective 
 ##   targets:        Relative targets [targets (min: 0.1, max: 0.1)]
 ##   decisions:      Binary decision 
-##   constraints:    <Locked out planning units [6 locked units]
-##                    Locked in planning units [198 locked units]>
+##   constraints:    <Locked in planning units [198 locked units]
+##                    Locked out planning units [6 locked units]>
 ##   penalties:      <none>
 ##   portfolio:      default
 ##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (-1), verbose (1)]
@@ -1704,8 +1703,8 @@ prioritizr can automatically calculate the boundary data for us.
 ##   objective:      Minimum set objective 
 ##   targets:        Relative targets [targets (min: 0.1, max: 0.1)]
 ##   decisions:      Binary decision 
-##   constraints:    <Locked in planning units [198 locked units]
-##                    Locked out planning units [6 locked units]>
+##   constraints:    <Locked out planning units [6 locked units]
+##                    Locked in planning units [198 locked units]>
 ##   penalties:      <Boundary penalties [edge factor (min: 0.5, max: 0.5), penalty (0.001), zones]>
 ##   portfolio:      default
 ##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (-1), verbose (1)]

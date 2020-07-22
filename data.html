@@ -24,7 +24,7 @@
 <meta name="author" content="Jeffrey O. Hanson" />
 
 
-<meta name="date" content="2020-07-21" />
+<meta name="date" content="2020-07-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -113,6 +113,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.2.1" data-path="introduction.html"><a href="introduction.html#r"><i class="fa fa-check"></i><b>2.2.1</b> R</a></li>
 <li class="chapter" data-level="2.2.2" data-path="introduction.html"><a href="introduction.html#rstudio"><i class="fa fa-check"></i><b>2.2.2</b> RStudio</a></li>
 <li class="chapter" data-level="2.2.3" data-path="introduction.html"><a href="introduction.html#r-packages"><i class="fa fa-check"></i><b>2.2.3</b> R packages</a></li>
+<li class="chapter" data-level="2.2.4" data-path="introduction.html"><a href="introduction.html#data-setup"><i class="fa fa-check"></i><b>2.2.4</b> Data</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#further-reading"><i class="fa fa-check"></i><b>2.3</b> Further reading</a></li>
 </ul></li>
@@ -187,7 +188,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">library</span>(assertthat)
 <span class="kw">library</span>(gridExtra)
 <span class="kw">library</span>(dplyr)</code></pre></div>
-<p>You should have already downloaded the data. If you have not already done so, you can download it from here: <a href="https://github.com/prioritizr/massey-workshop/raw/master/data.zip" class="uri">https://github.com/prioritizr/massey-workshop/raw/master/data.zip</a>. After downloading the data, you can unzip the data into a new folder. Next, you will need to set the working directory to this new folder. To achieve this, click on the <em>Session</em> button on the RStudio menu bar, then click <em>Set Working Directory</em>, and then <em>Choose Directory</em>.</p>
+<p>You should have already downloaded the data. If you have not already done so, you can <a href="https://github.com/prioritizr/massey-workshop/raw/master/data.zip">download it from here</a>. After downloading the data, you can unzip the data into a new folder. Next, you will need to set the working directory to this new folder. To achieve this, click on the <em>Session</em> button on the RStudio menu bar, then click <em>Set Working Directory</em>, and then <em>Choose Directory</em>.</p>
 <p><img src="images/rstudio-wd.png" width="70%" style="display: block; margin: auto;" /></p>
 
 <p>Now navigate to the folder where you unzipped the data and select <em>Open</em>. You can verify that you have correctly set the working directory using the following R code. You should see the output <code>TRUE</code> in the <em>Console</em> panel.</p>
@@ -198,22 +199,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">3.3</span> Data import</h2>
 <p>Now that we have downloaded the dataset, we will need to import it into our R session. Specifically, this data was obtained from the &quot;Introduction to Marxan&quot; course and was originally a subset of a larger spatial prioritization project performed under contract to Australia’s Department of Environment and Water Resources. It contains vector-based planning unit data (<code>pu.shp</code>) and the raster-based data describing the spatial distributions of 32 vegetation classes (<code>vegetation.tif</code>) in southern Tasmania, Australia. Please note this dataset is only provided for teaching purposes and should not be used for any real-world conservation planning. We can import the data into our R session using the following code.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># import planning unit data</span>
-pu_data &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">as</span>(<span class="kw">read_sf</span>(<span class="st">&quot;data/pu.shp&quot;</span>), <span class="st">&quot;Spatial&quot;</span>))
+pu_data &lt;-<span class="st"> </span><span class="kw">as</span>(<span class="kw">read_sf</span>(<span class="st">&quot;data/pu.shp&quot;</span>), <span class="st">&quot;Spatial&quot;</span>)
 
 <span class="co"># format columns in planning unit data</span>
 pu_data<span class="op">$</span>locked_in &lt;-<span class="st"> </span><span class="kw">as.logical</span>(pu_data<span class="op">$</span>locked_in)
 pu_data<span class="op">$</span>locked_out &lt;-<span class="st"> </span><span class="kw">as.logical</span>(pu_data<span class="op">$</span>locked_out)
 
 <span class="co"># import vegetation data</span>
-veg_data &lt;-<span class="st"> </span><span class="kw">suppressWarnings</span>(<span class="kw">stack</span>(<span class="st">&quot;data/vegetation.tif&quot;</span>))
-
-<span class="co"># verify that data are in same coordinate reference system</span>
-
-<span class="co"># manually set the coordinate reference system for veg_data to be equal to</span>
-<span class="co"># the coordinate reference system for pu_data,</span>
-## note that we do this because we know that the data have the same
-## projection system, and normally you use would sp::spTransform or
-## raster::projectRaster</code></pre></div>
+veg_data &lt;-<span class="st"> </span><span class="kw">stack</span>(<span class="st">&quot;data/vegetation.tif&quot;</span>)</code></pre></div>
 
 </div>
 <div id="planning-unit-data" class="section level2">
