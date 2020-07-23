@@ -33,6 +33,10 @@ tas_pu[["locked_out"]] <-
   as.numeric((tas_pu[["cost"]] >
     quantile(tas_pu[["cost"]], 0.99)[[1]]) & !tas_pu[["locked_in"]])
 
+# manually update CRS
+tas_pu@proj4string <- as(sf::st_crs(32755), "CRS")
+raster::crs(tas_features) <- as(sf::st_crs(32755), "CRS")
+
 # save data
 rgdal::writeOGR(tas_pu, "data", "pu", overwrite = TRUE ,
                 driver = "ESRI Shapefile")

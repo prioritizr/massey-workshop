@@ -31,7 +31,7 @@ print("this is also not a comment") # but this is a comment
 
 Now we will set up our R session for the workshop. Specifically, enter the following R code to attach the R packages used in this workshop.
 
-```{r, message = FALSE}
+```{r, message = FALSE, warning = FALSE}
 # load packages
 library(prioritizr)
 library(sf)
@@ -46,7 +46,7 @@ library(gridExtra)
 library(dplyr)
 ```
 
-You should have already downloaded the data. If you have not already done so, you can download it from here: https://github.com/prioritizr/cibio-workshop/raw/master/data.zip. After downloading the data, you can unzip the data into a new folder. Next, you will need to set the working directory to this new folder. To achieve this, click on the _Session_ button on the RStudio menu bar, then click _Set Working Directory_, and then _Choose Directory_.
+You should have already downloaded the data. If you have not already done so, you can [download it from here](https://github.com/prioritizr/massey-workshop/raw/master/data.zip). After downloading the data, you can unzip the data into a new folder. Next, you will need to set the working directory to this new folder. To achieve this, click on the _Session_ button on the RStudio menu bar, then click _Set Working Directory_, and then _Choose Directory_.
 
 ```{r, out.width = "70%", echo = FALSE}
 knitr::include_graphics("images/rstudio-wd.png")
