@@ -36,7 +36,7 @@ jobs:
 
       - name: Install system dependencies
         run: |
-          sudo apt-get -y install libcurl4-openssl-dev coinor-libsymphony-dev coinor-libcbc-dev coinor-libclp-dev ghostscript
+          sudo apt-get -y install libcurl4-openssl-dev coinor-libsymphony-dev coinor-libcbc-dev coinor-libclp-dev ghostscript texlive-extra-utils
           while read -r cmd
           do
             eval sudo $cmd

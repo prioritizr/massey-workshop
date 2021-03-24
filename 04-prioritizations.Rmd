@@ -153,6 +153,7 @@ Now, let's compare the solutions.
 3. Do the solutions with more planning units have a greater cost? Why (or why not)?
 4. Why does the first solution (`s1`) cost less than the second solution with protected areas locked into the solution (`s2`)?
 5. Why does the third solution (`s3`) cost less than the fourth solution solution with highly degraded areas locked out (`s4`)?
+
 ```
 
 ## Penalizing fragmentation
