@@ -47,3 +47,13 @@ jobs:
           remotes::install_deps(dependencies = TRUE)
           remotes::install_bioc("lpsymphony")
         shell: Rscript {0}
+
+      - name: Build site
+        run: |
+          chmod +x ./_build.sh
+          ./_build.sh
+
+      - name: Deploy site
+        run: |
+          chmod +x ./_build.sh
+          ./_deploy.sh
