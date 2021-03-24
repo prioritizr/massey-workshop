@@ -55,5 +55,5 @@ jobs:
 
       - name: Deploy site
         run: |
-          chmod +x ./_build.sh
+          chmod +x ./deploy.sh
           ./_deploy.sh
