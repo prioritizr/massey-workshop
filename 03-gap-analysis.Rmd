@@ -75,7 +75,7 @@ Now, try to answer the following questions.
 
 ## Feature representation
 
-After calculating the total amount of each feature in the planning units (i.e. the features' abundances), we will now calculate the amount of each feature in the planning units that are covered by protected areas (i.e. feature representation by protected areas). We can complete this task using the `feature_representation` function. This function requires (i) a conservation problem object with the planning unit and biodiversity data and also (ii) an object representing a solution to the problem (i.e an object in the same format as the planning unit data with values indicating if the planning units are selected or not).
+After calculating the total amount of each feature in the planning units (i.e. the features' abundances), we will now calculate the amount of each feature in the planning units that are covered by protected areas (i.e. feature representation by protected areas). We can complete this task using the `eval_feature_representation_summary()` function. This function requires (i) a conservation problem object with the planning unit and biodiversity data and also (ii) an object representing a solution to the problem (i.e an object in the same format as the planning unit data with values indicating if the planning units are selected or not).
 
 ```{r}
 # create column in planning unit data with binary values (zeros and ones)
@@ -83,7 +83,7 @@ After calculating the total amount of each feature in the planning units (i.e. t
 pu_data$pa_status <- as.numeric(pu_data$locked_in)
 
 # calculate feature representation by protected areas
-repr_data <- feature_representation(p0, pu_data[, "pa_status"])
+repr_data <- eval_feature_representation_summary(p0, pu_data[, "pa_status"])
 
 # print feature representation data
 print(repr_data)

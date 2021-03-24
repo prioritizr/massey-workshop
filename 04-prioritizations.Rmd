@@ -30,10 +30,10 @@ s1 <- solve(p1)
 print(s1)
 
 # calculate number of planning units selected in the prioritization
-sum(s1$solution_1)
+eval_n_summary(p1, s1[, "solution_1"])
 
 # calculate total cost of the prioritization
-sum(s1$solution_1 * s1$cost)
+eval_cost_summary(p1, s1[, "solution_1"])
 
 # plot solution
 # selected = green, not selected = grey
@@ -46,7 +46,7 @@ Now let's examine the solution.
 ```{block2, type="rmdquestion"}
 1. How many planing units were selected in the prioritization? What proportion of planning units were selected in the prioritization?
 2. Is there a pattern in the spatial distribution of the priority areas?
-3. Can you verify that all of the targets were met in the prioritization (hint: `feature_representation(p1, s1[, "solution_1"])`)?
+3. Can you verify that all of the targets were met in the prioritization (hint: `eval_feature_representation_summary(p1, s1[, "solution_1"])`)?
 
 ```
 
@@ -137,8 +137,10 @@ spplot(s4, "solution_1", col.regions = c("grey80", "darkgreen"), main = "s4",
 ```
 
 ```{r, include=FALSE}
-assert_that(!identical(s3$solution_1, s4$solution_1),
-            sum(s3$solution_1 * s3$cost) < sum(s4$solution_1 * s4$cost))
+assert_that(
+  !identical(s3$solution_1, s4$solution_1),
+  eval_cost_summary(p3, s3[, "solution_1"])$cost <
+    eval_cost_summary(p4, s4[, "solution_1"])$cost)
 ```
 
 \clearpage
@@ -189,8 +191,10 @@ spplot(s5, "solution_1", col.regions = c("grey80", "darkgreen"), main = "s5",
 ```
 
 ```{r, include=FALSE}
-assert_that(!identical(s5$solution_1, s4$solution_1),
-            sum(s5$solution_1 * s5$cost) > sum(s4$solution_1 * s4$cost))
+assert_that(
+  !identical(s5$solution_1, s4$solution_1),
+  eval_cost_summary(p4, s4[, "solution_1"])$cost <
+    eval_cost_summary(p5, s5[, "solution_1"])$cost)
 ```
 
 Now let's compare the solutions to the problems with (`s5`) and without (`s4`) the boundary length penalties.
