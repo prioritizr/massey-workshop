@@ -26,8 +26,4 @@ pdf: clean_temp
 purl:
 	Rscript -e "knitr::purl('prioritizr-workshop-manual.Rmd')"
 
-check:
-	R -e "source('verify-solutions.R')"
-	rm -f Rplots.pdf
-
 .PHONY: data clean check website site data
