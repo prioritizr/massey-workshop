@@ -14,5 +14,5 @@ Imports:
   lpsymphony,
   gridExtra
 Remotes:
-  rstudio/bookdown
+  rstudio/bookdown,
   prioritizr/prioritizr
