@@ -36,7 +36,7 @@ jobs:
 
       - name: Install system dependencies
         run: |
-          sudo apt-get -y install libcurl4-openssl-dev coinor-libsymphony-dev coinor-libcbc-dev coinor-libclp-dev
+          sudo apt-get -y install libcurl4-openssl-dev coinor-libsymphony-dev coinor-libcbc-dev coinor-libclp-dev ghostscript
           while read -r cmd
           do
             eval sudo $cmd
@@ -46,6 +46,7 @@ jobs:
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_bioc("lpsymphony")
+          tinytex::install_tinytex()
         shell: Rscript {0}
 
       - name: Build site

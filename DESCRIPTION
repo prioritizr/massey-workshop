@@ -12,7 +12,8 @@ Imports:
   units,
   scales,
   lpsymphony,
-  gridExtra
+  gridExtra,
+  tinytex
 Remotes:
   rstudio/bookdown,
   prioritizr/prioritizr
