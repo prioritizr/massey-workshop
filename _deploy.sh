@@ -16,8 +16,6 @@ git config --global user.email "actions@github.com"
 echo "2"
 git config --global user.name "GitHub Actions"
 echo "3"
-git clone -b gh-pages https://${GITHUB_PAT}@github.com/${GITHUB_REPOSITORY}.git book-output
-echo "4"
 rm -rf book-output/images
 echo "5"
 cd book-output

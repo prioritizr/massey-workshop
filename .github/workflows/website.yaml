@@ -26,6 +26,12 @@ jobs:
           echo "This is a file" > ./_book/test.md
           cat ./_book/test.md
 
+      - name: Prepate deployment
+        uses: actions/checkout@v2
+        with:
+          path: book-output
+          ref: gh-pages
+
       - name: Deploy site
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
