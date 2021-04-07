@@ -102,6 +102,8 @@ repr_data$absolute_held_km2 <-
 print(repr_data)
 ```
 
+\clearpage
+
 Now let's investigate how well the species are represented.
 
 ```{block2, type="rmdquestion"}

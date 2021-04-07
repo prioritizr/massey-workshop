@@ -242,8 +242,6 @@ cellStats(veg_data[[1]], "min")
 cellStats(veg_data[[1]], "mean")
 ```
 
-\clearpage
-
 Now, you can try and answer some questions about the vegetation data.
 
 ```{block2, type="rmdquestion"}
