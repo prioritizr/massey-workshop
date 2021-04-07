@@ -1,41 +1,53 @@
-\documentclass[12pt,]{book}
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
+%
+\documentclass[
+  12pt,
+]{book}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-\else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-% use upquote if available, for straight quotes in verbatim environments
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage[]{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
-\usepackage[unicode=true]{hyperref}
-\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-            pdftitle={PRIORITIZR WORKSHOP MANUAL},
-            pdfauthor={Jeffrey O. Hanson},
-            colorlinks=true,
-            linkcolor=Maroon,
-            citecolor=Blue,
-            urlcolor=blue,
-            breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
+  pdftitle={PRIORITIZR WORKSHOP MANUAL},
+  pdfauthor={Jeffrey O. Hanson},
+  colorlinks=true,
+  linkcolor=Maroon,
+  filecolor=Maroon,
+  citecolor=Blue,
+  urlcolor=blue,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage[left=2.54cm, right=2.54cm, top=2.54cm, bottom=2.54cm]{geometry}
-\usepackage{natbib}
-\bibliographystyle{plainnat}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -45,40 +57,46 @@
 \usepackage{framed}
 \definecolor{shadecolor}{RGB}{248,248,248}
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
-% Fix footnotes in tables (requires footnote package)
-\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{long table}}{}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -88,31 +106,14 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{5}
-% Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
-
-% set default figure placement to htbp
+% Set default figure placement to htbp
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
-
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
 % load packages
 \usepackage{caption}
 \usepackage{float}
@@ -216,189 +217,96 @@
 \newenvironment{rmdwarning}
   {\begin{rmdblock}{warning}}
   {\end{rmdblock}}
+\usepackage[]{natbib}
+\bibliographystyle{plainnat}
 
 \title{PRIORITIZR WORKSHOP MANUAL}
 \author{Jeffrey O. Hanson}
-\date{2020-07-27}
+\date{2021-04-07}
 
 \begin{document}
 \maketitle
 
 {
-\hypersetup{linkcolor=black}
+\hypersetup{linkcolor=}
 \setcounter{tocdepth}{0}
 \tableofcontents
 }
-\chapter{Welcome!}\label{welcome}
+\hypertarget{welcome}{%
+\chapter{Welcome!}\label{welcome}}
 
-Here you will find the manual for the prioritizr workshop held at Massey
-University, Palmerston North, New Zealand. \textbf{Before you arrive at
-the workshop, you should make sure that you have correctly
-\protect\hyperlink{setup}{set up your computer for the workshop} and you
-have
-\href{https://github.com/prioritizr/massey-workshop/raw/master/data.zip}{downloaded
-the data from here}. Since we cannot guarantee a stable Internet
-connection during the workshop, you may be unable to complete the
-workshop if you have not set up your computer beforehand.}
+Here you will find the manual for the prioritizr workshop held at Massey University, Palmerston North, New Zealand. \textbf{Before you arrive at the workshop, you should make sure that you have correctly \protect\hyperlink{setup}{set up your computer for the workshop} and you have \href{https://github.com/prioritizr/massey-workshop/raw/master/data.zip}{downloaded the data from here}. Since we cannot guarantee a stable Internet connection during the workshop, you may be unable to complete the workshop if you have not set up your computer beforehand.}
 
-\chapter{Introduction}\label{introduction}
+\hypertarget{introduction}{%
+\chapter{Introduction}\label{introduction}}
 
-\section{Overview}\label{overview}
+\hypertarget{overview}{%
+\section{Overview}\label{overview}}
 
-The aim of this workshop is to help you get started with using the
-prioritizr R package for systematic conservation planning. It is not
-designed to give you a comprehensive overview and you will not become an
-expert after completing this workshop. Instead, we want to help you
-understand the core principles of conservation planning and guide you
-through some of the common tasks involved with developing
-prioritizations. In other words, we want to give you the knowledge base
-and confidence needed to start applying systematic conservation planning
-to your own work.
+The aim of this workshop is to help you get started with using the prioritizr R package for systematic conservation planning. It is not designed to give you a comprehensive overview and you will not become an expert after completing this workshop. Instead, we want to help you understand the core principles of conservation planning and guide you through some of the common tasks involved with developing prioritizations. In other words, we want to give you the knowledge base and confidence needed to start applying systematic conservation planning to your own work.
 
-You are not alone in this workshop. If you are having trouble, please
-put your hand up and one of the instructors will help you as soon as
-they can. You can also ask the people sitting next to you for help too.
-\textbf{Most importantly, the code needed to answer the questions in
-this workshop are almost always located in the same section as the
-question. So if you are stuck, try rereading the example code and see if
-you can modify it to answer the question.} Please note that the first
-thing an instructor will ask you will be ``what have you tried so
-far?''. We can't help you if you haven't tried anything.
+You are not alone in this workshop. If you are having trouble, please put your hand up and one of the instructors will help you as soon as they can. You can also ask the people sitting next to you for help too. \textbf{Most importantly, the code needed to answer the questions in this workshop are almost always located in the same section as the question. So if you are stuck, try rereading the example code and see if you can modify it to answer the question.} Please note that the first thing an instructor will ask you will be ``what have you tried so far?''. We can't help you if you haven't tried anything.
 
-\hypertarget{setup}{\section{Setting up your computer}\label{setup}}
+\hypertarget{setup}{%
+\section{Setting up your computer}\label{setup}}
 
-You will need to have both R and RStudio installed on your computer to
-complete this workshop. Although it is not imperative that you have the
-latest version of RStudio installed, \textbf{you will need the latest
-version of R installed (i.e.~version 4.0.0)}. Please note that you might
-need administrative permissions to install these programs. After
-installing them, you will also need to install some R packages too.
-Finally, you will also need to download the data for this workshop.
+You will need to have both R and RStudio installed on your computer to complete this workshop. Although it is not imperative that you have the latest version of RStudio installed, \textbf{you will need the latest version of R installed (i.e.~version 4.0.4)}. Please note that you might need administrative permissions to install these programs. After installing them, you will also need to install some R packages too. Finally, you will also need to download the data for this workshop.
 
-\subsection{R}\label{r}
+\hypertarget{r}{%
+\subsection{R}\label{r}}
 
-The \href{https://www.r-project.org}{R statistical computing
-environment} can be downloaded from the Comprehensive R Archive Network
-(CRAN). Specifically, you can download the latest version of R (version
-4.0.0) from here: \url{https://cloud.r-project.org}. Please note that
-you will need to download the correct file for your operating system
-(i.e.~Linux, Mac OSX, Windows).
+The \href{https://www.r-project.org}{R statistical computing environment} can be downloaded from the Comprehensive R Archive Network (CRAN). Specifically, you can download the latest version of R (version 4.0.4) from here: \url{https://cloud.r-project.org}. Please note that you will need to download the correct file for your operating system (i.e.~Linux, Mac OSX, Windows).
 
-\subsection{RStudio}\label{rstudio}
+\hypertarget{rstudio}{%
+\subsection{RStudio}\label{rstudio}}
 
-\href{https://www.rstudio.com}{RStudio} is an integrated development
-environment (IDE). In other words, it is a program that is designed to
-make your R programming experience more enjoyable. During this workshop,
-you will interact with R through RStudio---meaning that you will open
-RStudio to code in R. You can download the latest version of RStudio
-here: \url{http://www.rstudio.com/download}. When you start RStudio, you
-will see two main parts of the interface:
+\href{https://www.rstudio.com}{RStudio} is an integrated development environment (IDE). In other words, it is a program that is designed to make your R programming experience more enjoyable. During this workshop, you will interact with R through RStudio---meaning that you will open RStudio to code in R. You can download the latest version of RStudio here: \url{http://www.rstudio.com/download}. When you start RStudio, you will see two main parts of the interface:
 
 \begin{center}\includegraphics[width=1\linewidth]{images/rstudio-console} \end{center}
 
-You can type R code into the \emph{Console} and press the enter key to
-run code.
+You can type R code into the \emph{Console} and press the enter key to run code.
 
-\subsection{R packages}\label{r-packages}
+\hypertarget{r-packages}{%
+\subsection{R packages}\label{r-packages}}
 
-An R package is a collection of R code and documentation that can be
-installed to enhance the standard R environment with additional
-functionality. Currently, there are over fifteen thousand R packages
-available on CRAN. Each of these R packages are developed to perform a
-specific task, such as
-\href{https://cran.r-project.org/web/packages/readxl/index.html}{reading
-Excel spreadsheets},
-\href{https://cran.r-project.org/web/packages/MODIStsp/index.html}{downloading
-satellite imagery data},
-\href{https://cran.r-project.org/web/packages/wdpar/index.html}{downloading
-and cleaning protected area data}, or
-\href{https://cran.r-project.org/web/packages/ENMeval/index.html}{fitting
-environmental niche models}. In fact, R has such a diverse ecosystem of
-R packages, that the question is almost always not ``can I use R to
-\ldots{}?'' but ``what R package can I use to \ldots{}?''. During this
-workshop, we will use several R packages. To install these R packages,
-please enter the code below in the \emph{Console} part of the RStudio
-interface and press enter. Note that you will require an Internet
-connection and the installation process may take some time to complete.
+An R package is a collection of R code and documentation that can be installed to enhance the standard R environment with additional functionality. Currently, there are over fifteen thousand R packages available on CRAN. Each of these R packages are developed to perform a specific task, such as \href{https://cran.r-project.org/web/packages/readxl/index.html}{reading Excel spreadsheets}, \href{https://cran.r-project.org/web/packages/MODIStsp/index.html}{downloading satellite imagery data}, \href{https://cran.r-project.org/web/packages/wdpar/index.html}{downloading and cleaning protected area data}, or \href{https://cran.r-project.org/web/packages/ENMeval/index.html}{fitting environmental niche models}. In fact, R has such a diverse ecosystem of R packages, that the question is almost always not ``can I use R to \ldots?'' but ``what R package can I use to \ldots?''. During this workshop, we will use several R packages. To install these R packages, please enter the code below in the \emph{Console} part of the RStudio interface and press enter. Note that you will require an Internet connection and the installation process may take some time to complete.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"sf"}\NormalTok{, }\StringTok{"dplyr"}\NormalTok{, }\StringTok{"sp"}\NormalTok{, }\StringTok{"rgeos"}\NormalTok{, }\StringTok{"rgdal"}\NormalTok{, }\StringTok{"raster"}\NormalTok{,}
-                   \StringTok{"units"}\NormalTok{, }\StringTok{"prioritizr"}\NormalTok{, }\StringTok{"prioritizrdata"}\NormalTok{, }\StringTok{"Rsymphony"}\NormalTok{,}
-                   \StringTok{"mapview"}\NormalTok{, }\StringTok{"assertthat"}\NormalTok{, }\StringTok{"remotes"}\NormalTok{, }\StringTok{"gridExtra"}\NormalTok{,}
-                   \StringTok{"BiocManager"}\NormalTok{))}
+\KeywordTok{install.packages}\NormalTok{(}
+  \KeywordTok{c}\NormalTok{(}\StringTok{"sf"}\NormalTok{, }\StringTok{"dplyr"}\NormalTok{, }\StringTok{"sp"}\NormalTok{, }\StringTok{"rgeos"}\NormalTok{, }\StringTok{"rgdal"}\NormalTok{, }\StringTok{"raster"}\NormalTok{, }\StringTok{"units"}\NormalTok{, }\StringTok{"prioritizr"}\NormalTok{,}
+    \StringTok{"prioritizrdata"}\NormalTok{, }\StringTok{"mapview"}\NormalTok{, }\StringTok{"assertthat"}\NormalTok{, }\StringTok{"remotes"}\NormalTok{, }\StringTok{"gridExtra"}\NormalTok{,}
+    \StringTok{"BiocManager"}\NormalTok{),}
+  \DataTypeTok{type =} \StringTok{"binary"}\NormalTok{)}
 \NormalTok{BiocManager}\OperatorTok{::}\KeywordTok{install}\NormalTok{(}\StringTok{"lpsymphony"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\subsection{Data}\label{data-setup}
+\hypertarget{data-setup}{%
+\subsection{Data}\label{data-setup}}
 
-The data for this workshop are available online. To download the data,
-please
-\href{https://github.com/prioritizr/massey-workshop/raw/master/data.zip}{click
-on this link} and save the \texttt{data.zip} file to your computer.
-Next, unzip the \texttt{data.zip} file. You should now have a new folder
-on your computer called \texttt{"data"} which contains the data files
-(e.g. \texttt{pu.shp}).
+The data for this workshop are available online. To download the data, please \href{https://github.com/prioritizr/massey-workshop/raw/master/data.zip}{click on this link} and save the \texttt{data.zip} file to your computer. Next, unzip the \texttt{data.zip} file. You should now have a new folder on your computer called \texttt{"data"} which contains the data files (e.g.~\texttt{pu.shp}).
 
-\section{Further reading}\label{further-reading}
+\hypertarget{further-reading}{%
+\section{Further reading}\label{further-reading}}
 
-There is a wealth of resources available for learning how to use R.
-Although not required for this workshop, I would highly recommend that
-you read \href{https://r4ds.had.co.nz/}{\emph{R for Data Science} by
-Garrett Grolemund and Hadley Wickham}. \textbf{This veritable trove of R
-goodness is freely available online.} If you spend a week going through
-this book then you will save months debugging and rerunning incorrect
-code. I would urge any and all ecologists, especially those working on
-Masters or PhD degrees, to read this book. I even bought this book as a
-Christmas present for my sister---and, yes, she was happy to receive it!
-For intermediate users looking to skill-up, I would recommend the
-\href{http://shop.oreilly.com/product/9781593273842.do}{\emph{The Art of
-R Programming: A Tour of Statistical Software Design} by Norman Matloff}
-and \href{https://adv-r.hadley.nz/}{\emph{Advanced R} by Hadley
-Wickham}. Finally, if you wish to learn more about using R as a
-geospatial information system (GIS), I would recommend
-\href{https://geocompr.robinlovelace.net/}{\emph{Geocomputation with R}
-by Robin Lovelace, Jakub Nowosad, and Jannes Muenchow} which is also
-freely available online. I also recommend
-\href{https://www.springer.com/gp/book/9781461476177}{\emph{Applied
-Spatial Data Analysis} by Roger S. Bivand, Edzer Pebesma, and Virgilio
-Gómez-Rubio} too.
+There is a wealth of resources available for learning how to use R. Although not required for this workshop, I would highly recommend that you read \href{https://r4ds.had.co.nz/}{\emph{R for Data Science} by Garrett Grolemund and Hadley Wickham}. \textbf{This veritable trove of R goodness is freely available online.} If you spend a week going through this book then you will save months debugging and rerunning incorrect code. I would urge any and all ecologists, especially those working on Masters or PhD degrees, to read this book. I even bought this book as a Christmas present for my sister---and, yes, she was happy to receive it! For intermediate users looking to skill-up, I would recommend the \href{http://shop.oreilly.com/product/9781593273842.do}{\emph{The Art of R Programming: A Tour of Statistical Software Design} by Norman Matloff} and \href{https://adv-r.hadley.nz/}{\emph{Advanced R} by Hadley Wickham}. Finally, if you wish to learn more about using R as a geospatial information system (GIS), I would recommend \href{https://geocompr.robinlovelace.net/}{\emph{Geocomputation with R} by Robin Lovelace, Jakub Nowosad, and Jannes Muenchow} which is also freely available online. I also recommend \href{https://www.springer.com/gp/book/9781461476177}{\emph{Applied Spatial Data Analysis} by Roger S. Bivand, Edzer Pebesma, and Virgilio Gómez-Rubio} too.
 
-\chapter{Data}\label{data}
+\hypertarget{data}{%
+\chapter{Data}\label{data}}
 
-\section{Starting out}\label{starting-out}
+\hypertarget{starting-out}{%
+\section{Starting out}\label{starting-out}}
 
-We will start by opening RStudio. Ideally, you will have already
-installed both R and Rstudio before the workshop. If you have not done
-this already, then please see the \protect\hyperlink{setup}{Setting up
-your computer} section. \textbf{During this workshop, please do not copy
-and paste code from the workshop manual into RStudio. Instead, please
-write it out yourself in an R script.} When programming, you will spend
-a lot of time fixing coding mistakes---that is, debugging your code---so
-it is best to get used to making mistakes now when you have people here
-to help you. You can create a new R script by clicking on \emph{File} in
-the RStudio menu bar, then \emph{New File}, and then \emph{R Script}.
+We will start by opening RStudio. Ideally, you will have already installed both R and Rstudio before the workshop. If you have not done this already, then please see the \protect\hyperlink{setup}{Setting up your computer} section. \textbf{During this workshop, please do not copy and paste code from the workshop manual into RStudio. Instead, please write it out yourself in an R script.} When programming, you will spend a lot of time fixing coding mistakes---that is, debugging your code---so it is best to get used to making mistakes now when you have people here to help you. You can create a new R script by clicking on \emph{File} in the RStudio menu bar, then \emph{New File}, and then \emph{R Script}.
 
 \begin{center}\includegraphics[width=0.7\linewidth]{images/rstudio-new-script} \end{center}
 
-After creating a new script, you will notice that a new \emph{Source}
-panel has appeared. In the \emph{Source} panel, you can type and edit
-code before you run it. You can run code in the \emph{Source} panel by
-placing the cursor (i.e.~the blinking line) on the desired line of code
-and pressing \texttt{Control\ +\ Enter} on your keyboard (or
-\texttt{CMD\ +\ Enter} if you are using an Apple computer). You can save
-the code in the \emph{Source} panel by pressing \texttt{Control\ +\ s}
-on your keyboard (or \texttt{CMD\ +\ s} if you are using an Apple
-computer).
+After creating a new script, you will notice that a new \emph{Source} panel has appeared. In the \emph{Source} panel, you can type and edit code before you run it. You can run code in the \emph{Source} panel by placing the cursor (i.e.~the blinking line) on the desired line of code and pressing \texttt{Control\ +\ Enter} on your keyboard (or \texttt{CMD\ +\ Enter} if you are using an Apple computer). You can save the code in the \emph{Source} panel by pressing \texttt{Control\ +\ s} on your keyboard (or \texttt{CMD\ +\ s} if you are using an Apple computer).
 
 \begin{center}\includegraphics[width=0.7\linewidth]{images/rstudio-source} \end{center}
 
-You can also make notes and write your answers to the workshop questions
-inside the R script. When writing notes and answers, add a \texttt{\#}
-symbol so that the text following the \texttt{\#} symbol is treated as a
-comment and not code. This means that you don't have to worry about
-highlighting specific parts of the script to avoid errors.
+You can also make notes and write your answers to the workshop questions inside the R script. When writing notes and answers, add a \texttt{\#} symbol so that the text following the \texttt{\#} symbol is treated as a comment and not code. This means that you don't have to worry about highlighting specific parts of the script to avoid errors.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -423,14 +331,12 @@ highlighting specific parts of the script to avoid errors.
 ## [1] "this is also not a comment"
 \end{verbatim}
 
-\textbf{Remember to save your script regularly to ensure that you don't
-lose anything in the event that RStudio crashes (e.g.~using
-\texttt{Control\ +\ s} or \texttt{CMD\ +\ s})!}
+\textbf{Remember to save your script regularly to ensure that you don't lose anything in the event that RStudio crashes (e.g.~using \texttt{Control\ +\ s} or \texttt{CMD\ +\ s})!}
 
-\section{Attaching packages}\label{attaching-packages}
+\hypertarget{attaching-packages}{%
+\section{Attaching packages}\label{attaching-packages}}
 
-Now we will set up our R session for the workshop. Specifically, enter
-the following R code to attach the R packages used in this workshop.
+Now we will set up our R session for the workshop. Specifically, enter the following R code to attach the R packages used in this workshop.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -449,23 +355,13 @@ the following R code to attach the R packages used in this workshop.
 \end{Highlighting}
 \end{Shaded}
 
-You should have already downloaded the data. If you have not already
-done so, you can
-\href{https://github.com/prioritizr/massey-workshop/raw/master/data.zip}{download
-it from here}. After downloading the data, you can unzip the data into a
-new folder. Next, you will need to set the working directory to this new
-folder. To achieve this, click on the \emph{Session} button on the
-RStudio menu bar, then click \emph{Set Working Directory}, and then
-\emph{Choose Directory}.
+You should have already downloaded the data. If you have not already done so, you can \href{https://github.com/prioritizr/massey-workshop/raw/master/data.zip}{download it from here}. After downloading the data, you can unzip the data into a new folder. Next, you will need to set the working directory to this new folder. To achieve this, click on the \emph{Session} button on the RStudio menu bar, then click \emph{Set Working Directory}, and then \emph{Choose Directory}.
 
 \begin{center}\includegraphics[width=0.7\linewidth]{images/rstudio-wd} \end{center}
 
 \clearpage
 
-Now navigate to the folder where you unzipped the data and select
-\emph{Open}. You can verify that you have correctly set the working
-directory using the following R code. You should see the output
-\texttt{TRUE} in the \emph{Console} panel.
+Now navigate to the folder where you unzipped the data and select \emph{Open}. You can verify that you have correctly set the working directory using the following R code. You should see the output \texttt{TRUE} in the \emph{Console} panel.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -477,19 +373,10 @@ directory using the following R code. You should see the output
 ## [1] TRUE
 \end{verbatim}
 
-\section{Data import}\label{data-import}
+\hypertarget{data-import}{%
+\section{Data import}\label{data-import}}
 
-Now that we have downloaded the dataset, we will need to import it into
-our R session. Specifically, this data was obtained from the
-``Introduction to Marxan'' course and was originally a subset of a
-larger spatial prioritization project performed under contract to
-Australia's Department of Environment and Water Resources. It contains
-vector-based planning unit data (\texttt{pu.shp}) and the raster-based
-data describing the spatial distributions of 32 vegetation classes
-(\texttt{vegetation.tif}) in southern Tasmania, Australia. Please note
-this dataset is only provided for teaching purposes and should not be
-used for any real-world conservation planning. We can import the data
-into our R session using the following code.
+Now that we have downloaded the dataset, we will need to import it into our R session. Specifically, this data was obtained from the ``Introduction to Marxan'' course and was originally a subset of a larger spatial prioritization project performed under contract to Australia's Department of Environment and Water Resources. It contains vector-based planning unit data (\texttt{pu.shp}) and the raster-based data describing the spatial distributions of 32 vegetation classes (\texttt{vegetation.tif}) in southern Tasmania, Australia. Please note this dataset is only provided for teaching purposes and should not be used for any real-world conservation planning. We can import the data into our R session using the following code.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -507,32 +394,23 @@ into our R session using the following code.
 
 \clearpage
 
-\section{Planning unit data}\label{planning-unit-data}
+\hypertarget{planning-unit-data}{%
+\section{Planning unit data}\label{planning-unit-data}}
 
-The planning unit data contains spatial data describing the geometry for
-each planning unit and attribute data with information about each
-planning unit (e.g.~cost values). Let's investigate the
-\texttt{pu\_data} object. The attribute data contains 5 columns with
-contain the following information:
+The planning unit data contains spatial data describing the geometry for each planning unit and attribute data with information about each planning unit (e.g.~cost values). Let's investigate the \texttt{pu\_data} object. The attribute data contains 5 columns with contain the following information:
 
 \begin{itemize}
 \tightlist
 \item
   \texttt{id}: unique identifiers for each planning unit
 \item
-  \texttt{cost}: acquisition cost values for each planning unit
-  (millions of Australian dollars).
+  \texttt{cost}: acquisition cost values for each planning unit (millions of Australian dollars).
 \item
-  \texttt{status}: status information for each planning unit (only
-  relevant with Marxan)
+  \texttt{status}: status information for each planning unit (only relevant with Marxan)
 \item
-  \texttt{locked\_in}: logical values (i.e.
-  \texttt{TRUE}/\texttt{FALSE}) indicating if planning units are covered
-  by protected areas or not.
+  \texttt{locked\_in}: logical values (i.e.~\texttt{TRUE}/\texttt{FALSE}) indicating if planning units are covered by protected areas or not.
 \item
-  \texttt{locked\_out}: logical values (i.e.
-  \texttt{TRUE}/\texttt{FALSE}) indicating if planning units cannot be
-  managed as a protected area because they contain are too degraded.
+  \texttt{locked\_out}: logical values (i.e.~\texttt{TRUE}/\texttt{FALSE}) indicating if planning units cannot be managed as a protected area because they contain are too degraded.
 \end{itemize}
 
 \begin{Shaded}
@@ -546,7 +424,7 @@ contain the following information:
 ## class       : SpatialPolygonsDataFrame 
 ## features    : 516 
 ## extent      : 348703.2, 611932.4, 5167775, 5344516  (xmin, xmax, ymin, ymax)
-## crs         : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 
+## crs         : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs 
 ## variables   : 5
 ## names       :   id,             cost, status, locked_in, locked_out 
 ## min values  :  557, 3.59717531470679,      0,         0,          0 
@@ -560,7 +438,7 @@ contain the following information:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-16-1} \end{center}
+\begin{center}\includegraphics{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-17-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -619,8 +497,7 @@ contain the following information:
 
 \begin{verbatim}
 ## CRS arguments:
-##  +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84
-## +towgs84=0,0,0
+##  +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs
 \end{verbatim}
 
 \begin{Shaded}
@@ -702,7 +579,7 @@ contain the following information:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.6\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-18-1} \end{center}
+\begin{center}\includegraphics[width=0.6\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-19-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -713,36 +590,27 @@ contain the following information:
 
 Now, you can try and answer some questions about the planning unit data.
 
-\begin{rmdquestion} 1. How many planning units are in the
-planning unit data? 2. What is the highest cost value? 3. Is there a
-spatial pattern in the planning unit cost values (hint: use
-\texttt{plot} to make a map)?
+\begin{rmdquestion}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  How many planning units are in the planning unit data?
+\item
+  What is the highest cost value?
+\item
+  Is there a spatial pattern in the planning unit cost values (hint: use \texttt{plot} to make a map)?
+\end{enumerate}
 \end{rmdquestion}
 
 \clearpage
 
-\section{Vegetation data}\label{vegetation-data}
+\hypertarget{vegetation-data}{%
+\section{Vegetation data}\label{vegetation-data}}
 
-The vegetation data describe the spatial distribution of 32 vegetation
-classes in the study area. This data is in a raster format and so the
-data are organized using a grid comprising square grid cells that are
-each the same size. In our case, the raster data contains multiple
-layers (also called ``bands'') and each layer has corresponds to a
-spatial grid with exactly the same area and has exactly the same
-dimensionality (i.e.~number of rows, columns, and cells). In this
-dataset, there are 32 different regular spatial grids layered on top of
-each other -- with each layer corresponding to a different vegetation
-class -- and each of these layers contains a grid with 164 rows, 326
-columns, and 53464 cells. Within each layer, each cell corresponds to a
-0.967 by 1.02 km square. The values associated with each grid cell
-indicate the (one) presence or (zero) absence of a given vegetation
-class in the cell.
+The vegetation data describe the spatial distribution of 32 vegetation classes in the study area. This data is in a raster format and so the data are organized using a grid comprising square grid cells that are each the same size. In our case, the raster data contains multiple layers (also called ``bands'') and each layer has corresponds to a spatial grid with exactly the same area and has exactly the same dimensionality (i.e.~number of rows, columns, and cells). In this dataset, there are 32 different regular spatial grids layered on top of each other -- with each layer corresponding to a different vegetation class -- and each of these layers contains a grid with 164 rows, 326 columns, and 53464 cells. Within each layer, each cell corresponds to a 0.967 by 1.02 km square. The values associated with each grid cell indicate the (one) presence or (zero) absence of a given vegetation class in the cell.
 
-\begin{figure}
-\centering
 \includegraphics{images/rasterbands.png}
-\caption{}
-\end{figure}
 
 Let's explore the vegetation data.
 
@@ -758,7 +626,7 @@ Let's explore the vegetation data.
 ## dimensions : 164, 326, 53464, 32  (nrow, ncol, ncell, nlayers)
 ## resolution : 967, 1020  (x, y)
 ## extent     : 298636.7, 613878.7, 5167756, 5335036  (xmin, xmax, ymin, ymax)
-## crs        : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 
+## crs        : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs 
 ## names      : vegetation.1, vegetation.2, vegetation.3, vegetation.4, vegetation.5, vegetation.6, vegetation.7, vegetation.8, vegetation.9, vegetation.10, vegetation.11, vegetation.12, vegetation.13, vegetation.14, vegetation.15, ... 
 ## min values :            0,            0,            0,            0,            0,            0,            0,            0,            0,             0,             0,             0,             0,             0,             0, ... 
 ## max values :            1,            1,            1,            1,            1,            1,            1,            1,            1,             1,             1,             1,             1,             1,             1, ...
@@ -870,8 +738,7 @@ Let's explore the vegetation data.
 
 \begin{verbatim}
 ## CRS arguments:
-##  +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84
-## +towgs84=0,0,0
+##  +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs
 \end{verbatim}
 
 \begin{Shaded}
@@ -887,8 +754,8 @@ Let's explore the vegetation data.
 ## dimensions : 164, 326, 53464  (nrow, ncol, ncell)
 ## resolution : 967, 1020  (x, y)
 ## extent     : 298636.7, 613878.7, 5167756, 5335036  (xmin, xmax, ymin, ymax)
-## crs        : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 
-## source     : /home/travis/build/prioritizr/massey-workshop/data/vegetation.tif 
+## crs        : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs 
+## source     : /home/runner/work/massey-workshop/massey-workshop/data/vegetation.tif 
 ## names      : vegetation.1 
 ## values     : 0, 1  (min, max)
 \end{verbatim}
@@ -966,49 +833,31 @@ Let's explore the vegetation data.
 
 Now, you can try and answer some questions about the vegetation data.
 
-\begin{rmdquestion} 1. What part of the study area is the 13th
-vegetation class found in (hint: make a map)? For instance, is it in the
-south-eastern part of the study area? 2. What proportion of cells
-contain the 12th vegetation class? 3. Which vegetation class is the most
-abundant (i.e.~present in the greatest number of cells)?
+\begin{rmdquestion}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What part of the study area is the 13th vegetation class found in (hint: make a map)? For instance, is it in the south-eastern part of the study area?
+\item
+  What proportion of cells contain the 12th vegetation class?
+\item
+  Which vegetation class is the most abundant (i.e.~present in the greatest number of cells)?
+\end{enumerate}
 \end{rmdquestion}
 
-\chapter{Gap analysis}\label{gap-analysis}
+\hypertarget{gap-analysis}{%
+\chapter{Gap analysis}\label{gap-analysis}}
 
-\section{Introduction}\label{introduction-1}
+\hypertarget{introduction-1}{%
+\section{Introduction}\label{introduction-1}}
 
-Before we begin to prioritize areas for protected area establishment, we
-should first understand how well existing protected areas are conserving
-our biodiversity features (i.e.~native vegetation classes in Tasmania,
-Australia). This step is critical: we cannot develop plans to improve
-conservation of biodiversity if we don't understand how well existing
-policies are currently conserving biodiversity! To achieve this, we can
-perform a ``gap analysis''. A gap analysis involves calculating how well
-each of our biodiversity features (i.e.~vegetation classes in this
-exercise) are represented (covered) by protected areas. Next, we compare
-current representation by protected areas of each feature (e.g.~5\% of
-their spatial distribution covered by protected areas) to a target
-threshold (e.g.~20\% of their spatial distribution covered by protected
-areas). This target threshold denotes the minimum amount (e.g.~minimum
-proportion of spatial distribution) that we need of each feature to be
-represented in the protected area system. Ideally, targets should be
-based on an estimate of how much area or habitat is needed for ecosystem
-function or species persistence. In practice, targets are generally set
-using simple rules of thumb (e.g.~10\% or 20\%), policy (17\%;
-\url{https://www.cbd.int/sp/targets/rationale/target-11}) or standard
-practices (e.g.~setting targets for species based on geographic range
-size) \citep{r1, r2}.
+Before we begin to prioritize areas for protected area establishment, we should first understand how well existing protected areas are conserving our biodiversity features (i.e.~native vegetation classes in Tasmania, Australia). This step is critical: we cannot develop plans to improve conservation of biodiversity if we don't understand how well existing policies are currently conserving biodiversity! To achieve this, we can perform a ``gap analysis''. A gap analysis involves calculating how well each of our biodiversity features (i.e.~vegetation classes in this exercise) are represented (covered) by protected areas. Next, we compare current representation by protected areas of each feature (e.g.~5\% of their spatial distribution covered by protected areas) to a target threshold (e.g.~20\% of their spatial distribution covered by protected areas). This target threshold denotes the minimum amount (e.g.~minimum proportion of spatial distribution) that we need of each feature to be represented in the protected area system. Ideally, targets should be based on an estimate of how much area or habitat is needed for ecosystem function or species persistence. In practice, targets are generally set using simple rules of thumb (e.g.~10\% or 20\%), policy (17\%; \url{https://www.cbd.int/sp/targets/rationale/target-11}) or standard practices (e.g.~setting targets for species based on geographic range size) \citep{r1, r2}.
 
-\section{Feature abundance}\label{feature-abundance}
+\hypertarget{feature-abundance}{%
+\section{Feature abundance}\label{feature-abundance}}
 
-Now we will perform some preliminary calculations to explore the data.
-First, we will calculate how much of each vegetation feature occurs
-inside each planning unit (i.e.~the abundance of the features). To
-achieve this, we will use the \texttt{problem} function to create an
-empty conservation planning problem that only contains the planning unit
-and biodiversity data. We will then use the \texttt{feature\_abundances}
-function to calculate the total amount of each feature in each planning
-unit.
+Now we will perform some preliminary calculations to explore the data. First, we will calculate how much of each vegetation feature occurs inside each planning unit (i.e.~the abundance of the features). To achieve this, we will use the \texttt{problem} function to create an empty conservation planning problem that only contains the planning unit and biodiversity data. We will then use the \texttt{feature\_abundances} function to calculate the total amount of each feature in each planning unit.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1122,17 +971,7 @@ unit.
 ## 32 vegetation.32               32                    1
 \end{verbatim}
 
-The \texttt{abundance\_data} object contains three columns. The
-\texttt{feature} column contains the name of each feature (derived from
-\texttt{names(veg\_data)}), the \texttt{absolute\_abundance} column
-contains the total amount of each feature in all the planning units, and
-the \texttt{relative\_abundance} column contains the total amount of
-each feature in the planning units expressed as a proportion of the
-total amount in the underlying raster data. Since all the raster cells
-containing vegetation overlap with the planning units, all of the values
-in the \texttt{relative\_abundance} column are equal to one (meaning
-100\%). Now let's add a new column with the feature abundances expressed
-in area units (i.e.~km\textsuperscript{2}).
+The \texttt{abundance\_data} object contains three columns. The \texttt{feature} column contains the name of each feature (derived from \texttt{names(veg\_data)}), the \texttt{absolute\_abundance} column contains the total amount of each feature in all the planning units, and the \texttt{relative\_abundance} column contains the total amount of each feature in the planning units expressed as a proportion of the total amount in the underlying raster data. Since all the raster cells containing vegetation overlap with the planning units, all of the values in the \texttt{relative\_abundance} column are equal to one (meaning 100\%). Now let's add a new column with the feature abundances expressed in area units (i.e.~km\textsuperscript{2}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1184,7 +1023,7 @@ Now let's explore the abundance data.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-27-1} \end{center}
+\begin{center}\includegraphics{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-28-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1210,25 +1049,23 @@ Now let's explore the abundance data.
 
 Now, try to answer the following questions.
 
-\begin{rmdquestion} 1. What is the median abundance of the
-features (hint: \texttt{median})? 2. What is the name of the feature
-with smallest abundance? 3. How many features have a total abundance
-greater than 100 km\^{}2 (hint: use
-\texttt{sum(abundance\_data\$absolute\_abundance\_km2\ \textgreater{}\ set\_units(threshold,\ km\^{}2)}
-with the correct \texttt{threshold} value)?
+\begin{rmdquestion}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What is the median abundance of the features (hint: \texttt{median})?
+\item
+  What is the name of the feature with smallest abundance?
+\item
+  How many features have a total abundance greater than 100 km\^{}2 (hint: use \texttt{sum(abundance\_data\$absolute\_abundance\_km2\ \textgreater{}\ set\_units(threshold,\ km\^{}2)} with the correct \texttt{threshold} value)?
+\end{enumerate}
 \end{rmdquestion}
 
-\section{Feature representation}\label{feature-representation}
+\hypertarget{feature-representation}{%
+\section{Feature representation}\label{feature-representation}}
 
-After calculating the total amount of each feature in the planning units
-(i.e.~the features' abundances), we will now calculate the amount of
-each feature in the planning units that are covered by protected areas
-(i.e.~feature representation by protected areas). We can complete this
-task using the \texttt{feature\_representation} function. This function
-requires (i) a conservation problem object with the planning unit and
-biodiversity data and also (ii) an object representing a solution to the
-problem (i.e an object in the same format as the planning unit data with
-values indicating if the planning units are selected or not).
+After calculating the total amount of each feature in the planning units (i.e.~the features' abundances), we will now calculate the amount of each feature in the planning units that are covered by protected areas (i.e.~feature representation by protected areas). We can complete this task using the \texttt{eval\_feature\_representation\_summary()} function. This function requires (i) a conservation problem object with the planning unit and biodiversity data and also (ii) an object representing a solution to the problem (i.e an object in the same format as the planning unit data with values indicating if the planning units are selected or not).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1237,7 +1074,7 @@ values indicating if the planning units are selected or not).
 \NormalTok{pu_data}\OperatorTok{$}\NormalTok{pa_status <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(pu_data}\OperatorTok{$}\NormalTok{locked_in)}
 
 \CommentTok{# calculate feature representation by protected areas}
-\NormalTok{repr_data <-}\StringTok{ }\KeywordTok{feature_representation}\NormalTok{(p0, pu_data[, }\StringTok{"pa_status"}\NormalTok{])}
+\NormalTok{repr_data <-}\StringTok{ }\KeywordTok{eval_feature_representation_summary}\NormalTok{(p0, pu_data[, }\StringTok{"pa_status"}\NormalTok{])}
 
 \CommentTok{# print feature representation data}
 \KeywordTok{print}\NormalTok{(repr_data)}
@@ -1245,33 +1082,23 @@ values indicating if the planning units are selected or not).
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 32 x 3
-##    feature       absolute_held relative_held
-##    <chr>                 <dbl>         <dbl>
-##  1 vegetation.1          0            0     
-##  2 vegetation.2          0            0     
-##  3 vegetation.3          0            0     
-##  4 vegetation.4          0            0     
-##  5 vegetation.5          0            0     
-##  6 vegetation.6          0            0     
-##  7 vegetation.7          0            0     
-##  8 vegetation.8          0            0     
-##  9 vegetation.9          0.846        0.0470
-## 10 vegetation.10         0            0     
+## # A tibble: 32 x 5
+##    summary feature       total_amount absolute_held relative_held
+##    <chr>   <chr>                <dbl>         <dbl>         <dbl>
+##  1 overall vegetation.1          16.0         0            0     
+##  2 overall vegetation.2          14.3         0            0     
+##  3 overall vegetation.3          10.4         0            0     
+##  4 overall vegetation.4          17.8         0            0     
+##  5 overall vegetation.5          13.0         0            0     
+##  6 overall vegetation.6          14.3         0            0     
+##  7 overall vegetation.7          20.0         0            0     
+##  8 overall vegetation.8          14.0         0            0     
+##  9 overall vegetation.9          18.0         0.846        0.0470
+## 10 overall vegetation.10         20.0         0            0     
 ## # ... with 22 more rows
 \end{verbatim}
 
-Similar to the abundance data before, the \texttt{repr\_data} object
-contains three columns. The \texttt{feature} column contains the name of
-each feature, the \texttt{absolute\_held} column shows the total amount
-of each feature held in the solution (i.e.~the planning units covered by
-protected areas), and the \texttt{relative\_held} column shows the
-proportion of each feature held in the solution (i.e.~the proportion of
-each feature's spatial distribution held in protected areas). Since the
-\texttt{absolute\_held} values correspond to the number of grid cells in
-the \texttt{veg\_data} object with overlap with protected areas, let's
-convert them to area units (i.e.~km\textsuperscript{2}) so we can report
-them.
+Similar to the abundance data before, the \texttt{repr\_data} object contains three columns. The \texttt{feature} column contains the name of each feature, the \texttt{absolute\_held} column shows the total amount of each feature held in the solution (i.e.~the planning units covered by protected areas), and the \texttt{relative\_held} column shows the proportion of each feature held in the solution (i.e.~the proportion of each feature's spatial distribution held in protected areas). Since the \texttt{absolute\_held} values correspond to the number of grid cells in the \texttt{veg\_data} object with overlap with protected areas, let's convert them to area units (i.e.~km\textsuperscript{2}) so we can report them.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1287,66 +1114,51 @@ them.
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 32 x 4
-##    feature       absolute_held relative_held absolute_held_km2
-##    <chr>                 <dbl>         <dbl>            [km^2]
-##  1 vegetation.1          0            0              0.0000000
-##  2 vegetation.2          0            0              0.0000000
-##  3 vegetation.3          0            0              0.0000000
-##  4 vegetation.4          0            0              0.0000000
-##  5 vegetation.5          0            0              0.0000000
-##  6 vegetation.6          0            0              0.0000000
-##  7 vegetation.7          0            0              0.0000000
-##  8 vegetation.8          0            0              0.0000000
-##  9 vegetation.9          0.846        0.0470         0.8341885
-## 10 vegetation.10         0            0              0.0000000
+## # A tibble: 32 x 6
+##    summary feature     total_amount absolute_held relative_held absolute_held_k~
+##    <chr>   <chr>              <dbl>         <dbl>         <dbl>           [km^2]
+##  1 overall vegetation~         16.0         0            0             0.0000000
+##  2 overall vegetation~         14.3         0            0             0.0000000
+##  3 overall vegetation~         10.4         0            0             0.0000000
+##  4 overall vegetation~         17.8         0            0             0.0000000
+##  5 overall vegetation~         13.0         0            0             0.0000000
+##  6 overall vegetation~         14.3         0            0             0.0000000
+##  7 overall vegetation~         20.0         0            0             0.0000000
+##  8 overall vegetation~         14.0         0            0             0.0000000
+##  9 overall vegetation~         18.0         0.846        0.0470        0.8341885
+## 10 overall vegetation~         20.0         0            0             0.0000000
 ## # ... with 22 more rows
 \end{verbatim}
 
 Now let's investigate how well the species are represented.
 
-\begin{rmdquestion} 1. What is the average proportion of the
-features held in protected areas (hint: use
-\texttt{mean(table\$relative\_held)} with the correct \texttt{table}
-name)? 2. If we set a target of 10\% coverage by protected areas, how
-many features fail to meet this target (hint: use
-\texttt{sum(table\$relative\_held\ \textgreater{}=\ target\_value)} with
-the correct \texttt{table} name)? 3. If we set a target of 20\% coverage
-by protected areas, how many features fail to meet this target? 4. Is
-there a relationship between the total abundance of a feature and how
-well it is represented by protected areas (hint:
-\texttt{plot(abundance\_data\$absolute\_abundance\ \textasciitilde{}\ repr\_data\$relative\_held)})?
+\begin{rmdquestion}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What is the average proportion of the features held in protected areas (hint: use \texttt{mean(table\$relative\_held)} with the correct \texttt{table} name)?
+\item
+  If we set a target of 10\% coverage by protected areas, how many features fail to meet this target (hint: use \texttt{sum(table\$relative\_held\ \textgreater{}=\ target\_value)} with the correct \texttt{table} name)?
+\item
+  If we set a target of 20\% coverage by protected areas, how many features fail to meet this target?
+\item
+  Is there a relationship between the total abundance of a feature and how well it is represented by protected areas (hint: \texttt{plot(abundance\_data\$absolute\_abundance\ \textasciitilde{}\ repr\_data\$relative\_held)})?
+\end{enumerate}
 \end{rmdquestion}
 
-\chapter{Spatial prioritizations}\label{spatial-prioritizations}
+\hypertarget{spatial-prioritizations}{%
+\chapter{Spatial prioritizations}\label{spatial-prioritizations}}
 
-\section{Introduction}\label{introduction-2}
+\hypertarget{introduction-2}{%
+\section{Introduction}\label{introduction-2}}
 
-Here we will develop prioritizations to identify priority areas for
-protected area establishment. Its worth noting that prioritizr is a
-decision support tool (similar to \href{http://marxan.org/}{Marxan} and
-\href{https://www.helsinki.fi/en/researchgroups/digital-geography-lab/software-developed-in-cbig\#section-52992}{Zonation}).
-This means that it is designed to help you make decisions---it can't
-make decisions for you.
+Here we will develop prioritizations to identify priority areas for protected area establishment. Its worth noting that prioritizr is a decision support tool (similar to \href{http://marxan.org/}{Marxan} and \href{https://www.helsinki.fi/en/researchgroups/digital-geography-lab/software-developed-in-cbig\#section-52992}{Zonation}). This means that it is designed to help you make decisions---it can't make decisions for you.
 
-\section{Starting out simple}\label{starting-out-simple}
+\hypertarget{starting-out-simple}{%
+\section{Starting out simple}\label{starting-out-simple}}
 
-To start things off, let's keep things simple. Let's create a
-prioritization using the
-\href{https://prioritizr.net/reference/add_min_set_objective.html}{minimum
-set formulation of the reserve selection problem}. This formulation
-means that we want a solution that will meet the targets for our
-biodiversity features for minimum cost. Here, we will set 5\% targets
-for each vegetation class and use the data in the \texttt{cost} column
-to specify acquisition costs. Although we strongly recommend using
-\href{https://www.gurobi.com/}{Gurobi} to solve problems (with
-\href{https://prioritizr.net/reference/add_gurobi_solver.html}{\texttt{add\_gurobi\_solver}}),
-we will use the
-\href{https://prioritizr.net/reference/add_lpsymphony_solver.html}{lpsymphony
-solver} in this workshop since it is easier to install. The Gurobi
-solver is much faster than the lpsymphony solver
-(\href{https://prioritizr.net/articles/gurobi_installation.html}{see
-here for installation instructions}).
+To start things off, let's keep things simple. Let's create a prioritization using the \href{https://prioritizr.net/reference/add_min_set_objective.html}{minimum set formulation of the reserve selection problem}. This formulation means that we want a solution that will meet the targets for our biodiversity features for minimum cost. Here, we will set 5\% targets for each vegetation class and use the data in the \texttt{cost} column to specify acquisition costs. Although we strongly recommend using \href{https://www.gurobi.com/}{Gurobi} to solve problems (with \href{https://prioritizr.net/reference/add_gurobi_solver.html}{\texttt{add\_gurobi\_solver}}), we will use the \href{https://prioritizr.net/reference/add_lpsymphony_solver.html}{lpsymphony solver} in this workshop since it is easier to install. The Gurobi solver is much faster than the lpsymphony solver (\href{https://prioritizr.net/articles/gurobi_installation.html}{see here for installation instructions}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1359,7 +1171,7 @@ here for installation instructions}).
 ## class       : SpatialPolygonsDataFrame 
 ## features    : 516 
 ## extent      : 348703.2, 611932.4, 5167775, 5344516  (xmin, xmax, ymin, ymax)
-## crs         : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 
+## crs         : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs 
 ## variables   : 6
 ## names       :   id,             cost, status, locked_in, locked_out, pa_status 
 ## min values  :  557, 3.59717531470679,      0,         0,          0,         0 
@@ -1391,7 +1203,7 @@ here for installation instructions}).
 ##   constraints:    <none>
 ##   penalties:      <none>
 ##   portfolio:      default
-##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (-1), verbose (1)]
+##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (2147483647), verbose (1)]
 \end{verbatim}
 
 \begin{Shaded}
@@ -1409,7 +1221,7 @@ here for installation instructions}).
 ## class       : SpatialPolygonsDataFrame 
 ## features    : 516 
 ## extent      : 348703.2, 611932.4, 5167775, 5344516  (xmin, xmax, ymin, ymax)
-## crs         : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 
+## crs         : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs 
 ## variables   : 7
 ## names       :   id,             cost, status, locked_in, locked_out, pa_status, solution_1 
 ## min values  :  557, 3.59717531470679,      0,         0,          0,         0,          0 
@@ -1419,23 +1231,29 @@ here for installation instructions}).
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# calculate number of planning units selected in the prioritization}
-\KeywordTok{sum}\NormalTok{(s1}\OperatorTok{$}\NormalTok{solution_}\DecValTok{1}\NormalTok{)}
+\KeywordTok{eval_n_summary}\NormalTok{(p1, s1[, }\StringTok{"solution_1"}\NormalTok{])}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 15
+## # A tibble: 1 x 2
+##   summary  cost
+##   <chr>   <dbl>
+## 1 overall    15
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# calculate total cost of the prioritization}
-\KeywordTok{sum}\NormalTok{(s1}\OperatorTok{$}\NormalTok{solution_}\DecValTok{1} \OperatorTok{*}\StringTok{ }\NormalTok{s1}\OperatorTok{$}\NormalTok{cost)}
+\KeywordTok{eval_cost_summary}\NormalTok{(p1, s1[, }\StringTok{"solution_1"}\NormalTok{])}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 384.8434
+## # A tibble: 1 x 2
+##   summary  cost
+##   <chr>   <dbl>
+## 1 overall  385.
 \end{verbatim}
 
 \begin{Shaded}
@@ -1447,29 +1265,27 @@ here for installation instructions}).
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-32-1} \end{center}
+\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-33-1} \end{center}
 
 Now let's examine the solution.
 
-\begin{rmdquestion} 1. How many planing units were selected in
-the prioritization? What proportion of planning units were selected in
-the prioritization? 2. Is there a pattern in the spatial distribution of
-the priority areas? 3. Can you verify that all of the targets were met
-in the prioritization (hint:
-\texttt{feature\_representation(p1,\ s1{[},\ "solution\_1"{]})})?
+\begin{rmdquestion}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  How many planing units were selected in the prioritization? What proportion of planning units were selected in the prioritization?
+\item
+  Is there a pattern in the spatial distribution of the priority areas?
+\item
+  Can you verify that all of the targets were met in the prioritization (hint: \texttt{eval\_feature\_representation\_summary(p1,\ s1{[},\ "solution\_1"{]})})?
+\end{enumerate}
 \end{rmdquestion}
 
-\section{Adding complexity}\label{adding-complexity}
+\hypertarget{adding-complexity}{%
+\section{Adding complexity}\label{adding-complexity}}
 
-Our first prioritization suffers many limitations, so let's add
-additional constraints to the problem to make it more useful. First,
-let's lock in planing units that are already by covered protected areas.
-If some vegetation communities are already secured inside existing
-protected areas, then we might not need to add as many new protected
-areas to the existing protected area system to meet their targets. Since
-our planning unit data (\texttt{pu\_da}) already contains this
-information in the \texttt{locked\_in} column, we can use this column
-name to specify which planning units should be locked in.
+Our first prioritization suffers many limitations, so let's add additional constraints to the problem to make it more useful. First, let's lock in planing units that are already by covered protected areas. If some vegetation communities are already secured inside existing protected areas, then we might not need to add as many new protected areas to the existing protected area system to meet their targets. Since our planning unit data (\texttt{pu\_da}) already contains this information in the \texttt{locked\_in} column, we can use this column name to specify which planning units should be locked in.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1480,7 +1296,7 @@ name to specify which planning units should be locked in.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-34-1} \end{center}
+\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-35-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1508,7 +1324,7 @@ name to specify which planning units should be locked in.
 ##   constraints:    <Locked in planning units [198 locked units]>
 ##   penalties:      <none>
 ##   portfolio:      default
-##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (-1), verbose (1)]
+##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (2147483647), verbose (1)]
 \end{verbatim}
 
 \begin{Shaded}
@@ -1523,12 +1339,9 @@ name to specify which planning units should be locked in.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-35-1} \end{center}
+\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-36-1} \end{center}
 
-Let's pretend that we talked to an expert on the vegetation communities
-in our study system and they recommended that a 10\% target was needed
-for each vegetation class. So, equipped with this information, let's set
-the targets to 10\%.
+Let's pretend that we talked to an expert on the vegetation communities in our study system and they recommended that a 10\% target was needed for each vegetation class. So, equipped with this information, let's set the targets to 10\%.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1556,7 +1369,7 @@ the targets to 10\%.
 ##   constraints:    <Locked in planning units [198 locked units]>
 ##   penalties:      <none>
 ##   portfolio:      default
-##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (-1), verbose (1)]
+##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (2147483647), verbose (1)]
 \end{verbatim}
 
 \begin{Shaded}
@@ -1571,11 +1384,9 @@ the targets to 10\%.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-36-1} \end{center}
+\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-37-1} \end{center}
 
-Next, let's lock out highly degraded areas. Similar to before, this
-information is present in our planning unit data so we can use the
-\texttt{locked\_out} column name to achieve this.
+Next, let's lock out highly degraded areas. Similar to before, this information is present in our planning unit data so we can use the \texttt{locked\_out} column name to achieve this.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1586,7 +1397,7 @@ information is present in our planning unit data so we can use the
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-37-1} \end{center}
+\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-38-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1616,11 +1427,11 @@ information is present in our planning unit data so we can use the
 ##   objective:      Minimum set objective 
 ##   targets:        Relative targets [targets (min: 0.1, max: 0.1)]
 ##   decisions:      Binary decision 
-##   constraints:    <Locked in planning units [198 locked units]
-##                    Locked out planning units [6 locked units]>
+##   constraints:    <Locked out planning units [6 locked units]
+##                    Locked in planning units [198 locked units]>
 ##   penalties:      <none>
 ##   portfolio:      default
-##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (-1), verbose (1)]
+##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (2147483647), verbose (1)]
 \end{verbatim}
 
 \begin{Shaded}
@@ -1635,49 +1446,35 @@ information is present in our planning unit data so we can use the
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-38-1} \end{center}
+\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-39-1} \end{center}
 
 \clearpage
 
 Now, let's compare the solutions.
 
-\begin{rmdquestion} 1. What is the cost of the planning units
-selected in \texttt{s2}, \texttt{s3}, and \texttt{s4}? 2. How many
-planning units are in \texttt{s2}, \texttt{s3}, and \texttt{s4}? 3. Do
-the solutions with more planning units have a greater cost? Why (or why
-not)? 4. Why does the first solution (\texttt{s1}) cost less than the
-second solution with protected areas locked into the solution
-(\texttt{s2})? 5. Why does the third solution (\texttt{s3}) cost less
-than the fourth solution solution with highly degraded areas locked out
-(\texttt{s4})? \end{rmdquestion}
+\begin{rmdquestion}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What is the cost of the planning units selected in \texttt{s2}, \texttt{s3}, and \texttt{s4}?
+\item
+  How many planning units are in \texttt{s2}, \texttt{s3}, and \texttt{s4}?
+\item
+  Do the solutions with more planning units have a greater cost? Why (or why not)?
+\item
+  Why does the first solution (\texttt{s1}) cost less than the second solution with protected areas locked into the solution (\texttt{s2})?
+\item
+  Why does the third solution (\texttt{s3}) cost less than the fourth solution solution with highly degraded areas locked out (\texttt{s4})?
+\end{enumerate}
+\end{rmdquestion}
 
-\section{Penalizing fragmentation}\label{penalizing-fragmentation}
+\hypertarget{penalizing-fragmentation}{%
+\section{Penalizing fragmentation}\label{penalizing-fragmentation}}
 
-Plans for protected area systems should promote connectivity. However,
-the prioritizations we have made so far have been highly fragmented. To
-address this issue, we can add penalties to our conservation planning
-problem to penalize fragmentation. These penalties work by specifying a
-trade-off between the primary objective (here, solution cost) and
-fragmentation (i.e.~total exposed boundary length) using a penalty
-value. If we set the penalty value too low, then we will end up with a
-solution that is nearly identical to the previous solution. If we set
-the penalty value too high, then prioritizr will (1) take a long time to
-solve the problem and (2) we will end up with a solution that contains
-lots of extra planning units that are not needed. This is because the
-minimizing fragmentation is considered so much more important than
-solution cost that the optimal solution is simply to select as many
-planning units as possible.
+Plans for protected area systems should promote connectivity. However, the prioritizations we have made so far have been highly fragmented. To address this issue, we can add penalties to our conservation planning problem to penalize fragmentation. These penalties work by specifying a trade-off between the primary objective (here, solution cost) and fragmentation (i.e.~total exposed boundary length) using a penalty value. If we set the penalty value too low, then we will end up with a solution that is nearly identical to the previous solution. If we set the penalty value too high, then prioritizr will (1) take a long time to solve the problem and (2) we will end up with a solution that contains lots of extra planning units that are not needed. This is because the minimizing fragmentation is considered so much more important than solution cost that the optimal solution is simply to select as many planning units as possible.
 
-As a rule of thumb, we generally want penalty values between 0.00001 and
-0.01. However, finding a useful penalty value requires calibration. The
-``correct'' penalty value depends on the size of the planning units, the
-main objective values (e.g.~cost values), and the effect of
-fragmentation on biodiversity persistence. Let's create a new problem
-that is similar to our previous problem (\texttt{p4})---except that it
-contains boundary length penalties and a slightly higher optimality gap
-to reduce runtime (default is 0.1)---and solve it. Since our planning
-unit data is in a spatial format (i.e.~vector or raster data),
-prioritizr can automatically calculate the boundary data for us.
+As a rule of thumb, we generally want penalty values between 0.00001 and 0.01. However, finding a useful penalty value requires calibration. The ``correct'' penalty value depends on the size of the planning units, the main objective values (e.g.~cost values), and the effect of fragmentation on biodiversity persistence. Let's create a new problem that is similar to our previous problem (\texttt{p4})---except that it contains boundary length penalties and a slightly higher optimality gap to reduce runtime (default is 0.1)---and solve it. Since our planning unit data is in a spatial format (i.e.~vector or raster data), prioritizr can automatically calculate the boundary data for us.
 
 \clearpage
 
@@ -1706,11 +1503,11 @@ prioritizr can automatically calculate the boundary data for us.
 ##   objective:      Minimum set objective 
 ##   targets:        Relative targets [targets (min: 0.1, max: 0.1)]
 ##   decisions:      Binary decision 
-##   constraints:    <Locked in planning units [198 locked units]
-##                    Locked out planning units [6 locked units]>
+##   constraints:    <Locked out planning units [6 locked units]
+##                    Locked in planning units [198 locked units]>
 ##   penalties:      <Boundary penalties [edge factor (min: 0.5, max: 0.5), penalty (0.001), zones]>
 ##   portfolio:      default
-##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (-1), verbose (1)]
+##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (2147483647), verbose (1)]
 \end{verbatim}
 
 \begin{Shaded}
@@ -1728,7 +1525,7 @@ prioritizr can automatically calculate the boundary data for us.
 ## class       : SpatialPolygonsDataFrame 
 ## features    : 516 
 ## extent      : 348703.2, 611932.4, 5167775, 5344516  (xmin, xmax, ymin, ymax)
-## crs         : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 
+## crs         : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs 
 ## variables   : 7
 ## names       :   id,             cost, status, locked_in, locked_out, pa_status, solution_1 
 ## min values  :  557, 3.59717531470679,      0,         0,          0,         0,          0 
@@ -1744,34 +1541,30 @@ prioritizr can automatically calculate the boundary data for us.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-41-1} \end{center}
+\begin{center}\includegraphics[width=0.65\linewidth]{prioritizr-workshop-manual_files/figure-latex/unnamed-chunk-42-1} \end{center}
 
-Now let's compare the solutions to the problems with (\texttt{s5}) and
-without (\texttt{s4}) the boundary length penalties.
+Now let's compare the solutions to the problems with (\texttt{s5}) and without (\texttt{s4}) the boundary length penalties.
 
-\begin{rmdquestion} 1. What is the cost the fourth
-(\texttt{s4}) and fifth (\texttt{s5}) solutions? Why does the fifth
-solution (\texttt{s5}) cost more than the fourth (\texttt{s4}) solution?
-2. Try setting the penalty value to 0.000000001 (i.e. \texttt{1e-9})
-instead of 0.0005. What is the cost of the solution now? Is it different
-from the fourth solution (\texttt{s4}) (hint: try plotting the solutions
-to visualize them)? Is this is a useful penalty value? Why (or why not)?
-3. Try setting the penalty value to 0.5. What is the cost of the
-solution now? Is it different from the fourth solution (\texttt{s4})
-(hint: try plotting the solutions to visualize them)? Is this a useful
-penalty value? Why (or why not)?
+\begin{rmdquestion}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What is the cost the fourth (\texttt{s4}) and fifth (\texttt{s5}) solutions? Why does the fifth solution (\texttt{s5}) cost more than the fourth (\texttt{s4}) solution?
+\item
+  Try setting the penalty value to 0.000000001 (i.e.~\texttt{1e-9}) instead of 0.0005. What is the cost of the solution now? Is it different from the fourth solution (\texttt{s4}) (hint: try plotting the solutions to visualize them)? Is this is a useful penalty value? Why (or why not)?
+\item
+  Try setting the penalty value to 0.5. What is the cost of the solution now? Is it different from the fourth solution (\texttt{s4}) (hint: try plotting the solutions to visualize them)? Is this a useful penalty value? Why (or why not)?
+\end{enumerate}
 \end{rmdquestion}
 
-\chapter{Acknowledgements}\label{acknowledgements}
+\hypertarget{acknowledgements}{%
+\chapter{Acknowledgements}\label{acknowledgements}}
 
-Many thanks to \href{https://icons8.com}{Icons8} for providing the icons
-used in this manual and to Yihui Xie for developing the
-\href{http://bookdown.org}{bookdown R package} that underpins this
-manual. We also thank Garrett Grolemund and Hadley Wickham for creating
-one of the Rstudio screenshots used in this manual that was originally a
-part of their \emph{R for Data Science} book.
+Many thanks to \href{https://icons8.com}{Icons8} for providing the icons used in this manual and to Yihui Xie for developing the \href{http://bookdown.org}{bookdown R package} that underpins this manual. We also thank Garrett Grolemund and Hadley Wickham for creating one of the Rstudio screenshots used in this manual that was originally a part of their \emph{R for Data Science} book.
 
-\chapter{Session information}\label{session-information}
+\hypertarget{session-information}{%
+\chapter{Session information}\label{session-information}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1781,51 +1574,50 @@ part of their \emph{R for Data Science} book.
 \end{Shaded}
 
 \begin{verbatim}
-## R version 4.0.0 (2020-04-24)
+## R version 4.0.5 (2021-03-31)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 16.04.6 LTS
+## Running under: Ubuntu 20.04.2 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /home/travis/R-bin/lib/R/lib/libRblas.so
-## LAPACK: /home/travis/R-bin/lib/R/lib/libRlapack.so
+## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0
+## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
 ## 
 ## locale:
-##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
-##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
-##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
-##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+##  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
+##  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
+##  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
+## [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] dplyr_1.0.0      gridExtra_2.3    assertthat_0.2.1 scales_1.1.1    
-##  [5] units_0.6-7      rgeos_0.5-3      rgdal_1.5-12     prioritizr_5.0.1
-##  [9] proto_1.0.0      sf_0.9-5         raster_3.3-13    sp_1.4-2        
+##  [1] dplyr_1.0.5      gridExtra_2.3    assertthat_0.2.1 scales_1.1.1    
+##  [5] units_0.7-1      rgeos_0.5-5      rgdal_1.5-23     prioritizr_7.0.1
+##  [9] proto_1.0.0      sf_0.9-8         raster_3.4-5     sp_1.4-5        
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_1.0.5          compiler_4.0.0      pillar_1.4.6       
-##  [4] class_7.3-16        tools_4.0.0         uuid_0.1-4         
-##  [7] digest_0.6.25       gtable_0.3.0        evaluate_0.14      
-## [10] lifecycle_0.2.0     tibble_3.0.3        lattice_0.20-41    
-## [13] pkgconfig_2.0.3     rlang_0.4.7         Matrix_1.2-18      
-## [16] lpsymphony_1.16.0   cli_2.0.2           DBI_1.1.0          
-## [19] parallel_4.0.0      yaml_2.2.1          xfun_0.16          
-## [22] e1071_1.7-3         exactextractr_0.4.0 stringr_1.4.0      
-## [25] knitr_1.29          generics_0.0.2      vctrs_0.3.2        
-## [28] classInt_0.4-3      grid_4.0.0          tidyselect_1.1.0   
-## [31] glue_1.4.1          R6_2.4.1            fansi_0.4.1        
-## [34] rmarkdown_2.3       bookdown_0.20.2     purrr_0.3.4        
-## [37] magrittr_1.5        codetools_0.2-16    htmltools_0.5.0    
-## [40] ellipsis_0.3.1      colorspace_1.4-1    utf8_1.1.4         
-## [43] KernSmooth_2.23-16  stringi_1.4.6       munsell_0.5.0      
-## [46] crayon_1.3.4
+##  [1] tidyselect_1.1.0    xfun_0.22           slam_0.1-48        
+##  [4] purrr_0.3.4         lattice_0.20-41     colorspace_2.0-0   
+##  [7] vctrs_0.3.7         generics_0.1.0      htmltools_0.5.1.1  
+## [10] yaml_2.2.1          utf8_1.2.1          rlang_0.4.10       
+## [13] e1071_1.7-6         pillar_1.5.1        glue_1.4.2         
+## [16] DBI_1.1.1           uuid_0.1-4          lifecycle_1.0.0    
+## [19] stringr_1.4.0       munsell_0.5.0       gtable_0.3.0       
+## [22] codetools_0.2-18    evaluate_0.14       knitr_1.31         
+## [25] parallel_4.0.5      class_7.3-18        fansi_0.4.2        
+## [28] exactextractr_0.5.1 Rcpp_1.0.6          KernSmooth_2.23-18 
+## [31] classInt_0.4-3      lpsymphony_1.18.0   digest_0.6.27      
+## [34] stringi_1.5.3       bookdown_0.21.9     grid_4.0.5         
+## [37] cli_2.4.0           tools_4.0.5         magrittr_2.0.1     
+## [40] proxy_0.4-25        tibble_3.1.0        crayon_1.4.1       
+## [43] pkgconfig_2.0.3     ellipsis_0.3.1      Matrix_1.3-2       
+## [46] rmarkdown_2.7       R6_2.5.0            compiler_4.0.5
 \end{verbatim}
 
-\chapter{References}\label{references}
+\hypertarget{references}{%
+\chapter{References}\label{references}}
 
-\bibliography{references.bib}
+  \bibliography{references.bib}
 
 \end{document}
