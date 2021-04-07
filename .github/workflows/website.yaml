@@ -20,25 +20,6 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v1
 
-      - name: Debug
-        run: |
-          mkdir ./_book
-          echo "This is a file" > ./_book/test.md
-          cat ./_book/test.md
-
-      - name: Prepate deployment
-        uses: actions/checkout@v2
-        with:
-          path: book-output
-          ref: gh-pages
-
-      - name: Deploy site
-        env:
-          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          chmod +x ./_deploy.sh
-          ./_deploy.sh
-
       - name: Query dependencies
         run: |
           install.packages('remotes')
@@ -72,6 +53,12 @@ jobs:
         run: |
           chmod +x ./_build.sh
           ./_build.sh
+
+      - name: Prepare deployment
+        uses: actions/checkout@v2
+        with:
+          path: book-output
+          ref: gh-pages
 
       - name: Deploy site
         run: |
