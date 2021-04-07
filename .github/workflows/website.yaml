@@ -20,12 +20,6 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v1
 
-      - name: Deploy site
-        run: |
-          chmod +x ./_deploy.sh
-          ./_deploy.sh
-
-
       - name: Query dependencies
         run: |
           install.packages('remotes')
