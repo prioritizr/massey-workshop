@@ -23,7 +23,7 @@ jobs:
       - name: Debug
         run: |
           mkdir _book
-          echo "This is a file" > test.md
+          echo "This is a file" > _book/test.md
 
       - name: Deploy site
         run: |
