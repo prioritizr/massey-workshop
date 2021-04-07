@@ -6,7 +6,7 @@ echo "0"
 [ -z "${GITHUB_PAT}" ] && exit 0
 echo "0.5"
 echo "${GITHUB_REF}"
-[ "${GITHUB_REF}" != "ref/heads/master" ] && exit 0
+[ "${GITHUB_REF}" != "refs/heads/master" ] && exit 0
 
 echo "1"
 git config --global user.email "jeffrey.hanson@uqconnect.edu.au"
