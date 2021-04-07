@@ -27,6 +27,8 @@ jobs:
           cat ./_book/test.md
 
       - name: Deploy site
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         run: |
           chmod +x ./_deploy.sh
           ./_deploy.sh
