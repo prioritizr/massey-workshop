@@ -22,8 +22,9 @@ jobs:
 
       - name: Debug
         run: |
-          mkdir _book
-          echo "This is a file" > _book/test.md
+          mkdir ./_book
+          echo "This is a file" > ./_book/test.md
+          cat ./_book/test.md
 
       - name: Deploy site
         run: |
