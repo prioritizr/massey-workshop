@@ -12,9 +12,9 @@ echo "0.6"
 echo "${GITHUB_REPOSITORY}"
 
 echo "1"
-git config --local user.email "actions@github.com"
+git config --global user.email "actions@github.com"
 echo "2"
-git config --local user.name "GitHub Actions"
+git config --global user.name "GitHub Actions"
 echo "3"
 git clone -b gh-pages https://${GITHUB_PAT}@github.com/${GITHUB_REPOSITORY}.git book-output
 echo "4"
