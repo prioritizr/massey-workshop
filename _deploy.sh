@@ -8,6 +8,9 @@ echo "0.5"
 echo "${GITHUB_REF}"
 [ "${GITHUB_REF}" != "refs/heads/master" ] && exit 0
 
+echo "0.6"
+echo "${GITHUB_REPOSITORY}"
+
 echo "1"
 git config --global user.email "jeffrey.hanson@uqconnect.edu.au"
 echo "2"
