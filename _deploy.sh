@@ -11,7 +11,7 @@ echo "${GITHUB_REF}"
 echo "1"
 git config --global user.email "jeffrey.hanson@uqconnect.edu.au"
 echo "2"
-git config --global user.name "jeffrey-hanson"
+git config --global user.name "jeffreyhanson"
 echo "3"
 git clone -b gh-pages https://${GITHUB_PAT}@github.com/${GITHUB_REPOSITORY}.git book-output
 echo "4"
