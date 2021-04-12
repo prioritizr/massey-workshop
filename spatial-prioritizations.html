@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Spatial prioritizations | PRIORITIZR WORKSHOP MANUAL</title>
   <meta name="description" content="Manual for the prioritizr workshop held at Massey University, Palmerston North, New Zealand." />
-  <meta name="generator" content="bookdown 0.21.9 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21.10 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Spatial prioritizations | PRIORITIZR WORKSHOP MANUAL" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Jeffrey O. Hanson" />
 
 
-<meta name="date" content="2021-04-07" />
+<meta name="date" content="2021-04-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -244,13 +244,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 1 x 2
 ##   summary  cost
 ##   &lt;chr&gt;   &lt;dbl&gt;
-## 1 overall    16</code></pre>
+## 1 overall    15</code></pre>
 <div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="spatial-prioritizations.html#cb99-1"></a><span class="co"># calculate total cost of the prioritization</span></span>
 <span id="cb99-2"><a href="spatial-prioritizations.html#cb99-2"></a><span class="kw">eval_cost_summary</span>(p1, s1[, <span class="st">&quot;solution_1&quot;</span>])</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 2
 ##   summary  cost
 ##   &lt;chr&gt;   &lt;dbl&gt;
-## 1 overall  390.</code></pre>
+## 1 overall  385.</code></pre>
 <div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="spatial-prioritizations.html#cb101-1"></a><span class="co"># plot solution</span></span>
 <span id="cb101-2"><a href="spatial-prioritizations.html#cb101-2"></a><span class="co"># selected = green, not selected = grey</span></span>
 <span id="cb101-3"><a href="spatial-prioritizations.html#cb101-3"></a><span class="kw">spplot</span>(s1, <span class="st">&quot;solution_1&quot;</span>, <span class="dt">col.regions =</span> <span class="kw">c</span>(<span class="st">&quot;grey80&quot;</span>, <span class="st">&quot;darkgreen&quot;</span>), <span class="dt">main =</span> <span class="st">&quot;s1&quot;</span>,</span>
@@ -387,7 +387,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="penalizing-fragmentation" class="section level2">
 <h2><span class="header-section-number">5.4</span> Penalizing fragmentation</h2>
 <p>Plans for protected area systems should promote connectivity. However, the prioritizations we have made so far have been highly fragmented. To address this issue, we can add penalties to our conservation planning problem to penalize fragmentation. These penalties work by specifying a trade-off between the primary objective (here, solution cost) and fragmentation (i.e. total exposed boundary length) using a penalty value. If we set the penalty value too low, then we will end up with a solution that is nearly identical to the previous solution. If we set the penalty value too high, then prioritizr will (1) take a long time to solve the problem and (2) we will end up with a solution that contains lots of extra planning units that are not needed. This is because the minimizing fragmentation is considered so much more important than solution cost that the optimal solution is simply to select as many planning units as possible.</p>
-<p>As a rule of thumb, we generally want penalty values between 0.00001 and 0.01. However, finding a useful penalty value requires calibration. The “correct” penalty value depends on the size of the planning units, the main objective values (e.g. cost values), and the effect of fragmentation on biodiversity persistence. Let’s create a new problem that is similar to our previous problem (<code>p4</code>)—except that it contains boundary length penalties and a slightly higher optimality gap to reduce runtime (default is 0.1)—and solve it. Since our planning unit data is in a spatial format (i.e. vector or raster data), prioritizr can automatically calculate the boundary data for us.</p>
+<p>As a rule of thumb, we generally want penalty values between 0.00001 and 0.01. However, finding a useful penalty value requires calibration. The “correct” penalty value depends on the size of the planning units, the main objective values (e.g. cost values), and the effect of fragmentation on biodiversity persistence. Let’s create a new problem that is similar to our previous problem (<code>p4</code>)—except that it contains boundary length penalties—and solve it. Since our planning unit data is in a spatial format (i.e. vector or raster data), prioritizr can automatically calculate the boundary data for us.</p>
 
 <div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="spatial-prioritizations.html#cb114-1"></a><span class="co"># make prioritization problem</span></span>
 <span id="cb114-2"><a href="spatial-prioritizations.html#cb114-2"></a>p5 &lt;-<span class="st"> </span><span class="kw">problem</span>(pu_data, veg_data, <span class="dt">cost_column =</span> <span class="st">&quot;cost&quot;</span>) <span class="op">%&gt;%</span></span>
@@ -408,8 +408,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   objective:      Minimum set objective 
 ##   targets:        Relative targets [targets (min: 0.1, max: 0.1)]
 ##   decisions:      Binary decision 
-##   constraints:    &lt;Locked out planning units [6 locked units]
-##                    Locked in planning units [198 locked units]&gt;
+##   constraints:    &lt;Locked in planning units [198 locked units]
+##                    Locked out planning units [6 locked units]&gt;
 ##   penalties:      &lt;Boundary penalties [edge factor (min: 0.5, max: 0.5), penalty (0.001), zones]&gt;
 ##   portfolio:      default
 ##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (2147483647), verbose (1)]</code></pre>
@@ -437,7 +437,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="rmdquestion">
 <ol style="list-style-type: decimal">
 <li>What is the cost the fourth (<code>s4</code>) and fifth (<code>s5</code>) solutions? Why does the fifth solution (<code>s5</code>) cost more than the fourth (<code>s4</code>) solution?</li>
-<li>Try setting the penalty value to 0.000000001 (i.e. <code>1e-9</code>) instead of 0.0005. What is the cost of the solution now? Is it different from the fourth solution (<code>s4</code>) (hint: try plotting the solutions to visualize them)? Is this is a useful penalty value? Why (or why not)?</li>
+<li>Try setting the penalty value to 0.000000001 (i.e. <code>1e-9</code>) instead of 0.001. What is the cost of the solution now? Is it different from the fourth solution (<code>s4</code>) (hint: try plotting the solutions to visualize them)? Is this is a useful penalty value? Why (or why not)?</li>
 <li>Try setting the penalty value to 0.5. What is the cost of the solution now? Is it different from the fourth solution (<code>s4</code>) (hint: try plotting the solutions to visualize them)? Is this a useful penalty value? Why (or why not)?</li>
 </ol>
 </div>
@@ -474,6 +474,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

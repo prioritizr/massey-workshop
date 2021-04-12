@@ -222,7 +222,7 @@
 
 \title{PRIORITIZR WORKSHOP MANUAL}
 \author{Jeffrey O. Hanson}
-\date{2021-04-07}
+\date{2021-04-12}
 
 \begin{document}
 \maketitle
@@ -1427,8 +1427,8 @@ Next, let's lock out highly degraded areas. Similar to before, this information 
 ##   objective:      Minimum set objective 
 ##   targets:        Relative targets [targets (min: 0.1, max: 0.1)]
 ##   decisions:      Binary decision 
-##   constraints:    <Locked out planning units [6 locked units]
-##                    Locked in planning units [198 locked units]>
+##   constraints:    <Locked in planning units [198 locked units]
+##                    Locked out planning units [6 locked units]>
 ##   penalties:      <none>
 ##   portfolio:      default
 ##   solver:         Lpsymphony [first_feasible (0), gap (0.1), time_limit (2147483647), verbose (1)]
@@ -1474,7 +1474,7 @@ Now, let's compare the solutions.
 
 Plans for protected area systems should promote connectivity. However, the prioritizations we have made so far have been highly fragmented. To address this issue, we can add penalties to our conservation planning problem to penalize fragmentation. These penalties work by specifying a trade-off between the primary objective (here, solution cost) and fragmentation (i.e.~total exposed boundary length) using a penalty value. If we set the penalty value too low, then we will end up with a solution that is nearly identical to the previous solution. If we set the penalty value too high, then prioritizr will (1) take a long time to solve the problem and (2) we will end up with a solution that contains lots of extra planning units that are not needed. This is because the minimizing fragmentation is considered so much more important than solution cost that the optimal solution is simply to select as many planning units as possible.
 
-As a rule of thumb, we generally want penalty values between 0.00001 and 0.01. However, finding a useful penalty value requires calibration. The ``correct'' penalty value depends on the size of the planning units, the main objective values (e.g.~cost values), and the effect of fragmentation on biodiversity persistence. Let's create a new problem that is similar to our previous problem (\texttt{p4})---except that it contains boundary length penalties and a slightly higher optimality gap to reduce runtime (default is 0.1)---and solve it. Since our planning unit data is in a spatial format (i.e.~vector or raster data), prioritizr can automatically calculate the boundary data for us.
+As a rule of thumb, we generally want penalty values between 0.00001 and 0.01. However, finding a useful penalty value requires calibration. The ``correct'' penalty value depends on the size of the planning units, the main objective values (e.g.~cost values), and the effect of fragmentation on biodiversity persistence. Let's create a new problem that is similar to our previous problem (\texttt{p4})---except that it contains boundary length penalties---and solve it. Since our planning unit data is in a spatial format (i.e.~vector or raster data), prioritizr can automatically calculate the boundary data for us.
 
 \clearpage
 
@@ -1552,7 +1552,7 @@ Now let's compare the solutions to the problems with (\texttt{s5}) and without (
 \item
   What is the cost the fourth (\texttt{s4}) and fifth (\texttt{s5}) solutions? Why does the fifth solution (\texttt{s5}) cost more than the fourth (\texttt{s4}) solution?
 \item
-  Try setting the penalty value to 0.000000001 (i.e.~\texttt{1e-9}) instead of 0.0005. What is the cost of the solution now? Is it different from the fourth solution (\texttt{s4}) (hint: try plotting the solutions to visualize them)? Is this is a useful penalty value? Why (or why not)?
+  Try setting the penalty value to 0.000000001 (i.e.~\texttt{1e-9}) instead of 0.001. What is the cost of the solution now? Is it different from the fourth solution (\texttt{s4}) (hint: try plotting the solutions to visualize them)? Is this is a useful penalty value? Why (or why not)?
 \item
   Try setting the penalty value to 0.5. What is the cost of the solution now? Is it different from the fourth solution (\texttt{s4}) (hint: try plotting the solutions to visualize them)? Is this a useful penalty value? Why (or why not)?
 \end{enumerate}
@@ -1592,9 +1592,9 @@ Many thanks to \href{https://icons8.com}{Icons8} for providing the icons used in
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] dplyr_1.0.5      gridExtra_2.3    assertthat_0.2.1 scales_1.1.1    
-##  [5] units_0.7-1      rgeos_0.5-5      rgdal_1.5-23     prioritizr_7.0.1
-##  [9] proto_1.0.0      sf_0.9-8         raster_3.4-5     sp_1.4-5        
+##  [1] dplyr_1.0.5        gridExtra_2.3      assertthat_0.2.1   scales_1.1.1      
+##  [5] units_0.7-1        rgeos_0.5-5        rgdal_1.5-23       prioritizr_7.0.1.1
+##  [9] proto_1.0.0        sf_0.9-8           raster_3.4-5       sp_1.4-5          
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] tidyselect_1.1.0    xfun_0.22           slam_0.1-48        
@@ -1608,7 +1608,7 @@ Many thanks to \href{https://icons8.com}{Icons8} for providing the icons used in
 ## [25] parallel_4.0.5      class_7.3-18        fansi_0.4.2        
 ## [28] exactextractr_0.5.1 Rcpp_1.0.6          KernSmooth_2.23-18 
 ## [31] classInt_0.4-3      lpsymphony_1.18.0   digest_0.6.27      
-## [34] stringi_1.5.3       bookdown_0.21.9     grid_4.0.5         
+## [34] stringi_1.5.3       bookdown_0.21.10    grid_4.0.5         
 ## [37] cli_2.4.0           tools_4.0.5         magrittr_2.0.1     
 ## [40] proxy_0.4-25        tibble_3.1.0        crayon_1.4.1       
 ## [43] pkgconfig_2.0.3     ellipsis_0.3.1      Matrix_1.3-2       
