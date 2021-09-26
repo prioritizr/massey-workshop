@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Gap analysis | PRIORITIZR WORKSHOP MANUAL</title>
   <meta name="description" content="Manual for the prioritizr workshop held at Massey University, Palmerston North, New Zealand." />
-  <meta name="generator" content="bookdown 0.21.10 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Gap analysis | PRIORITIZR WORKSHOP MANUAL" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Jeffrey O. Hanson" />
 
 
-<meta name="date" content="2021-04-12" />
+<meta name="date" content="2021-09-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,8 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="prev" href="data.html"/>
 <link rel="next" href="spatial-prioritizations.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -41,7 +42,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -217,7 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb72-3"><a href="gap-analysis.html#cb72-3"></a></span>
 <span id="cb72-4"><a href="gap-analysis.html#cb72-4"></a><span class="co"># print abundance data</span></span>
 <span id="cb72-5"><a href="gap-analysis.html#cb72-5"></a><span class="kw">print</span>(abundance_data)</span></code></pre></div>
-<pre><code>## # A tibble: 32 x 3
+<pre><code>## # A tibble: 32 × 3
 ##    feature       absolute_abundance relative_abundance
 ##    &lt;chr&gt;                      &lt;dbl&gt;              &lt;dbl&gt;
 ##  1 vegetation.1                16.0                  1
@@ -239,7 +239,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
 <div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="gap-analysis.html#cb76-1"></a><span class="co"># we can print all of the rows in abundance_data like this</span></span>
 <span id="cb76-2"><a href="gap-analysis.html#cb76-2"></a><span class="kw">print</span>(abundance_data, <span class="dt">n =</span> <span class="ot">Inf</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 32 x 3
+<pre><code>## # A tibble: 32 × 3
 ##    feature       absolute_abundance relative_abundance
 ##    &lt;chr&gt;                      &lt;dbl&gt;              &lt;dbl&gt;
 ##  1 vegetation.1                16.0                  1
@@ -283,19 +283,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb78-6"><a href="gap-analysis.html#cb78-6"></a></span>
 <span id="cb78-7"><a href="gap-analysis.html#cb78-7"></a><span class="co"># print abundance data</span></span>
 <span id="cb78-8"><a href="gap-analysis.html#cb78-8"></a><span class="kw">print</span>(abundance_data)</span></code></pre></div>
-<pre><code>## # A tibble: 32 x 4
+<pre><code>## # A tibble: 32 × 4
 ##    feature       absolute_abundance relative_abundance absolute_abundance_km2
 ##    &lt;chr&gt;                      &lt;dbl&gt;              &lt;dbl&gt;                 [km^2]
-##  1 vegetation.1                16.0                  1               15.78148
-##  2 vegetation.2                14.3                  1               14.11504
-##  3 vegetation.3                10.4                  1               10.23844
-##  4 vegetation.4                17.8                  1               17.58813
-##  5 vegetation.5                13.0                  1               12.83198
-##  6 vegetation.6                14.3                  1               14.10423
-##  7 vegetation.7                20.0                  1               19.72680
-##  8 vegetation.8                14.0                  1               13.85014
-##  9 vegetation.9                18.0                  1               17.75412
-## 10 vegetation.10               20.0                  1               19.74076
+##  1 vegetation.1                16.0                  1                   15.8
+##  2 vegetation.2                14.3                  1                   14.1
+##  3 vegetation.3                10.4                  1                   10.2
+##  4 vegetation.4                17.8                  1                   17.6
+##  5 vegetation.5                13.0                  1                   12.8
+##  6 vegetation.6                14.3                  1                   14.1
+##  7 vegetation.7                20.0                  1                   19.7
+##  8 vegetation.8                14.0                  1                   13.9
+##  9 vegetation.9                18.0                  1                   17.8
+## 10 vegetation.10               20.0                  1                   19.7
 ## # … with 22 more rows</code></pre>
 <p>Now let’s explore the abundance data.</p>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="gap-analysis.html#cb80-1"></a><span class="co"># calculate the average abundance of the features</span></span>
@@ -333,7 +333,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb87-7"><a href="gap-analysis.html#cb87-7"></a></span>
 <span id="cb87-8"><a href="gap-analysis.html#cb87-8"></a><span class="co"># print feature representation data</span></span>
 <span id="cb87-9"><a href="gap-analysis.html#cb87-9"></a><span class="kw">print</span>(repr_data)</span></code></pre></div>
-<pre><code>## # A tibble: 32 x 5
+<pre><code>## # A tibble: 32 × 5
 ##    summary feature       total_amount absolute_held relative_held
 ##    &lt;chr&gt;   &lt;chr&gt;                &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;
 ##  1 overall vegetation.1          16.0         0            0     
@@ -356,19 +356,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb89-6"><a href="gap-analysis.html#cb89-6"></a></span>
 <span id="cb89-7"><a href="gap-analysis.html#cb89-7"></a><span class="co"># print representation data</span></span>
 <span id="cb89-8"><a href="gap-analysis.html#cb89-8"></a><span class="kw">print</span>(repr_data)</span></code></pre></div>
-<pre><code>## # A tibble: 32 x 6
-##    summary feature     total_amount absolute_held relative_held absolute_held_k…
-##    &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;           [km^2]
-##  1 overall vegetation…         16.0         0            0             0.0000000
-##  2 overall vegetation…         14.3         0            0             0.0000000
-##  3 overall vegetation…         10.4         0            0             0.0000000
-##  4 overall vegetation…         17.8         0            0             0.0000000
-##  5 overall vegetation…         13.0         0            0             0.0000000
-##  6 overall vegetation…         14.3         0            0             0.0000000
-##  7 overall vegetation…         20.0         0            0             0.0000000
-##  8 overall vegetation…         14.0         0            0             0.0000000
-##  9 overall vegetation…         18.0         0.846        0.0470        0.8341885
-## 10 overall vegetation…         20.0         0            0             0.0000000
+<pre><code>## # A tibble: 32 × 6
+##    summary feature       total_amount absolute_held relative_held absolute_held_k…
+##    &lt;chr&gt;   &lt;chr&gt;                &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;           [km^2]
+##  1 overall vegetation.1          16.0         0            0                 0    
+##  2 overall vegetation.2          14.3         0            0                 0    
+##  3 overall vegetation.3          10.4         0            0                 0    
+##  4 overall vegetation.4          17.8         0            0                 0    
+##  5 overall vegetation.5          13.0         0            0                 0    
+##  6 overall vegetation.6          14.3         0            0                 0    
+##  7 overall vegetation.7          20.0         0            0                 0    
+##  8 overall vegetation.8          14.0         0            0                 0    
+##  9 overall vegetation.9          18.0         0.846        0.0470            0.834
+## 10 overall vegetation.10         20.0         0            0                 0    
 ## # … with 22 more rows</code></pre>
 
 <p>Now let’s investigate how well the species are represented.</p>
@@ -404,7 +404,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -444,6 +443,10 @@ gitbook.start({
 "text": null
 },
 "download": ["prioritizr-workshop-manual.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

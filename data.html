@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Data | PRIORITIZR WORKSHOP MANUAL</title>
   <meta name="description" content="Manual for the prioritizr workshop held at Massey University, Palmerston North, New Zealand." />
-  <meta name="generator" content="bookdown 0.21.10 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Data | PRIORITIZR WORKSHOP MANUAL" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Jeffrey O. Hanson" />
 
 
-<meta name="date" content="2021-04-12" />
+<meta name="date" content="2021-09-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,8 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="prev" href="introduction.html"/>
 <link rel="next" href="gap-analysis.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -41,7 +42,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -273,7 +273,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   ..@ plotOrder  : int [1:516] 69 104 1 122 157 190 4 221 17 140 ...
 ##   ..@ bbox       : num [1:2, 1:2] 348703 5167775 611932 5344516
 ##   .. ..- attr(*, &quot;dimnames&quot;)=List of 2
-##   ..@ proj4string:Formal class &#39;CRS&#39; [package &quot;sp&quot;] with 1 slot</code></pre>
+##   ..@ proj4string:Formal class &#39;CRS&#39; [package &quot;sp&quot;] with 1 slot
+##   ..$ comment: chr &quot;TRUE&quot;</code></pre>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="data.html#cb16-1"></a><span class="co"># print the class of the object</span></span>
 <span id="cb16-2"><a href="data.html#cb16-2"></a><span class="kw">class</span>(pu_data)</span></code></pre></div>
 <pre><code>## [1] &quot;SpatialPolygonsDataFrame&quot;
@@ -384,7 +385,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## resolution : 967, 1020  (x, y)
 ## extent     : 298636.7, 613878.7, 5167756, 5335036  (xmin, xmax, ymin, ymax)
 ## crs        : +proj=utm +zone=55 +south +datum=WGS84 +units=m +no_defs 
-## source     : /home/runner/work/massey-workshop/massey-workshop/data/vegetation.tif 
+## source     : vegetation.tif 
 ## names      : vegetation.1 
 ## values     : 0, 1  (min, max)</code></pre>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="data.html#cb58-1"></a><span class="co"># print the value in the 800th cell in the first layer of the stack</span></span>
@@ -431,7 +432,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -471,6 +471,10 @@ gitbook.start({
 "text": null
 },
 "download": ["prioritizr-workshop-manual.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }
